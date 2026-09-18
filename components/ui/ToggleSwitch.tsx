@@ -30,7 +30,7 @@ export function ToggleSwitch({
       onClick={() => onChange(!checked)}
       className={cn(
         "relative inline-flex h-7 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-2 focus-visible:outline-nova-green focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-        checked ? "bg-nova-green" : "bg-nova-border"
+        checked ? "bg-nova-green" : "bg-nova-border",
       )}
     >
       <span className="sr-only">{label || "Toggle setting"}</span>
@@ -39,7 +39,7 @@ export function ToggleSwitch({
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
         className={cn(
           "pointer-events-none flex h-6 w-6 transform items-center justify-center rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out",
-          checked ? "translate-x-5" : "translate-x-0"
+          checked ? "translate-x-5" : "translate-x-0",
         )}
       >
         {checked ? (

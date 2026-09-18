@@ -1,13 +1,18 @@
 "use client";
 
 import React from "react";
-import { Sparkles, CheckCircle2, Sliders, Check, ArrowRight } from "lucide-react";
+import { Sparkles, CheckCircle2, Check } from "lucide-react";
 import { Sheet } from "@/components/ui/Sheet";
 import { Button } from "@/components/ui/Button";
 import { useJourney } from "@/context/JourneyContext";
 
 export function WhyJourneySheet() {
-  const { whyJourneySheetOpen, setWhyJourneySheetOpen, currentJourney, showToast } = useJourney();
+  const {
+    whyJourneySheetOpen,
+    setWhyJourneySheetOpen,
+    currentJourney,
+    showToast,
+  } = useJourney();
   const { whyNova } = currentJourney;
 
   return (
@@ -33,7 +38,7 @@ export function WhyJourneySheet() {
 
         {/* Personalized Rationale Box */}
         <div className="p-4 rounded-card bg-[#FAF8FC] border border-nova-border/80 shadow-2xs">
-          <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-nova-coral flex items-center gap-1 mb-1.5">
+          <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-coral flex items-center gap-1 mb-1.5">
             <Sparkles className="w-3 h-3" />
             Personalized Routing Intelligence
           </span>
@@ -71,7 +76,7 @@ export function WhyJourneySheet() {
           <div className="p-3.5 rounded-card border-2 border-nova-green bg-nova-green-soft/60 flex flex-col justify-between shadow-2xs">
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-nova-green">
+                <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-green">
                   Selected
                 </span>
                 <Check className="w-4 h-4 text-nova-green stroke-[3]" />
@@ -83,7 +88,7 @@ export function WhyJourneySheet() {
                 {whyNova.comparison.selected.tag}
               </p>
             </div>
-            <p className="text-[11px] text-nova-text-muted mt-2 border-t border-nova-green/20 pt-1.5">
+            <p className="text-[12px] text-nova-text-muted mt-2 border-t border-nova-green/20 pt-1.5">
               {whyNova.comparison.selected.details}
             </p>
           </div>
@@ -91,7 +96,7 @@ export function WhyJourneySheet() {
           {/* Fastest Alternative */}
           <div className="p-3.5 rounded-card border border-nova-border bg-white flex flex-col justify-between shadow-2xs">
             <div>
-              <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-nova-text-muted">
+              <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted">
                 Fastest Alternative
               </span>
               <p className="font-heading font-bold text-[22px] text-nova-text-primary mt-1">
@@ -101,7 +106,7 @@ export function WhyJourneySheet() {
                 {whyNova.comparison.fastest.tag}
               </p>
             </div>
-            <p className="text-[11px] text-nova-text-muted mt-2 border-t border-nova-border/40 pt-1.5">
+            <p className="text-[12px] text-nova-text-muted mt-2 border-t border-nova-border/40 pt-1.5">
               {whyNova.comparison.fastest.details}
             </p>
           </div>

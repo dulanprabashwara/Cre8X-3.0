@@ -31,20 +31,24 @@ export function RouteFlowBar() {
           const Icon = isPod
             ? CarFront
             : isRail
-            ? TrainFront
-            : isAero
-            ? Plane
-            : Footprints;
+              ? TrainFront
+              : isAero
+                ? Plane
+                : Footprints;
 
           return (
             <div
               key={seg.id}
               className={cn(
                 "py-3 px-2 rounded-xl border flex flex-col items-center text-center transition-colors select-none",
-                isPod && "bg-nova-green-soft/70 border-nova-green/40 text-nova-green",
-                isRail && "bg-white border-nova-border text-nova-text-primary shadow-2xs",
-                isAero && "bg-nova-coral-soft/70 border-nova-coral/30 text-nova-coral",
-                isWalk && "bg-nova-surface/50 border-nova-border/60 text-nova-text-secondary"
+                isPod &&
+                  "bg-nova-green-soft/70 border-nova-green/40 text-nova-green",
+                isRail &&
+                  "bg-white border-nova-border text-nova-text-primary shadow-2xs",
+                isAero &&
+                  "bg-nova-coral-soft/70 border-nova-coral/30 text-nova-coral",
+                isWalk &&
+                  "bg-nova-surface/50 border-nova-border/60 text-nova-text-secondary",
               )}
             >
               <Icon className="w-5 h-5 mb-1.5" />
@@ -52,12 +56,12 @@ export function RouteFlowBar() {
                 {seg.type === "pod"
                   ? "Pod"
                   : seg.type === "rail"
-                  ? "Rail"
-                  : seg.type === "aero"
-                  ? "Aero"
-                  : "Walk"}
+                    ? "Rail"
+                    : seg.type === "aero"
+                      ? "Aero"
+                      : "Walk"}
               </span>
-              <span className="text-[11px] font-medium opacity-80 mt-1">
+              <span className="text-[12px] font-medium opacity-80 mt-1">
                 {seg.durationMinutes} min
               </span>
             </div>

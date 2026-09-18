@@ -28,7 +28,10 @@ export function AssistanceSheet() {
     setAssistanceSheetOpen(false);
     switch (type) {
       case "repeat":
-        showToast("“Exit at Central Skyport. Doors open on the left in 4 minutes.”", "info");
+        showToast(
+          "“Exit at Central Skyport. Doors open on the left in 4 minutes.”",
+          "info",
+        );
         break;
       case "simple":
         setLiveMode("instructions");
@@ -118,8 +121,8 @@ export function AssistanceSheet() {
                   isDanger
                     ? "bg-white hover:bg-nova-error-soft border-nova-error/30 text-nova-error"
                     : isGreen
-                    ? "bg-white hover:bg-nova-green-soft border-nova-green/30"
-                    : "bg-white hover:bg-nova-surface/70 border-nova-border"
+                      ? "bg-white hover:bg-nova-green-soft border-nova-green/30"
+                      : "bg-white hover:bg-nova-surface/70 border-nova-border",
                 )}
               >
                 <div className="flex items-center gap-3.5 min-w-0">
@@ -129,8 +132,8 @@ export function AssistanceSheet() {
                       isDanger
                         ? "bg-nova-error-soft text-nova-error"
                         : isGreen
-                        ? "bg-nova-green-soft text-nova-green"
-                        : "bg-nova-surface text-nova-text-secondary"
+                          ? "bg-nova-green-soft text-nova-green"
+                          : "bg-nova-surface text-nova-text-secondary",
                     )}
                   >
                     <Icon className="w-5 h-5" />
@@ -140,7 +143,7 @@ export function AssistanceSheet() {
                     <h4
                       className={cn(
                         "font-heading font-semibold text-[15px]",
-                        isDanger ? "text-nova-error" : "text-nova-text-primary"
+                        isDanger ? "text-nova-error" : "text-nova-text-primary",
                       )}
                     >
                       {opt.title}
@@ -154,7 +157,7 @@ export function AssistanceSheet() {
                 <ChevronRight
                   className={cn(
                     "w-5 h-5 shrink-0 ml-2",
-                    isDanger ? "text-nova-error/60" : "text-nova-text-muted"
+                    isDanger ? "text-nova-error/60" : "text-nova-text-muted",
                   )}
                 />
               </button>

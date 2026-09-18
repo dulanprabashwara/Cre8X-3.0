@@ -49,11 +49,15 @@ export function MobilityConfirmationDialog() {
 
             <div className="mt-3 p-3.5 rounded-xl bg-[#FAF8FC] border border-nova-border/70 text-[14px] text-nova-text-secondary leading-relaxed text-left space-y-2">
               <p>
-                <strong>Central Skyport staff notified.</strong> A transit assistant will meet you directly at <strong>Platform 2B</strong> as your train arrives.
+                <strong>Central Skyport staff notified.</strong> A transit
+                assistant will meet you directly at <strong>Platform 2B</strong>{" "}
+                as your train arrives.
               </p>
               <div className="flex items-center justify-between text-[12px] text-nova-text-muted border-t border-nova-divider pt-2 font-medium">
                 <span>Estimated meeting:</span>
-                <span className="text-nova-green font-semibold">In approx 4 min</span>
+                <span className="text-nova-green font-semibold">
+                  In approx 4 min
+                </span>
               </div>
             </div>
 

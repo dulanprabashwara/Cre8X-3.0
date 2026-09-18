@@ -30,7 +30,7 @@ export function SegmentedControl<T extends string>({
       role="tablist"
       className={cn(
         "inline-flex items-center bg-white p-1 rounded-full border border-nova-border/70 shadow-xs",
-        className
+        className,
       )}
     >
       {options.map((option) => {
@@ -46,7 +46,7 @@ export function SegmentedControl<T extends string>({
               size === "sm" ? "px-3 py-1 text-[13px]" : "px-4 py-2 text-[14px]",
               isSelected
                 ? "text-white"
-                : "text-nova-text-secondary hover:text-nova-text-primary"
+                : "text-nova-text-secondary hover:text-nova-text-primary",
             )}
           >
             {isSelected && (

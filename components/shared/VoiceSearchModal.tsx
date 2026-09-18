@@ -7,7 +7,8 @@ import { useJourney } from "@/context/JourneyContext";
 import { DESTINATIONS } from "@/data/destinations";
 
 export function VoiceSearchModal() {
-  const { voiceModalOpen, setVoiceModalOpen, setDestination, showToast } = useJourney();
+  const { voiceModalOpen, setVoiceModalOpen, setDestination, showToast } =
+    useJourney();
   const [spokenText, setSpokenText] = useState("Listening...");
 
   useEffect(() => {
@@ -21,7 +22,9 @@ export function VoiceSearchModal() {
       }, 1200);
 
       timer2 = setTimeout(() => {
-        const target = DESTINATIONS.find((d) => d.name === "Colombo Skyport") || DESTINATIONS[0];
+        const target =
+          DESTINATIONS.find((d) => d.name === "Colombo Skyport") ||
+          DESTINATIONS[0];
         setDestination(target);
         showToast("Destination set: Colombo Skyport");
         setVoiceModalOpen(false);
@@ -67,12 +70,20 @@ export function VoiceSearchModal() {
             <div className="relative my-6 flex items-center justify-center">
               <motion.div
                 animate={{ scale: [1, 1.35, 1], opacity: [0.3, 0.7, 0.3] }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut",
+                }}
                 className="absolute w-24 h-24 rounded-full bg-nova-coral/20"
               />
               <motion.div
                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
-                transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.6,
+                  ease: "easeInOut",
+                }}
                 className="absolute w-18 h-18 rounded-full bg-nova-coral-mid/30"
               />
               <div className="relative w-14 h-14 rounded-full bg-gradient-to-tr from-nova-coral to-nova-coral-orange text-white flex items-center justify-center shadow-glowCoral">
@@ -90,7 +101,8 @@ export function VoiceSearchModal() {
             </h3>
 
             <p className="text-[13px] text-nova-text-muted mt-2">
-              Speak naturally to search any district, skyport, or transit station.
+              Speak naturally to search any district, skyport, or transit
+              station.
             </p>
           </motion.div>
         </div>

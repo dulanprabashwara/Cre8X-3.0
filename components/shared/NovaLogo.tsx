@@ -9,7 +9,7 @@ export function NovaLogo() {
       <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-white to-[#F3EEFA] border border-nova-border/60 shadow-xs flex items-center justify-center overflow-hidden">
         {/* Subtle ambient glow inside */}
         <div className="absolute inset-0 bg-radial from-nova-green/10 via-nova-coral/10 to-transparent" />
-        
+
         {/* Stylized geometric N logo with connecting node dots */}
         <svg
           width="20"
@@ -50,7 +50,7 @@ export function NovaLogo() {
         <span className="font-heading font-bold text-[18px] leading-tight text-nova-text-primary tracking-tight">
           NOVA
         </span>
-        <span className="font-heading text-[11px] font-medium tracking-[0.14em] text-nova-text-muted uppercase">
+        <span className="font-heading text-[12px] font-medium tracking-[0.14em] text-nova-text-muted uppercase">
           Mobility OS 2100
         </span>
       </div>

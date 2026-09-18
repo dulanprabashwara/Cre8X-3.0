@@ -11,7 +11,10 @@ interface VehicleMarkerProps {
 
 export function VehicleMarker({ x, y, angle = -35 }: VehicleMarkerProps) {
   return (
-    <g transform={`translate(${x}, ${y})`} className="cursor-pointer select-none">
+    <g
+      transform={`translate(${x}, ${y})`}
+      className="cursor-pointer select-none"
+    >
       {/* Outer pulsing bioluminescent halo */}
       <motion.circle
         r={14}
@@ -24,7 +27,11 @@ export function VehicleMarker({ x, y, angle = -35 }: VehicleMarkerProps) {
       <circle r={10} fill="rgba(47, 174, 99, 0.45)" />
 
       {/* White rim container */}
-      <circle r={6.5} fill="#FFFFFF" filter="drop-shadow(0px 2px 4px rgba(35, 29, 43, 0.2))" />
+      <circle
+        r={6.5}
+        fill="#FFFFFF"
+        filter="drop-shadow(0px 2px 4px rgba(35, 29, 43, 0.2))"
+      />
 
       {/* Inner vibrant Luciferin Green core */}
       <circle r={4.5} fill="#2FAE63" />

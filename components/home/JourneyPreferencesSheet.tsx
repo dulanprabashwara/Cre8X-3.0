@@ -95,12 +95,14 @@ export function JourneyPreferencesSheet() {
                 <button
                   key={item.id}
                   type="button"
-                  onClick={() => setLocalPrefs((p) => ({ ...p, routeStyle: item.id }))}
+                  onClick={() =>
+                    setLocalPrefs((p) => ({ ...p, routeStyle: item.id }))
+                  }
                   className={cn(
                     "p-3 rounded-card border text-left flex flex-col justify-between transition-all select-none min-h-[96px]",
                     isSelected
                       ? "bg-nova-green-soft border-nova-green shadow-xs ring-1 ring-nova-green/30"
-                      : "bg-white hover:bg-nova-surface/50 border-nova-border/80"
+                      : "bg-white hover:bg-nova-surface/50 border-nova-border/80",
                   )}
                 >
                   <div className="flex items-center justify-between w-full">
@@ -109,12 +111,14 @@ export function JourneyPreferencesSheet() {
                         "w-8 h-8 rounded-lg flex items-center justify-center",
                         isSelected
                           ? "bg-nova-green text-white"
-                          : "bg-nova-surface text-nova-text-secondary"
+                          : "bg-nova-surface text-nova-text-secondary",
                       )}
                     >
                       <Icon className="w-4 h-4" />
                     </div>
-                    {isSelected && <Check className="w-4 h-4 text-nova-green stroke-[3]" />}
+                    {isSelected && (
+                      <Check className="w-4 h-4 text-nova-green stroke-[3]" />
+                    )}
                   </div>
 
                   <div className="mt-2">
@@ -152,7 +156,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.stepFree}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, stepFree: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, stepFree: val }))
+                }
                 label="Step-free routes"
               />
             </div>
@@ -170,7 +176,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.reduceWalking}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, reduceWalking: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, reduceWalking: val }))
+                }
                 label="Reduce walking"
               />
             </div>
@@ -188,7 +196,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.avoidSteep}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, avoidSteep: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, avoidSteep: val }))
+                }
                 label="Avoid steep pathways"
               />
             </div>
@@ -216,7 +226,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.simpleInstructions}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, simpleInstructions: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, simpleInstructions: val }))
+                }
                 label="Simple instructions"
               />
             </div>
@@ -234,7 +246,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.extraTransferTime}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, extraTransferTime: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, extraTransferTime: val }))
+                }
                 label="Extra transfer time"
               />
             </div>
@@ -252,7 +266,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.audioGuidance}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, audioGuidance: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, audioGuidance: val }))
+                }
                 label="Audio guidance"
               />
             </div>
@@ -280,7 +296,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.reducedMotion}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, reducedMotion: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, reducedMotion: val }))
+                }
                 label="Reduced motion"
               />
             </div>
@@ -298,7 +316,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.lessVisualInfo}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, lessVisualInfo: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, lessVisualInfo: val }))
+                }
                 label="Less visual information"
               />
             </div>
@@ -316,7 +336,9 @@ export function JourneyPreferencesSheet() {
               </div>
               <ToggleSwitch
                 checked={localPrefs.quietNotifications}
-                onChange={(val) => setLocalPrefs((p) => ({ ...p, quietNotifications: val }))}
+                onChange={(val) =>
+                  setLocalPrefs((p) => ({ ...p, quietNotifications: val }))
+                }
                 label="Quiet notifications"
               />
             </div>

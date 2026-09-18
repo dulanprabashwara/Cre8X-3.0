@@ -4,8 +4,17 @@ import React from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
-  variant?: "primary" | "secondary" | "inverted" | "outlined" | "coral" | "ghost";
+export interface ButtonProps extends Omit<
+  HTMLMotionProps<"button">,
+  "children"
+> {
+  variant?:
+    | "primary"
+    | "secondary"
+    | "inverted"
+    | "outlined"
+    | "coral"
+    | "ghost";
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
   icon?: React.ReactNode;
@@ -26,7 +35,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
     const baseStyles =
       "relative inline-flex items-center justify-center font-heading font-medium transition-colors focus-visible:outline-2 focus-visible:outline-nova-green focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none select-none";
@@ -63,20 +72,24 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           variantStyles[variant],
           sizeStyles[size],
           fullWidth && "w-full",
-          className
+          className,
         )}
         {...props}
       >
         {icon && iconPosition === "left" && (
-          <span className="inline-flex shrink-0 items-center justify-center">{icon}</span>
+          <span className="inline-flex shrink-0 items-center justify-center">
+            {icon}
+          </span>
         )}
         <span>{children}</span>
         {icon && iconPosition === "right" && (
-          <span className="inline-flex shrink-0 items-center justify-center">{icon}</span>
+          <span className="inline-flex shrink-0 items-center justify-center">
+            {icon}
+          </span>
         )}
       </motion.button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

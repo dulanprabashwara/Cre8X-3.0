@@ -28,7 +28,7 @@ export default function JourneyPage() {
         {/* Back Button */}
         <button
           onClick={() => router.push("/")}
-          className="w-10 h-10 rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
+          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
           aria-label="Back to planner"
         >
           <ArrowLeft className="w-5 h-5" />
@@ -46,8 +46,13 @@ export default function JourneyPage() {
 
         {/* More Actions */}
         <button
-          onClick={() => showToast("Journey options: Share, Export itinerary, Cancel reservations", "info")}
-          className="w-10 h-10 rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
+          onClick={() =>
+            showToast(
+              "Journey options: Share, Export itinerary, Cancel reservations",
+              "info",
+            )
+          }
+          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
           aria-label="More journey options"
         >
           <MoreVertical className="w-5 h-5" />

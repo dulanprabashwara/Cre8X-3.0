@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, MoreVertical, Radio } from "lucide-react";
+import { ArrowLeft, MoreVertical, Route, Headphones, Sliders } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useJourney } from "@/context/JourneyContext";
 import { LiveMap } from "@/components/live/LiveMap";
 import { InstructionModeView } from "@/components/live/InstructionModeView";
 import { LiveJourneySheet } from "@/components/live/LiveJourneySheet";
 import { AssistanceSheet } from "@/components/live/AssistanceSheet";
 import { MobilityConfirmationDialog } from "@/components/live/MobilityConfirmationDialog";
+import { JourneyPreferencesSheet } from "@/components/home/JourneyPreferencesSheet";
 
 export default function LivePage() {
   const router = useRouter();
@@ -16,18 +18,24 @@ export default function LivePage() {
     liveMode,
     triggerApproachingTransfer,
     triggerNetworkChange,
+    setPreferencesSheetOpen,
     showToast,
   } = useJourney();
 
-  // Automatic simulation progression for presentation / judge review
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Automatic simulation progression for competition review:
+  // 0 sec: Live Journey opens normally
+  // 8 sec: Approaching transfer state
+  // 16 sec: Network change appears (remains until passenger acts)
   useEffect(() => {
     const timerTransfer = setTimeout(() => {
       triggerApproachingTransfer();
-    }, 18000);
+    }, 8000);
 
     const timerNetwork = setTimeout(() => {
       triggerNetworkChange();
-    }, 36000);
+    }, 16000);
 
     return () => {
       clearTimeout(timerTransfer);
@@ -42,7 +50,7 @@ export default function LivePage() {
         {/* Back button */}
         <button
           onClick={() => router.push("/journey")}
-          className="w-10 h-10 rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
+          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
           aria-label="Back to journey details"
         >
           <ArrowLeft className="w-5 h-5" />
@@ -62,16 +70,68 @@ export default function LivePage() {
           </div>
         </div>
 
-        {/* More options button */}
-        <button
-          onClick={() =>
-            showToast("Telemetry: Connected via Sri Lanka Smart Urban Transit Mesh", "info")
-          }
-          className="w-10 h-10 rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
-          aria-label="More live options"
-        >
-          <MoreVertical className="w-5 h-5" />
-        </button>
+        {/* More options button with passenger-appropriate menu */}
+        <div className="relative">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
+            aria-label="Journey options"
+          >
+            <MoreVertical className="w-5 h-5" />
+          </button>
+
+          {/* Passenger Options Dropdown */}
+          <AnimatePresence>
+            {menuOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setMenuOpen(false)}
+                />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: -4 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -4 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-12 z-50 w-52 bg-white rounded-card shadow-dock border border-nova-border p-1.5 space-y-1"
+                >
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      router.push("/journey");
+                    }}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 text-[14px] font-heading font-medium text-nova-text-primary hover:bg-nova-surface rounded-xl transition-colors text-left"
+                  >
+                    <Route className="w-4 h-4 text-nova-green" />
+                    <span>Journey details</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      showToast("Audio guidance active for next transfer", "info");
+                    }}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 text-[14px] font-heading font-medium text-nova-text-primary hover:bg-nova-surface rounded-xl transition-colors text-left"
+                  >
+                    <Headphones className="w-4 h-4 text-nova-green" />
+                    <span>Audio guidance</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setPreferencesSheetOpen(true);
+                    }}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 text-[14px] font-heading font-medium text-nova-text-primary hover:bg-nova-surface rounded-xl transition-colors text-left"
+                  >
+                    <Sliders className="w-4 h-4 text-nova-green" />
+                    <span>Journey preferences</span>
+                  </button>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </div>
       </header>
 
       {/* Main View Area: Map or Instructions */}
@@ -84,9 +144,10 @@ export default function LivePage() {
         </div>
       </main>
 
-      {/* Assistance & Confirmation Overlays */}
+      {/* Assistance, Confirmation & Preferences Overlays */}
       <AssistanceSheet />
       <MobilityConfirmationDialog />
+      <JourneyPreferencesSheet />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Crosshair, Headphones } from "lucide-react";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { VehicleMarker } from "./VehicleMarker";
@@ -9,13 +9,8 @@ import { useJourney } from "@/context/JourneyContext";
 import { cn } from "@/lib/utils";
 
 export function LiveMap() {
-  const {
-    liveMode,
-    setLiveMode,
-    routeVariant,
-    simulationPhase,
-    showToast,
-  } = useJourney();
+  const { liveMode, setLiveMode, routeVariant, simulationPhase, showToast } =
+    useJourney();
 
   const [audioActive, setAudioActive] = useState(false);
 
@@ -23,7 +18,7 @@ export function LiveMap() {
     setAudioActive(!audioActive);
     showToast(
       !audioActive ? "Audio journey guidance enabled" : "Audio guidance muted",
-      "info"
+      "info",
     );
   };
 
@@ -42,11 +37,11 @@ export function LiveMap() {
     simulationPhase === "normal_travel"
       ? { x: 206, y: 264, angle: -38 }
       : simulationPhase === "approaching_transfer"
-      ? { x: 220, y: 244, angle: -36 }
-      : { x: 226, y: 236, angle: -42 };
+        ? { x: 220, y: 244, angle: -36 }
+        : { x: 226, y: 236, angle: -42 };
 
   return (
-    <div className="relative w-full h-[420px] sm:h-[460px] bg-[#F3EEF7] overflow-hidden select-none border-b border-nova-border/50">
+    <div className="relative w-full h-[460px] sm:h-[500px] bg-[#F3EEF7] overflow-hidden select-none border-b border-nova-border/50">
       {/* Top Floating Controls Row */}
       <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
         {/* Map / Instructions Segmented Control */}
@@ -83,7 +78,7 @@ export function LiveMap() {
               "w-11 h-11 rounded-full border shadow-dock flex items-center justify-center transition-all active:scale-95",
               audioActive
                 ? "bg-nova-green border-nova-green text-white"
-                : "bg-white border-nova-border/80 text-nova-text-secondary hover:bg-nova-surface hover:text-nova-text-primary"
+                : "bg-white border-nova-border/80 text-nova-text-secondary hover:bg-nova-surface hover:text-nova-text-primary",
             )}
           >
             <Headphones className="w-5 h-5" />
@@ -99,14 +94,26 @@ export function LiveMap() {
       >
         <defs>
           {/* Coral Gradient for future route */}
-          <linearGradient id="coral-future-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient
+            id="coral-future-grad"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
             <stop offset="0%" stopColor="#E85F8E" />
             <stop offset="52%" stopColor="#EE6F72" />
             <stop offset="100%" stopColor="#F28B5B" />
           </linearGradient>
 
           {/* New Reroute Gradient (Signature green -> coral transition) */}
-          <linearGradient id="reroute-anim-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient
+            id="reroute-anim-grad"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
             <stop offset="0%" stopColor="#2FAE63" />
             <stop offset="50%" stopColor="#41C579" />
             <stop offset="100%" stopColor="#EE6F72" />
@@ -145,7 +152,13 @@ export function LiveMap() {
           <path d="M140,-10 C150,150 120,340 100,490" />
           <path d="M-20,220 C180,210 320,280 420,270" />
           <path d="M260,-10 C270,140 290,320 310,490" />
-          <circle cx="230" cy="240" r="130" strokeOpacity="0.4" strokeDasharray="4 6" />
+          <circle
+            cx="230"
+            cy="240"
+            r="130"
+            strokeOpacity="0.4"
+            strokeDasharray="4 6"
+          />
         </g>
 
         {/* 4. Futuristic City Architecture Blocks (Rounded buildings matching screenshot) */}
@@ -261,7 +274,9 @@ export function LiveMap() {
         </g>
 
         {/* Central Skyport Node & Floating Pill Badge */}
-        <g transform={`translate(${centralSkyportPos.x}, ${centralSkyportPos.y})`}>
+        <g
+          transform={`translate(${centralSkyportPos.x}, ${centralSkyportPos.y})`}
+        >
           {/* Node ring */}
           <circle r="6" fill="#FFFFFF" stroke="#2FAE63" strokeWidth="2.5" />
           <circle r="3" fill="#2FAE63" />
@@ -290,7 +305,9 @@ export function LiveMap() {
         </g>
 
         {/* Colombo Skyport Destination Node & Label */}
-        <g transform={`translate(${colomboSkyportPos.x}, ${colomboSkyportPos.y})`}>
+        <g
+          transform={`translate(${colomboSkyportPos.x}, ${colomboSkyportPos.y})`}
+        >
           {/* Target circular marker */}
           <circle r="7" fill="#FFFFFF" stroke="#E85F8E" strokeWidth="2" />
           <circle r="3.5" fill="#E85F8E" />
@@ -309,7 +326,11 @@ export function LiveMap() {
         </g>
 
         {/* 7. Live Vehicle Marker */}
-        <VehicleMarker x={vehiclePos.x} y={vehiclePos.y} angle={vehiclePos.angle} />
+        <VehicleMarker
+          x={vehiclePos.x}
+          y={vehiclePos.y}
+          angle={vehiclePos.angle}
+        />
       </svg>
     </div>
   );

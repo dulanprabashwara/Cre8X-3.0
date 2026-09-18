@@ -42,7 +42,8 @@ export function NovaInsightCard() {
           Leave in 6 minutes
         </h3>
         <p className="text-[14px] text-nova-text-secondary mt-1.5 leading-relaxed">
-          HyperRail traffic is expected to increase after 09:30. Avoids a predicted 14 min delay.
+          HyperRail traffic is expected to increase after 09:30. Avoids a
+          predicted 14 min delay.
         </p>
       </div>
 

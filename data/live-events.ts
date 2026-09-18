@@ -35,7 +35,7 @@ export const INITIAL_LIVE_STATE: LiveEventState = {
   vehicleCode: "HyperRail H4",
   car: "Car 03",
   destination: "Central Skyport",
-  nextStop: "Central Sky",
+  nextStop: "Central Skyport",
   nextStopPlatform: "Platform 2B",
   minutesRemaining: 4,
   estimatedArrival: "09:42",

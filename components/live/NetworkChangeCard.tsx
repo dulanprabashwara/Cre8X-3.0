@@ -2,7 +2,12 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, CheckCircle2, RotateCcw, AlertCircle, ArrowRight } from "lucide-react";
+import {
+  Sparkles,
+  CheckCircle2,
+  RotateCcw,
+  ArrowRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useJourney } from "@/context/JourneyContext";
 
@@ -79,7 +84,7 @@ export function NetworkChangeCard() {
         <div className="flex items-center justify-between">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-nova-coral-soft border border-nova-coral/30 text-nova-coral text-[12px] font-heading font-bold">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>NETWORK CHANGE DETECTED</span>
+            <span>NETWORK CHANGE</span>
           </div>
 
           <span className="text-[12px] font-heading font-semibold text-nova-coral">
@@ -93,7 +98,8 @@ export function NetworkChangeCard() {
             {cause}
           </h4>
           <p className="text-[14px] text-nova-text-secondary leading-relaxed">
-            {solution} <strong className="text-nova-green font-semibold">{impact}</strong>
+            {solution}{" "}
+            <strong className="text-nova-green font-semibold">{impact}</strong>
           </p>
         </div>
 
@@ -108,15 +114,21 @@ export function NetworkChangeCard() {
             >
               <div className="flex justify-between">
                 <span className="text-nova-text-muted">Original:</span>
-                <span className="font-medium text-nova-text-secondary">AeroLink A12 (Gate 04, +6 min delay)</span>
+                <span className="font-medium text-nova-text-secondary">
+                  AeroLink A12 (Gate 04, +6 min delay)
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-nova-text-muted">Recommended:</span>
-                <span className="font-medium text-nova-green">AeroLink Express A14 (Gate 05, direct)</span>
+                <span className="font-medium text-nova-green">
+                  AeroLink Express A14 (Gate 05, direct)
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-nova-text-muted">Walking diff:</span>
-                <span className="font-medium text-nova-text-secondary">Step-free Elevator B, 45 seconds closer</span>
+                <span className="font-medium text-nova-text-secondary">
+                  Step-free Elevator B, 45 seconds closer
+                </span>
               </div>
             </motion.div>
           )}

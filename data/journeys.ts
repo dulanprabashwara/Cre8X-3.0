@@ -167,7 +167,8 @@ export const PRIMARY_JOURNEY: JourneyData = {
       badgeText: "Destination",
       statusColor: "coral",
       details: {
-        expandedNote: "Follow illuminated floor vectors directly to Skyport Sky Lounge.",
+        expandedNote:
+          "Follow illuminated floor vectors directly to Skyport Sky Lounge.",
       },
     },
   ],

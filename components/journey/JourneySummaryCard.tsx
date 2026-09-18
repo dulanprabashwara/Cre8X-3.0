@@ -29,7 +29,7 @@ export function JourneySummaryCard() {
           <span className="font-heading font-bold text-[30px] text-nova-text-primary tracking-tight leading-none">
             {currentJourney.departureTime}
           </span>
-          <span className="text-[11px] font-heading font-bold tracking-widest text-nova-text-muted uppercase mt-1.5">
+          <span className="text-[12px] font-heading font-bold tracking-widest text-nova-text-muted uppercase mt-1.5">
             Departure
           </span>
         </div>
@@ -57,7 +57,7 @@ export function JourneySummaryCard() {
           <span className="font-heading font-bold text-[30px] text-nova-text-primary tracking-tight leading-none">
             {currentJourney.arrivalTime}
           </span>
-          <span className="text-[11px] font-heading font-bold tracking-widest text-nova-text-muted uppercase mt-1.5">
+          <span className="text-[12px] font-heading font-bold tracking-widest text-nova-text-muted uppercase mt-1.5">
             Arrival
           </span>
         </div>

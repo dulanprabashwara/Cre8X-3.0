@@ -2,7 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, CarFront, TrainFront, Plane, Sparkles } from "lucide-react";
+import {
+  CheckCircle2,
+  CarFront,
+  TrainFront,
+  Plane,
+  Sparkles,
+} from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
 
 export function PlanningLoadingOverlay() {
@@ -54,7 +60,10 @@ export function PlanningLoadingOverlay() {
           >
             {/* Header emblem */}
             <div className="w-12 h-12 rounded-2xl bg-nova-green-soft border border-nova-green/30 flex items-center justify-center text-nova-green mb-3 shadow-xs">
-              <Sparkles className="w-6 h-6 animate-spin" style={{ animationDuration: "4s" }} />
+              <Sparkles
+                className="w-6 h-6 animate-spin"
+                style={{ animationDuration: "4s" }}
+              />
             </div>
 
             <span className="text-[12px] font-heading font-semibold text-nova-green tracking-widest uppercase mb-1">
@@ -79,8 +88,8 @@ export function PlanningLoadingOverlay() {
                       isComplete
                         ? "bg-nova-green-soft/60 border-nova-green/40 text-nova-text-primary"
                         : isCurrent
-                        ? "bg-[#FAF8FC] border-nova-coral/40 text-nova-text-primary shadow-xs"
-                        : "bg-nova-surface/40 border-nova-border/40 text-nova-text-muted opacity-50"
+                          ? "bg-[#FAF8FC] border-nova-coral/40 text-nova-text-primary shadow-xs"
+                          : "bg-nova-surface/40 border-nova-border/40 text-nova-text-muted opacity-50"
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -89,8 +98,8 @@ export function PlanningLoadingOverlay() {
                           isComplete
                             ? "bg-nova-green text-white"
                             : isCurrent
-                            ? "bg-nova-coral text-white"
-                            : "bg-nova-border text-nova-text-muted"
+                              ? "bg-nova-coral text-white"
+                              : "bg-nova-border text-nova-text-muted"
                         }`}
                       >
                         <Icon className="w-4 h-4" />

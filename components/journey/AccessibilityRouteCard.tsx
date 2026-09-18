@@ -21,7 +21,8 @@ export function AccessibilityRouteCard() {
           {accessibility.preferenceLabel}
         </h4>
         <p className="text-[13px] text-nova-text-secondary mt-0.5 leading-snug">
-          Walking reduced by {accessibility.walkReductionPercent}% · Elevators confirmed at all transfers
+          Walking reduced by {accessibility.walkReductionPercent}% · Elevators
+          confirmed at all transfers
         </p>
       </div>
     </div>

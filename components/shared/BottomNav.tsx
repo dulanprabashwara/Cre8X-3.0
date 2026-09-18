@@ -27,13 +27,18 @@ export function BottomNav() {
             "flex flex-col items-center justify-center py-1 px-4 rounded-full transition-all duration-200 select-none",
             isHome
               ? "bg-nova-green-soft text-nova-green"
-              : "text-nova-text-muted hover:text-nova-text-primary"
+              : "text-nova-text-muted hover:text-nova-text-primary",
           )}
         >
-          <div className={cn("p-1 rounded-full", isHome && "bg-nova-green text-white")}>
+          <div
+            className={cn(
+              "p-1 rounded-full",
+              isHome && "bg-nova-green text-white",
+            )}
+          >
             <LayoutGrid className="w-4 h-4" />
           </div>
-          <span className="text-[11px] font-heading font-semibold tracking-wider uppercase mt-0.5">
+          <span className="text-[12px] font-heading font-semibold tracking-wider uppercase mt-0.5">
             Home
           </span>
         </Link>
@@ -45,26 +50,33 @@ export function BottomNav() {
             "flex flex-col items-center justify-center py-1 px-4 rounded-full transition-all duration-200 select-none",
             isJourney
               ? "bg-nova-green-soft text-nova-green"
-              : "text-nova-text-muted hover:text-nova-text-primary"
+              : "text-nova-text-muted hover:text-nova-text-primary",
           )}
         >
-          <div className={cn("p-1 rounded-full", isJourney && "bg-nova-green text-white")}>
+          <div
+            className={cn(
+              "p-1 rounded-full",
+              isJourney && "bg-nova-green text-white",
+            )}
+          >
             <Route className="w-4 h-4" />
           </div>
-          <span className="text-[11px] font-heading font-semibold tracking-wider uppercase mt-0.5">
+          <span className="text-[12px] font-heading font-semibold tracking-wider uppercase mt-0.5">
             Journey
           </span>
         </Link>
 
         {/* Profile */}
         <button
-          onClick={() => showToast("Passenger Profile: Citizen ID 8492-X", "info")}
+          onClick={() =>
+            showToast("Passenger Profile: Citizen ID 8492-X", "info")
+          }
           className="flex flex-col items-center justify-center py-1 px-4 rounded-full text-nova-text-muted hover:text-nova-text-primary transition-all duration-200 select-none"
         >
           <div className="p-1 rounded-full">
             <User className="w-4 h-4" />
           </div>
-          <span className="text-[11px] font-heading font-semibold tracking-wider uppercase mt-0.5">
+          <span className="text-[12px] font-heading font-semibold tracking-wider uppercase mt-0.5">
             Profile
           </span>
         </button>

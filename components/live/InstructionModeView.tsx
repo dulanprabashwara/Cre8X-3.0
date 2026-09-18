@@ -25,7 +25,7 @@ export function InstructionModeView() {
           <TrainFront className="w-5 h-5" />
         </div>
         <div className="flex-1 min-w-0">
-          <span className="text-[11px] font-heading font-bold uppercase tracking-widest text-nova-green">
+          <span className="text-[12px] font-heading font-bold uppercase tracking-widest text-nova-green">
             NOW
           </span>
           <h4 className="font-heading font-bold text-[17px] text-nova-text-primary leading-tight mt-0.5">
@@ -43,7 +43,7 @@ export function InstructionModeView() {
           <LogOut className="w-5 h-5" />
         </div>
         <div className="flex-1 min-w-0">
-          <span className="text-[11px] font-heading font-bold uppercase tracking-widest text-nova-text-muted">
+          <span className="text-[12px] font-heading font-bold uppercase tracking-widest text-nova-text-muted">
             NEXT
           </span>
           <h4 className="font-heading font-bold text-[16px] text-nova-text-primary leading-tight mt-0.5">
@@ -61,7 +61,7 @@ export function InstructionModeView() {
           <Footprints className="w-5 h-5" />
         </div>
         <div className="flex-1 min-w-0">
-          <span className="text-[11px] font-heading font-bold uppercase tracking-widest text-nova-coral">
+          <span className="text-[12px] font-heading font-bold uppercase tracking-widest text-nova-coral">
             AFTER THAT
           </span>
           <h4 className="font-heading font-bold text-[16px] text-nova-text-primary leading-tight mt-0.5">

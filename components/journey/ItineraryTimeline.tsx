@@ -8,7 +8,9 @@ import { cn } from "@/lib/utils";
 
 export function ItineraryTimeline() {
   const { currentJourney, showToast } = useJourney();
-  const [expandedSegment, setExpandedSegment] = useState<string | null>("seg-2"); // HyperRail expanded by default as in screenshot
+  const [expandedSegment, setExpandedSegment] = useState<string | null>(
+    "seg-2",
+  ); // HyperRail expanded by default as in screenshot
 
   const toggleExpand = (id: string) => {
     setExpandedSegment((prev) => (prev === id ? null : id));
@@ -48,10 +50,13 @@ export function ItineraryTimeline() {
               <div
                 className={cn(
                   "absolute -left-6 top-1 w-3.5 h-3.5 rounded-full z-10 transition-transform group-hover:scale-110",
-                  isFirst && "border-2 border-nova-green bg-white ring-4 ring-white",
-                  isHyperRail && "border-2 border-nova-text-primary bg-white ring-4 ring-white",
-                  isAero && "border-2 border-nova-coral bg-white ring-4 ring-white",
-                  isLast && "bg-nova-coral ring-4 ring-white"
+                  isFirst &&
+                    "border-2 border-nova-green bg-white ring-4 ring-white",
+                  isHyperRail &&
+                    "border-2 border-nova-text-primary bg-white ring-4 ring-white",
+                  isAero &&
+                    "border-2 border-nova-coral bg-white ring-4 ring-white",
+                  isLast && "bg-nova-coral ring-4 ring-white",
                 )}
               />
 
@@ -60,7 +65,7 @@ export function ItineraryTimeline() {
                 <span
                   className={cn(
                     "font-heading font-semibold text-[15px]",
-                    isFirst ? "text-nova-green" : "text-nova-text-primary"
+                    isFirst ? "text-nova-green" : "text-nova-text-primary",
                   )}
                 >
                   {seg.departureTime}
@@ -72,7 +77,8 @@ export function ItineraryTimeline() {
                       "text-[12px] font-heading font-semibold",
                       seg.statusColor === "green" && "text-nova-green",
                       seg.statusColor === "coral" && "text-nova-coral",
-                      seg.statusColor === "neutral" && "text-nova-text-secondary"
+                      seg.statusColor === "neutral" &&
+                        "text-nova-text-secondary",
                     )}
                   >
                     {seg.badgeText}
@@ -105,7 +111,8 @@ export function ItineraryTimeline() {
                       <div className="flex items-center gap-2 text-nova-text-primary">
                         <TrainFront className="w-4 h-4 text-nova-text-secondary shrink-0" />
                         <span className="font-heading font-medium">
-                          Boarding {seg.details.boardingTime} • {seg.details.car}
+                          Boarding {seg.details.boardingTime} •{" "}
+                          {seg.details.car}
                         </span>
                       </div>
 

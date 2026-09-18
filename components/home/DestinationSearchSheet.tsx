@@ -31,7 +31,8 @@ export function DestinationSearchSheet() {
   } = useJourney();
 
   const [searchQuery, setSearchQuery] = useState(destination.name);
-  const [selectedItem, setSelectedItem] = useState<DestinationItem>(destination);
+  const [selectedItem, setSelectedItem] =
+    useState<DestinationItem>(destination);
 
   const handleSelect = (item: DestinationItem) => {
     setSelectedItem(item);
@@ -52,7 +53,7 @@ export function DestinationSearchSheet() {
     (d) =>
       d.category === "recent" &&
       (d.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        d.district.toLowerCase().includes(searchQuery.toLowerCase()))
+        d.district.toLowerCase().includes(searchQuery.toLowerCase())),
   );
 
   return (
@@ -107,15 +108,19 @@ export function DestinationSearchSheet() {
               "p-3 rounded-xl border text-left flex items-center gap-3 transition-colors select-none",
               selectedItem.id === "home-ratmalana"
                 ? "bg-nova-green-soft border-nova-green shadow-xs"
-                : "bg-nova-surface/60 hover:bg-nova-surface border-nova-border/70"
+                : "bg-nova-surface/60 hover:bg-nova-surface border-nova-border/70",
             )}
           >
             <div className="w-9 h-9 rounded-lg bg-white border border-nova-border/60 flex items-center justify-center text-nova-green shrink-0 shadow-2xs">
               <Home className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <p className="font-heading font-semibold text-[14px] text-nova-text-primary">Home</p>
-              <p className="text-[12px] text-nova-text-muted truncate">Ratmalana Distr...</p>
+              <p className="font-heading font-semibold text-[14px] text-nova-text-primary">
+                Home
+              </p>
+              <p className="text-[12px] text-nova-text-muted truncate">
+                Ratmalana Distr...
+              </p>
             </div>
           </button>
 
@@ -129,15 +134,19 @@ export function DestinationSearchSheet() {
               "p-3 rounded-xl border text-left flex items-center gap-3 transition-colors select-none",
               selectedItem.id === "work-central"
                 ? "bg-nova-green-soft border-nova-green shadow-xs"
-                : "bg-nova-surface/60 hover:bg-nova-surface border-nova-border/70"
+                : "bg-nova-surface/60 hover:bg-nova-surface border-nova-border/70",
             )}
           >
             <div className="w-9 h-9 rounded-lg bg-white border border-nova-border/60 flex items-center justify-center text-nova-green shrink-0 shadow-2xs">
               <Briefcase className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <p className="font-heading font-semibold text-[14px] text-nova-text-primary">Work</p>
-              <p className="text-[12px] text-nova-text-muted truncate">Colombo Central</p>
+              <p className="font-heading font-semibold text-[14px] text-nova-text-primary">
+                Work
+              </p>
+              <p className="text-[12px] text-nova-text-muted truncate">
+                Colombo Central
+              </p>
             </div>
           </button>
         </div>
@@ -164,8 +173,8 @@ export function DestinationSearchSheet() {
               item.iconType === "airport"
                 ? Plane
                 : item.iconType === "ferry"
-                ? Ship
-                : Building2;
+                  ? Ship
+                  : Building2;
 
             return (
               <div
@@ -175,7 +184,7 @@ export function DestinationSearchSheet() {
                   "p-3.5 rounded-card border transition-all cursor-pointer flex items-center justify-between select-none group",
                   isSelected
                     ? "bg-nova-green-soft/70 border-nova-green shadow-xs ring-1 ring-nova-green/30"
-                    : "bg-white hover:bg-nova-surface/40 border-nova-border/80 shadow-2xs"
+                    : "bg-white hover:bg-nova-surface/40 border-nova-border/80 shadow-2xs",
                 )}
               >
                 <div className="flex items-center gap-3.5 min-w-0">
@@ -184,7 +193,7 @@ export function DestinationSearchSheet() {
                       "w-10 h-10 rounded-xl border flex items-center justify-center shrink-0 shadow-2xs",
                       isSelected
                         ? "bg-white border-nova-green/40 text-nova-green"
-                        : "bg-nova-surface border-nova-border/60 text-nova-text-secondary"
+                        : "bg-nova-surface border-nova-border/60 text-nova-text-secondary",
                     )}
                   >
                     <Icon className="w-5 h-5" />
@@ -196,8 +205,8 @@ export function DestinationSearchSheet() {
                         {item.name}
                       </h4>
                       {item.badge && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-nova-coral-soft border border-nova-coral/20 text-[11px] font-heading font-semibold text-nova-coral">
-                          <Sparkles className="w-2.5 h-2.5" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-nova-coral-soft border border-nova-coral/20 text-[12px] font-heading font-semibold text-nova-coral">
+                          <Sparkles className="w-3 h-3" />
                           {item.badge}
                         </span>
                       )}

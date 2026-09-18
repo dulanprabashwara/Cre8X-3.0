@@ -18,7 +18,8 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "NOVA 2100 — Universal Mobility OS",
-  description: "One journey. Every network. Advanced multimodal transportation operating system.",
+  description:
+    "One journey. Every network. Advanced multimodal transportation operating system.",
   icons: {
     icon: "/favicon.ico",
   },

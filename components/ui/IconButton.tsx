@@ -4,7 +4,10 @@ import React from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export interface IconButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
+export interface IconButtonProps extends Omit<
+  HTMLMotionProps<"button">,
+  "children"
+> {
   children: React.ReactNode;
   variant?: "ghost" | "secondary" | "white" | "primary";
   size?: "sm" | "md" | "lg";
@@ -21,12 +24,15 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
     const variantStyles = {
-      ghost: "bg-transparent hover:bg-nova-surface text-nova-text-primary active:bg-nova-border/30",
-      secondary: "bg-nova-surface hover:bg-[#E5DFEA] text-nova-text-primary active:bg-[#DDD6E3]",
-      white: "bg-white hover:bg-nova-bg text-nova-text-primary border border-nova-border shadow-xs",
+      ghost:
+        "bg-transparent hover:bg-nova-surface text-nova-text-primary active:bg-nova-border/30",
+      secondary:
+        "bg-nova-surface hover:bg-[#E5DFEA] text-nova-text-primary active:bg-[#DDD6E3]",
+      white:
+        "bg-white hover:bg-nova-bg text-nova-text-primary border border-nova-border shadow-xs",
       primary: "bg-nova-green hover:bg-nova-green-hover text-white shadow-sm",
     };
 
@@ -46,14 +52,14 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
           "inline-flex items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-nova-green focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none select-none",
           variantStyles[variant],
           sizeStyles[size],
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </motion.button>
     );
-  }
+  },
 );
 
 IconButton.displayName = "IconButton";

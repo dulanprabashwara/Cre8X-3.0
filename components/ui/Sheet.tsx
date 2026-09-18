@@ -12,12 +12,7 @@ export interface SheetProps {
   className?: string;
 }
 
-export function Sheet({
-  isOpen,
-  onClose,
-  children,
-  className,
-}: SheetProps) {
+export function Sheet({ isOpen, onClose, children, className }: SheetProps) {
   // Handle escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -66,7 +61,7 @@ export function Sheet({
             transition={{ type: "spring", damping: 28, stiffness: 300 }}
             className={cn(
               "relative w-full max-w-[480px] md:max-w-[560px] bg-white rounded-t-sheet shadow-sheet z-10 flex flex-col max-h-[90vh] overflow-hidden border-t border-nova-border/50",
-              className
+              className,
             )}
           >
             {/* Drag handle pill */}

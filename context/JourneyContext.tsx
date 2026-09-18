@@ -1,10 +1,13 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
-import {
-  JourneyPreferences,
-  DEFAULT_PREFERENCES,
-} from "@/lib/constants";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import { JourneyPreferences, DEFAULT_PREFERENCES } from "@/lib/constants";
 import { DESTINATIONS, DestinationItem } from "@/data/destinations";
 import { PRIMARY_JOURNEY, JourneyData } from "@/data/journeys";
 import {
@@ -26,31 +29,31 @@ interface JourneyContextType {
   setDestination: (dest: DestinationItem) => void;
   routeStyle: "fastest" | "calmest" | "eco" | "low_walking";
   setRouteStyle: (style: "fastest" | "calmest" | "eco" | "low_walking") => void;
-  
+
   // Preferences
   preferences: JourneyPreferences;
   updatePreferences: (newPrefs: Partial<JourneyPreferences>) => void;
   savePreferences: (newPrefs: JourneyPreferences) => void;
-  
+
   // Journey Detail Data
   currentJourney: JourneyData;
   isPlanning: boolean;
   startPlanning: (onComplete?: () => void) => void;
-  
+
   // Live State
   liveMode: "map" | "instructions";
   setLiveMode: (mode: "map" | "instructions") => void;
   simulationPhase: SimulationPhase;
   liveState: LiveEventState;
   routeVariant: "original" | "rerouted";
-  
+
   // Simulation actions
   triggerApproachingTransfer: () => void;
   triggerNetworkChange: () => void;
   acceptReroute: () => void;
   undoReroute: () => void;
   resetSimulation: () => void;
-  
+
   // Sheet & Dialog states
   destinationSheetOpen: boolean;
   setDestinationSheetOpen: (open: boolean) => void;
@@ -64,7 +67,7 @@ interface JourneyContextType {
   setMobilityDialogOpen: (open: boolean) => void;
   voiceModalOpen: boolean;
   setVoiceModalOpen: (open: boolean) => void;
-  
+
   // Toasts
   toast: ToastInfo | null;
   showToast: (message: string, type?: "success" | "info" | "warning") => void;
@@ -75,17 +78,26 @@ const JourneyContext = createContext<JourneyContextType | undefined>(undefined);
 const PREFS_STORAGE_KEY = "nova_journey_preferences_2100";
 
 export function JourneyProvider({ children }: { children: React.ReactNode }) {
-  const [destination, setDestination] = useState<DestinationItem>(DESTINATIONS[0]);
-  const [routeStyle, setRouteStyle] = useState<"fastest" | "calmest" | "eco" | "low_walking">("low_walking");
-  const [preferences, setPreferences] = useState<JourneyPreferences>(DEFAULT_PREFERENCES);
+  const [destination, setDestination] = useState<DestinationItem>(
+    DESTINATIONS[0],
+  );
+  const [routeStyle, setRouteStyle] = useState<
+    "fastest" | "calmest" | "eco" | "low_walking"
+  >("low_walking");
+  const [preferences, setPreferences] =
+    useState<JourneyPreferences>(DEFAULT_PREFERENCES);
   const [currentJourney] = useState<JourneyData>(PRIMARY_JOURNEY);
   const [isPlanning, setIsPlanning] = useState(false);
 
   // Live Tracking state
   const [liveMode, setLiveMode] = useState<"map" | "instructions">("map");
-  const [simulationPhase, setSimulationPhase] = useState<SimulationPhase>("normal_travel");
-  const [liveState, setLiveState] = useState<LiveEventState>(INITIAL_LIVE_STATE);
-  const [routeVariant, setRouteVariant] = useState<"original" | "rerouted">("original");
+  const [simulationPhase, setSimulationPhase] =
+    useState<SimulationPhase>("normal_travel");
+  const [liveState, setLiveState] =
+    useState<LiveEventState>(INITIAL_LIVE_STATE);
+  const [routeVariant, setRouteVariant] = useState<"original" | "rerouted">(
+    "original",
+  );
 
   // Sheet Controls
   const [destinationSheetOpen, setDestinationSheetOpen] = useState(false);
@@ -98,12 +110,15 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
   // Toast
   const [toast, setToast] = useState<ToastInfo | null>(null);
 
-  const showToast = useCallback((message: string, type: "success" | "info" | "warning" = "success") => {
-    setToast({ message, type });
-    setTimeout(() => {
-      setToast((prev) => (prev?.message === message ? null : prev));
-    }, 3800);
-  }, []);
+  const showToast = useCallback(
+    (message: string, type: "success" | "info" | "warning" = "success") => {
+      setToast({ message, type });
+      setTimeout(() => {
+        setToast((prev) => (prev?.message === message ? null : prev));
+      }, 3800);
+    },
+    [],
+  );
 
   // Load preferences from localStorage on mount
   useEffect(() => {
@@ -121,20 +136,26 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const updatePreferences = useCallback((newPrefs: Partial<JourneyPreferences>) => {
-    setPreferences((prev) => ({ ...prev, ...newPrefs }));
-  }, []);
+  const updatePreferences = useCallback(
+    (newPrefs: Partial<JourneyPreferences>) => {
+      setPreferences((prev) => ({ ...prev, ...newPrefs }));
+    },
+    [],
+  );
 
-  const savePreferences = useCallback((newPrefs: JourneyPreferences) => {
-    setPreferences(newPrefs);
-    setRouteStyle(newPrefs.routeStyle);
-    try {
-      localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(newPrefs));
-      showToast("Preferences saved. NOVA will use them on future journeys.");
-    } catch (e) {
-      console.warn("Could not write to localStorage:", e);
-    }
-  }, [showToast]);
+  const savePreferences = useCallback(
+    (newPrefs: JourneyPreferences) => {
+      setPreferences(newPrefs);
+      setRouteStyle(newPrefs.routeStyle);
+      try {
+        localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(newPrefs));
+        showToast("Preferences saved. NOVA will use them on future journeys.");
+      } catch (e) {
+        console.warn("Could not write to localStorage:", e);
+      }
+    },
+    [showToast],
+  );
 
   const startPlanning = useCallback((onComplete?: () => void) => {
     setIsPlanning(true);

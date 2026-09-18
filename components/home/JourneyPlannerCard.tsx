@@ -89,7 +89,10 @@ export function JourneyPlannerCard() {
               </span>
             </div>
 
-            <div className="flex items-center gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
+            <div
+              className="flex items-center gap-1 shrink-0"
+              onClick={(e) => e.stopPropagation()}
+            >
               <button
                 type="button"
                 onClick={() => setVoiceModalOpen(true)}
@@ -127,17 +130,19 @@ export function JourneyPlannerCard() {
                 "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-heading font-medium border transition-all select-none shrink-0",
                 isSelected
                   ? "bg-nova-green-soft border-nova-green text-nova-text-primary font-semibold shadow-2xs ring-1 ring-nova-green/30"
-                  : "bg-nova-surface/60 hover:bg-nova-surface border-nova-border/70 text-nova-text-secondary hover:text-nova-text-primary"
+                  : "bg-nova-surface/60 hover:bg-nova-surface border-nova-border/70 text-nova-text-secondary hover:text-nova-text-primary",
               )}
             >
               <Icon
                 className={cn(
                   "w-3.5 h-3.5",
-                  isSelected ? "text-nova-green" : "text-nova-text-secondary"
+                  isSelected ? "text-nova-green" : "text-nova-text-secondary",
                 )}
               />
               <span>{pref.label}</span>
-              {isSelected && <Check className="w-3 h-3 text-nova-green stroke-[3] ml-0.5" />}
+              {isSelected && (
+                <Check className="w-3 h-3 text-nova-green stroke-[3] ml-0.5" />
+              )}
             </button>
           );
         })}

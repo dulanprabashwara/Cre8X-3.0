@@ -3,26 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --nova-bg: #F7F4FA;
-  --nova-surface: #F0EBF4;
-  --nova-card: #FFFFFF;
-  --nova-text: #231D2B;
-  --nova-text-secondary: #655D6F;
-  --nova-muted: #8B8295;
-  --nova-green: #2FAE63;
-  --nova-green-hover: #258C50;
-  --nova-green-soft: #E8F8EE;
-  --nova-coral: #E85F8E;
-  --nova-coral-mid: #EE6F72;
-  --nova-coral-orange: #F28B5B;
-  --nova-coral-soft: #FFF0F4;
-  --nova-warning: #D99624;
-  --nova-warning-soft: #FFF5DD;
-  --nova-error: #D94C61;
-  --nova-error-soft: #FDECEF;
-  --nova-border: #DDD6E3;
+  --nova-bg: #f7f4fa;
+  --nova-surface: #f0ebf4;
+  --nova-card: #ffffff;
+  --nova-text: #231d2b;
+  --nova-text-secondary: #655d6f;
+  --nova-muted: #8b8295;
+  --nova-green: #2fae63;
+  --nova-green-hover: #258c50;
+  --nova-green-soft: #e8f8ee;
+  --nova-coral: #e85f8e;
+  --nova-coral-mid: #ee6f72;
+  --nova-coral-orange: #f28b5b;
+  --nova-coral-soft: #fff0f4;
+  --nova-warning: #d99624;
+  --nova-warning-soft: #fff5dd;
+  --nova-error: #d94c61;
+  --nova-error-soft: #fdecef;
+  --nova-border: #ddd6e3;
   --nova-divider: rgba(35, 29, 43, 0.08);
-  --nova-ai-gradient: linear-gradient(135deg, #E85F8E 0%, #EE6F72 52%, #F28B5B 100%);
+  --nova-ai-gradient: linear-gradient(
+    135deg,
+    #e85f8e 0%,
+    #ee6f72 52%,
+    #f28b5b 100%
+  );
 }
 
 * {
@@ -33,7 +38,11 @@
 body {
   background-color: var(--nova-bg);
   color: var(--nova-text);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family:
+    var(--font-inter),
+    system-ui,
+    -apple-system,
+    sans-serif;
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -42,8 +51,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6, .font-heading {
-  font-family: var(--font-space-grotesk), var(--font-inter), system-ui, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family:
+    var(--font-space-grotesk), var(--font-inter), system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 
@@ -58,12 +74,12 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DDD6E3;
+  background: #ddd6e3;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C4BACB;
+  background: #c4bacb;
 }
 
 /* Accessible focus visible outlines */
