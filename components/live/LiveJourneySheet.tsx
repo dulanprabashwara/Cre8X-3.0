@@ -12,17 +12,13 @@ import { ApproachingTransferBanner } from "./ApproachingTransferBanner";
 import { NetworkChangeCard } from "./NetworkChangeCard";
 
 export function LiveJourneySheet() {
-  const {
-    liveState,
-    simulationPhase,
-    setAssistanceSheetOpen,
-    showToast,
-  } = useJourney();
+  const { liveState, simulationPhase, setAssistanceSheetOpen, showToast } =
+    useJourney();
 
   const handleRepeatInstruction = () => {
     showToast(
       `“${liveState.nextAction.title}. ${liveState.nextAction.description}.”`,
-      "info"
+      "info",
     );
   };
 

@@ -2,12 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Sparkles,
-  CheckCircle2,
-  RotateCcw,
-  ArrowRight,
-} from "lucide-react";
+import { Sparkles, CheckCircle2, RotateCcw, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useJourney } from "@/context/JourneyContext";
 

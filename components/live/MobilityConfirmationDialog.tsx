@@ -9,10 +9,26 @@ import { useJourney } from "@/context/JourneyContext";
 export function MobilityConfirmationDialog() {
   const { mobilityDialogOpen, setMobilityDialogOpen, showToast } = useJourney();
 
-  const handleClose = () => {
+  const handleClose = React.useCallback(() => {
     setMobilityDialogOpen(false);
     showToast("Assistance beacon active on Platform 2B");
-  };
+  }, [setMobilityDialogOpen, showToast]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobilityDialogOpen) {
+        handleClose();
+      }
+    };
+    if (mobilityDialogOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobilityDialogOpen, handleClose]);
 
   return (
     <AnimatePresence>

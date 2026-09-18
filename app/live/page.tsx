@@ -2,7 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, MoreVertical, Route, Headphones, Sliders } from "lucide-react";
+import {
+  ArrowLeft,
+  MoreVertical,
+  Route,
+  Headphones,
+  Sliders,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useJourney } from "@/context/JourneyContext";
 import { LiveMap } from "@/components/live/LiveMap";
@@ -109,7 +115,10 @@ export default function LivePage() {
                   <button
                     onClick={() => {
                       setMenuOpen(false);
-                      showToast("Audio guidance active for next transfer", "info");
+                      showToast(
+                        "Audio guidance active for next transfer",
+                        "info",
+                      );
                     }}
                     className="w-full flex items-center gap-2.5 px-3 py-2 text-[14px] font-heading font-medium text-nova-text-primary hover:bg-nova-surface rounded-xl transition-colors text-left"
                   >

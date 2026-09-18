@@ -21,7 +21,7 @@ export function RouteFlowBar() {
       </div>
 
       {/* 4 segments grid */}
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
         {currentJourney.segments.map((seg) => {
           const isPod = seg.type === "pod";
           const isRail = seg.type === "rail";
@@ -40,7 +40,7 @@ export function RouteFlowBar() {
             <div
               key={seg.id}
               className={cn(
-                "py-3 px-2 rounded-xl border flex flex-col items-center text-center transition-colors select-none",
+                "py-2.5 sm:py-3 px-1 sm:px-2 rounded-xl border flex flex-col items-center text-center transition-colors select-none",
                 isPod &&
                   "bg-nova-green-soft/70 border-nova-green/40 text-nova-green",
                 isRail &&

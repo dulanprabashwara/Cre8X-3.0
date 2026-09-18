@@ -26,7 +26,7 @@ export function JourneySummaryCard() {
       <div className="mt-4 flex items-center justify-between">
         {/* Departure */}
         <div className="flex flex-col">
-          <span className="font-heading font-bold text-[30px] text-nova-text-primary tracking-tight leading-none">
+          <span className="font-heading font-bold text-[26px] sm:text-[30px] text-nova-text-primary tracking-tight leading-none">
             {currentJourney.departureTime}
           </span>
           <span className="text-[12px] font-heading font-bold tracking-widest text-nova-text-muted uppercase mt-1.5">
@@ -35,8 +35,8 @@ export function JourneySummaryCard() {
         </div>
 
         {/* Duration & Segment connector */}
-        <div className="flex-1 mx-4 flex flex-col items-center">
-          <span className="font-heading font-bold text-[20px] text-nova-green tracking-tight mb-1">
+        <div className="flex-1 mx-2 sm:mx-4 flex flex-col items-center text-center">
+          <span className="font-heading font-bold text-[18px] sm:text-[20px] text-nova-green tracking-tight mb-1">
             {currentJourney.durationMinutes} min
           </span>
 
@@ -47,14 +47,14 @@ export function JourneySummaryCard() {
             <div className="w-2 h-2 rounded-full bg-nova-coral shrink-0" />
           </div>
 
-          <span className="text-[12px] font-heading font-medium text-nova-text-secondary mt-1.5">
+          <span className="text-[12px] font-heading font-medium text-nova-text-secondary mt-1.5 truncate max-w-full">
             {currentJourney.connectionSummary}
           </span>
         </div>
 
         {/* Arrival */}
         <div className="flex flex-col items-end">
-          <span className="font-heading font-bold text-[30px] text-nova-text-primary tracking-tight leading-none">
+          <span className="font-heading font-bold text-[26px] sm:text-[30px] text-nova-text-primary tracking-tight leading-none">
             {currentJourney.arrivalTime}
           </span>
           <span className="text-[12px] font-heading font-bold tracking-widest text-nova-text-muted uppercase mt-1.5">

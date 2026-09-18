@@ -15,7 +15,15 @@ export function VoiceSearchModal() {
     let timer1: NodeJS.Timeout;
     let timer2: NodeJS.Timeout;
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && voiceModalOpen) {
+        setVoiceModalOpen(false);
+      }
+    };
+
     if (voiceModalOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
       setSpokenText("Listening for destination...");
       timer1 = setTimeout(() => {
         setSpokenText("“Take me to Colombo Skyport”");
@@ -32,6 +40,8 @@ export function VoiceSearchModal() {
     }
 
     return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
