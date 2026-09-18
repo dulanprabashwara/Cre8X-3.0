@@ -113,13 +113,13 @@ export function TabletNavRail() {
         {/* Profile Avatar */}
         <Link
           href="/profile"
-          title="Passenger Profile"
-          aria-label="Passenger Profile"
+          title="Traveler Profile"
+          aria-label="Traveler Profile"
           className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-[#231D2B] to-[#3B3247] p-0.5 shadow-xs flex items-center justify-center active:scale-95 transition-transform"
         >
           <div className="w-full h-full rounded-[10px] bg-[#2A2333] flex items-center justify-center text-white/90">
             <span className="text-[12px] font-heading font-bold tracking-wider text-white/90">
-              PX
+              NT
             </span>
           </div>
           <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-nova-green border-2 border-white shadow-xs" />

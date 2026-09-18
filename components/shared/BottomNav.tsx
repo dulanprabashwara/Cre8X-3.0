@@ -67,10 +67,8 @@ export function BottomNav() {
         </Link>
 
         {/* Profile */}
-        <button
-          onClick={() =>
-            showToast("Passenger Profile: Citizen ID 8492-X", "info")
-          }
+        <Link
+          href="/profile"
           className="flex flex-col items-center justify-center py-1 px-4 rounded-full text-nova-text-muted hover:text-nova-text-primary transition-all duration-200 select-none"
         >
           <div className="p-1 rounded-full">
@@ -79,7 +77,7 @@ export function BottomNav() {
           <span className="text-[12px] font-heading font-semibold tracking-wider uppercase mt-0.5">
             Profile
           </span>
-        </button>
+        </Link>
       </div>
     </nav>
   );

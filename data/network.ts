@@ -1,4 +1,8 @@
-export type SystemStatusLevel = "operational" | "warning" | "advisory" | "disruption";
+export type SystemStatusLevel =
+  | "operational"
+  | "warning"
+  | "advisory"
+  | "disruption";
 
 export interface TransportModeSystem {
   id: string;
@@ -45,7 +49,8 @@ export const TRANSPORT_SYSTEMS: TransportModeSystem[] = [
     avgFrequencySeconds: 45,
     punctualityRate: 99.8,
     corridorNote: "All 18 feeder corridors running optimal velocity",
-    details: "Zero wait times at KDU Hub, Central Skyport, and Ratmalana. Autonomous magnetic induction tracks fully functional.",
+    details:
+      "Zero wait times at KDU Hub, Central Skyport, and Ratmalana. Autonomous magnetic induction tracks fully functional.",
   },
   {
     id: "hyperrail",
@@ -57,8 +62,10 @@ export const TRANSPORT_SYSTEMS: TransportModeSystem[] = [
     activeVehicles: 64,
     avgFrequencySeconds: 90,
     punctualityRate: 98.4,
-    corridorNote: "Increased passenger surge predicted after 09:30 (+14 min window)",
-    details: "HyperRail H4 running at normal 3-min headway. H1 and H2 approaching capacity. Departure before 09:30 recommended.",
+    corridorNote:
+      "Increased passenger surge predicted after 09:30 (+14 min window)",
+    details:
+      "HyperRail H4 running at normal 3-min headway. H1 and H2 approaching capacity. Departure before 09:30 recommended.",
   },
   {
     id: "aerolink",
@@ -71,7 +78,8 @@ export const TRANSPORT_SYSTEMS: TransportModeSystem[] = [
     avgFrequencySeconds: 120,
     punctualityRate: 94.2,
     corridorNote: "Coastal crosswinds affecting Corridor A12 approach vector",
-    details: "NOVA Guardian auto-rerouting active for Colombo Skyport connections via Gate 04 skybridge.",
+    details:
+      "NOVA Guardian auto-rerouting active for Colombo Skyport connections via Gate 04 skybridge.",
   },
   {
     id: "smartroads",
@@ -79,12 +87,14 @@ export const TRANSPORT_SYSTEMS: TransportModeSystem[] = [
     shortCode: "ROAD",
     status: "operational",
     statusText: "Clear & synchronized",
-    description: "Dynamic surface corridors for multi-passenger autonomous transit",
+    description:
+      "Dynamic surface corridors for multi-passenger autonomous transit",
     activeVehicles: 310,
     avgFrequencySeconds: 60,
     punctualityRate: 99.5,
     corridorNote: "All automated surface vehicle zones clear",
-    details: "Zero congestion across Western Maritime Expressway and Central Spine.",
+    details:
+      "Zero congestion across Western Maritime Expressway and Central Spine.",
   },
 ];
 
@@ -95,9 +105,11 @@ export const NETWORK_ADVISORIES: NetworkAdvisory[] = [
     systemName: "AeroLink Sky Corridor",
     severity: "advisory",
     title: "Weather Guidance: Coastal Crosswinds on Line A12",
-    description: "Wind shear sensors near Waterfront Sector require a 6-minute speed reduction. Dynamic transfer buffers applied.",
+    description:
+      "Wind shear sensors near Waterfront Sector require a 6-minute speed reduction. Dynamic transfer buffers applied.",
     affectedLines: ["A12", "A14"],
-    recommendedAction: "NOVA Guardian has reserved Gate 04 at Central Skyport to protect connection window.",
+    recommendedAction:
+      "NOVA Guardian has reserved Gate 04 at Central Skyport to protect connection window.",
     timestamp: "09:14 AM",
   },
   {
@@ -106,9 +118,11 @@ export const NETWORK_ADVISORIES: NetworkAdvisory[] = [
     systemName: "HyperRail Network",
     severity: "warning",
     title: "Peak Demand Surge Approaching at 09:30",
-    description: "Predictive traffic model indicates 38% influx of passengers along Central Skyport trunk lines.",
+    description:
+      "Predictive traffic model indicates 38% influx of passengers along Central Skyport trunk lines.",
     affectedLines: ["H1", "H4"],
-    recommendedAction: "Board currently suggested Pod P17 before 09:25 to bypass boarding queue.",
+    recommendedAction:
+      "Board currently suggested Pod P17 before 09:25 to bypass boarding queue.",
     timestamp: "09:05 AM",
   },
 ];

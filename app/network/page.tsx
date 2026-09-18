@@ -39,7 +39,7 @@ export default function NetworkPage() {
       {/* Page Header */}
       <PageHeader
         title="City Network"
-        subtitle="Real-time condition, vehicle telemetry & infrastructure health"
+        subtitle="Live service status, disruptions and accessibility"
       />
 
       {/* Top Unified Network Status Card */}
@@ -102,18 +102,20 @@ export default function NetworkPage() {
           const isAdvisory = sys.status === "advisory";
 
           return (
-            <div
+            <button
+              type="button"
               key={sys.id}
               onClick={() => setSelectedSystemId(isSelected ? null : sys.id)}
+              aria-pressed={isSelected}
               className={cn(
-                "p-4 rounded-panel border transition-all cursor-pointer flex flex-col justify-between space-y-3 group",
+                "p-4 rounded-panel border transition-all cursor-pointer flex flex-col justify-between space-y-3 group text-left w-full focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-nova-green",
                 isSelected
                   ? "bg-white border-nova-green/50 shadow-md ring-1 ring-nova-green/20"
                   : "bg-white/90 hover:bg-white border-nova-border/70 shadow-xs",
               )}
             >
               {/* Top Mode Header */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between w-full">
                 <span className="px-2.5 py-0.5 rounded-full bg-nova-surface text-[12px] font-heading font-bold text-nova-text-muted uppercase tracking-wider">
                   {sys.shortCode}
                 </span>
@@ -131,7 +133,7 @@ export default function NetworkPage() {
               </div>
 
               {/* Title & Description */}
-              <div>
+              <div className="w-full">
                 <h3 className="font-heading font-bold text-[16px] text-nova-text-primary group-hover:text-nova-green transition-colors">
                   {sys.name}
                 </h3>
@@ -141,12 +143,12 @@ export default function NetworkPage() {
               </div>
 
               {/* Bottom Metrics */}
-              <div className="pt-2 border-t border-nova-border/50 flex items-center justify-between text-[12px] font-heading text-nova-text-secondary">
+              <div className="pt-2 border-t border-nova-border/50 flex items-center justify-between text-[12px] font-heading text-nova-text-secondary w-full">
                 <span>{sys.activeVehicles} active</span>
                 <span>{sys.avgFrequencySeconds}s headway</span>
                 <span className="font-bold text-nova-text-primary">{sys.punctualityRate}%</span>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>

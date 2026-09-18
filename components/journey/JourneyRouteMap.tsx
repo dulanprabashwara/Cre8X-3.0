@@ -9,8 +9,20 @@ export function JourneyRouteMap() {
 
   const stops = [
     { name: "KDU Mobility Hub", time: "09:18", mode: "Pod P17", x: 60, y: 150 },
-    { name: "Ratmalana Station", time: "09:24", mode: "Transfer (3m)", x: 170, y: 110 },
-    { name: "Central Skyport", time: "09:35", mode: "Gate 04 (3m)", x: 290, y: 70 },
+    {
+      name: "Ratmalana Station",
+      time: "09:24",
+      mode: "Transfer (3m)",
+      x: 170,
+      y: 110,
+    },
+    {
+      name: "Central Skyport",
+      time: "09:35",
+      mode: "Gate 04 (3m)",
+      x: 290,
+      y: 70,
+    },
     { name: "Colombo Skyport", time: "09:42", mode: "Arrival", x: 410, y: 40 },
   ];
 
@@ -26,13 +38,13 @@ export function JourneyRouteMap() {
             <h3 className="font-heading font-bold text-[15px] text-nova-text-primary tracking-tight">
               Synchronized Corridor Map
             </h3>
-            <p className="text-[12px] font-heading text-nova-text-secondary">
+            <p className="text-[11px] font-heading text-nova-text-secondary">
               Direct connection via HyperRail H4 & AeroLink
             </p>
           </div>
         </div>
 
-        <span className="px-2.5 py-0.5 rounded-full bg-nova-green-soft text-nova-green border border-nova-green/40 text-[12px] font-heading font-bold uppercase tracking-wider">
+        <span className="px-2.5 py-0.5 rounded-full bg-nova-green-soft text-nova-green border border-nova-green/40 text-[11px] font-heading font-bold uppercase tracking-wider">
           Arrival Protected
         </span>
       </div>
@@ -50,7 +62,13 @@ export function JourneyRouteMap() {
               <stop offset="65%" stopColor="#2FAE63" />
               <stop offset="100%" stopColor="#E85F8E" />
             </linearGradient>
-            <filter id="j-node-glow" x="-30%" y="-30%" width="160%" height="160%">
+            <filter
+              id="j-node-glow"
+              x="-30%"
+              y="-30%"
+              width="160%"
+              height="160%"
+            >
               <feGaussianBlur stdDeviation="3" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
@@ -88,7 +106,14 @@ export function JourneyRouteMap() {
           />
 
           {/* Active vehicle indicator */}
-          <circle cx="210" cy="98" r="5" fill="#2FAE63" className="animate-ping" opacity="0.75" />
+          <circle
+            cx="210"
+            cy="98"
+            r="5"
+            fill="#2FAE63"
+            className="animate-ping"
+            opacity="0.75"
+          />
           <circle cx="210" cy="98" r="4" fill="#2FAE63" />
 
           {/* Stations / Hubs */}
@@ -140,7 +165,7 @@ export function JourneyRouteMap() {
         </svg>
 
         {/* Legend overlay */}
-        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-nova-border/60 text-[12px] font-heading font-medium text-nova-text-secondary flex items-center gap-2">
+        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-nova-border/60 text-[10px] font-heading font-medium text-nova-text-secondary flex items-center gap-2">
           <span className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-nova-green" />
             Pod & HyperRail

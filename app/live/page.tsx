@@ -15,9 +15,6 @@ import { useJourney } from "@/context/JourneyContext";
 import { LiveMap } from "@/components/live/LiveMap";
 import { InstructionModeView } from "@/components/live/InstructionModeView";
 import { LiveJourneySheet } from "@/components/live/LiveJourneySheet";
-import { AssistanceSheet } from "@/components/live/AssistanceSheet";
-import { MobilityConfirmationDialog } from "@/components/live/MobilityConfirmationDialog";
-import { JourneyPreferencesSheet } from "@/components/home/JourneyPreferencesSheet";
 
 export default function LivePage() {
   const router = useRouter();
@@ -69,7 +66,7 @@ export default function LivePage() {
               Live journey
             </h1>
             <p className="hidden sm:block text-[12px] font-heading font-medium text-nova-text-secondary">
-              Active Multimodal Corridor Telemetry
+              On the way to Colombo Skyport
             </p>
           </div>
         </div>
@@ -164,11 +161,6 @@ export default function LivePage() {
           <LiveJourneySheet />
         </div>
       </main>
-
-      {/* Assistance, Confirmation & Preferences Overlays */}
-      <AssistanceSheet />
-      <MobilityConfirmationDialog />
-      <JourneyPreferencesSheet />
     </div>
   );
 }

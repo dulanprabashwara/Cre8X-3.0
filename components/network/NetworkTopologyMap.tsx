@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Activity, Radio, AlertTriangle, ShieldCheck, RefreshCw } from "lucide-react";
+import {
+  Activity,
+  Radio,
+  AlertTriangle,
+  ShieldCheck,
+  RefreshCw,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NetworkTopologyMapProps {
@@ -24,13 +30,13 @@ export function NetworkTopologyMap({
           <span className="text-[12px] font-heading font-bold text-nova-text-primary">
             Citywide Topology Grid
           </span>
-          <span className="px-2 py-0.5 rounded-full bg-nova-green-soft text-nova-green text-[12px] font-heading font-bold">
+          <span className="px-2 py-0.5 rounded-full bg-nova-green-soft text-nova-green text-[10px] font-heading font-bold">
             99.4% Online
           </span>
         </div>
 
         {/* Advisory Tag Indicator */}
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-nova-border/80 shadow-xs flex items-center gap-1.5 text-[12px] font-heading font-semibold text-nova-coral">
+        <div className="pointer-events-auto bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-nova-border/80 shadow-xs flex items-center gap-1.5 text-[11px] font-heading font-semibold text-nova-coral">
           <span className="w-2 h-2 rounded-full bg-nova-coral animate-ping" />
           <span>AeroLink A12 Coastal Crosswind Zone</span>
         </div>
@@ -106,7 +112,9 @@ export function NetworkTopologyMap({
         <g
           className={cn(
             "transition-opacity duration-300",
-            selectedSystemId && selectedSystemId !== "pods" ? "opacity-25" : "opacity-100",
+            selectedSystemId && selectedSystemId !== "pods"
+              ? "opacity-25"
+              : "opacity-100",
           )}
         >
           <path
@@ -122,7 +130,9 @@ export function NetworkTopologyMap({
         <g
           className={cn(
             "transition-opacity duration-300",
-            selectedSystemId && selectedSystemId !== "hyperrail" ? "opacity-30" : "opacity-100",
+            selectedSystemId && selectedSystemId !== "hyperrail"
+              ? "opacity-30"
+              : "opacity-100",
           )}
         >
           <path
@@ -145,7 +155,9 @@ export function NetworkTopologyMap({
         <g
           className={cn(
             "transition-opacity duration-300",
-            selectedSystemId && selectedSystemId !== "aerolink" ? "opacity-30" : "opacity-100",
+            selectedSystemId && selectedSystemId !== "aerolink"
+              ? "opacity-30"
+              : "opacity-100",
           )}
         >
           <path
@@ -156,7 +168,14 @@ export function NetworkTopologyMap({
             strokeDasharray="6 4"
           />
           {/* Active AeroLink shuttle */}
-          <circle cx="430" cy="142" r="5" fill="#E85F8E" className="animate-ping" opacity="0.7" />
+          <circle
+            cx="430"
+            cy="142"
+            r="5"
+            fill="#E85F8E"
+            className="animate-ping"
+            opacity="0.7"
+          />
           <circle cx="430" cy="142" r="4" fill="#E85F8E" />
         </g>
 
@@ -164,7 +183,9 @@ export function NetworkTopologyMap({
         <g
           className={cn(
             "transition-opacity duration-300",
-            selectedSystemId && selectedSystemId !== "smartroads" ? "opacity-25" : "opacity-100",
+            selectedSystemId && selectedSystemId !== "smartroads"
+              ? "opacity-25"
+              : "opacity-100",
           )}
         >
           <path
@@ -178,11 +199,41 @@ export function NetworkTopologyMap({
 
         {/* Primary Station Hubs */}
         {[
-          { name: "KDU Mobility Hub", x: 110, y: 350, code: "KDU", status: "ok" },
-          { name: "Ratmalana District", x: 190, y: 280, code: "RAT", status: "ok" },
-          { name: "Central Skyport", x: 330, y: 210, code: "CTR", status: "ok" },
-          { name: "Port City Ocean Hub", x: 250, y: 140, code: "PCO", status: "ok" },
-          { name: "Colombo Skyport", x: 490, y: 110, code: "CSK", status: "advisory" },
+          {
+            name: "KDU Mobility Hub",
+            x: 110,
+            y: 350,
+            code: "KDU",
+            status: "ok",
+          },
+          {
+            name: "Ratmalana District",
+            x: 190,
+            y: 280,
+            code: "RAT",
+            status: "ok",
+          },
+          {
+            name: "Central Skyport",
+            x: 330,
+            y: 210,
+            code: "CTR",
+            status: "ok",
+          },
+          {
+            name: "Port City Ocean Hub",
+            x: 250,
+            y: 140,
+            code: "PCO",
+            status: "ok",
+          },
+          {
+            name: "Colombo Skyport",
+            x: 490,
+            y: 110,
+            code: "CSK",
+            status: "advisory",
+          },
         ].map((hub) => {
           const isAdvisory = hub.status === "advisory";
 
@@ -240,7 +291,7 @@ export function NetworkTopologyMap({
       {/* Bottom Mode Filter Pills Row */}
       <div className="p-3 bg-white/95 backdrop-blur-md border-t border-nova-border/70 flex items-center justify-between gap-2 z-20 overflow-x-auto scrollbar-none">
         <div className="flex items-center gap-2">
-          <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted px-1">
+          <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-nova-text-muted px-1">
             Focus System:
           </span>
           <button
@@ -262,7 +313,9 @@ export function NetworkTopologyMap({
           ].map((mode) => (
             <button
               key={mode.id}
-              onClick={() => onSelectSystem(selectedSystemId === mode.id ? null : mode.id)}
+              onClick={() =>
+                onSelectSystem(selectedSystemId === mode.id ? null : mode.id)
+              }
               className={cn(
                 "px-3 py-1 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0",
                 selectedSystemId === mode.id
@@ -275,7 +328,7 @@ export function NetworkTopologyMap({
           ))}
         </div>
 
-        <div className="hidden sm:flex items-center gap-3 text-[12px] font-heading font-medium text-nova-text-secondary pr-1 shrink-0">
+        <div className="hidden sm:flex items-center gap-3 text-[11px] font-heading font-medium text-nova-text-secondary pr-1 shrink-0">
           <span className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-nova-green" />
             Normal

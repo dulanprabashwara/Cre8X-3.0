@@ -175,61 +175,80 @@ export function ExploreMap({ selectedId, onSelect, modeFilter }: ExploreMapProps
 
         {/* Transit Corridors */}
         {/* HyperRail Trunk: KDU -> Ratmalana -> Central -> Colombo */}
-        <path
-          d="M 100 330 Q 180 260, 320 190 T 480 110"
-          fill="none"
-          stroke="#E0DAE7"
-          strokeWidth="10"
-          strokeLinecap="round"
-        />
-        <path
-          d="M 100 330 Q 180 260, 320 190 T 480 110"
-          fill="none"
-          stroke="url(#exp-corridor-flow)"
-          strokeWidth="5"
-          strokeLinecap="round"
-        />
+        <g opacity={modeFilter === "All" || modeFilter === "HyperRail" ? 1 : 0.2} className="transition-opacity duration-300">
+          <path
+            d="M 100 330 Q 180 260, 320 190 T 480 110"
+            fill="none"
+            stroke="#E0DAE7"
+            strokeWidth="10"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 100 330 Q 180 260, 320 190 T 480 110"
+            fill="none"
+            stroke="url(#exp-corridor-flow)"
+            strokeWidth="5"
+            strokeLinecap="round"
+          />
+        </g>
 
         {/* Port City Branch: Central -> Port City */}
-        <path
-          d="M 320 190 Q 270 160, 230 130"
-          fill="none"
-          stroke="#2FAE63"
-          strokeWidth="4"
-          strokeDasharray="6 4"
-        />
+        <g opacity={modeFilter === "All" || modeFilter === "HyperRail" || modeFilter === "Smart Road" ? 1 : 0.2} className="transition-opacity duration-300">
+          <path
+            d="M 320 190 Q 270 160, 230 130"
+            fill="none"
+            stroke="#2FAE63"
+            strokeWidth="4"
+            strokeDasharray="6 4"
+          />
+        </g>
 
         {/* SkyPod feeder: Ratmalana -> Waterfront */}
-        <path
-          d="M 180 260 Q 200 180, 230 130"
-          fill="none"
-          stroke="#D0C8DB"
-          strokeWidth="3"
-          strokeDasharray="4 4"
-        />
+        <g opacity={modeFilter === "All" || modeFilter === "Pod" ? 1 : 0.2} className="transition-opacity duration-300">
+          <path
+            d="M 180 260 Q 200 180, 230 130"
+            fill="none"
+            stroke="#2FAE63"
+            strokeWidth="3.5"
+            strokeDasharray="4 4"
+          />
+        </g>
 
         {/* AeroLink High-Speed Aerial: Central -> Colombo Skyport */}
-        <path
-          d="M 320 190 Q 390 120, 480 110"
-          fill="none"
-          stroke="#E85F8E"
-          strokeWidth="3.5"
-          strokeDasharray="5 5"
-          opacity="0.8"
-        />
+        <g opacity={modeFilter === "All" || modeFilter === "AeroLink" ? 1 : 0.2} className="transition-opacity duration-300">
+          <path
+            d="M 320 190 Q 390 120, 480 110"
+            fill="none"
+            stroke="#E85F8E"
+            strokeWidth="4"
+            strokeDasharray="5 5"
+          />
+          <circle cx="410" cy="145" r="4.5" fill="#E85F8E" className="animate-ping" opacity="0.8" />
+        </g>
 
         {/* Hub Nodes */}
         {hubs.map((hub) => {
           const isSelected = hub.id === (selectedId || "colombo-skyport");
           const isHovered = hoveredNode === hub.id;
+          const matchesMode = modeFilter === "All" || hub.modes.includes(modeFilter);
 
           return (
             <g
               key={hub.id}
-              className="cursor-pointer transition-transform"
+              role="button"
+              tabIndex={0}
+              aria-label={`${hub.name} (${hub.district})`}
+              className="cursor-pointer transition-transform focus:outline-none"
+              opacity={matchesMode ? 1 : 0.35}
               onMouseEnter={() => setHoveredNode(hub.id)}
               onMouseLeave={() => setHoveredNode(null)}
               onClick={() => onSelect(hub.id)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onSelect(hub.id);
+                }
+              }}
             >
               {/* Outer halo */}
               <circle

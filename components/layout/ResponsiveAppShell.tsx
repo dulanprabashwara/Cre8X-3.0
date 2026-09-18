@@ -32,8 +32,8 @@ export function ResponsiveAppShell({ children }: ResponsiveAppShellProps) {
       <div
         className={cn(
           "flex-1 flex flex-col w-full transition-all duration-200",
-          // Left margin for tablet and desktop navigation
-          "md:ml-[76px] lg:ml-[240px]",
+          // Left padding for tablet and desktop navigation (prevents width overflow)
+          "md:pl-[76px] lg:pl-[240px]",
           // Bottom padding for mobile floating dock (not on live)
           !isLive && "pb-24 md:pb-8",
         )}

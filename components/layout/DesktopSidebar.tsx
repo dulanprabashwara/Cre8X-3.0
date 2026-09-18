@@ -58,7 +58,7 @@ export function DesktopSidebar() {
 
         {/* Primary Navigation */}
         <nav className="space-y-1.5" aria-label="Main Navigation">
-          <p className="px-2 pb-1 text-[12px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
+          <p className="px-2 pb-1 text-[11px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
             Menu
           </p>
           {PRIMARY_NAV_ITEMS.map((item) => {
@@ -95,7 +95,7 @@ export function DesktopSidebar() {
                 {item.badge && (
                   <span
                     className={cn(
-                      "px-2 py-0.5 rounded-full text-[12px] font-heading font-semibold tracking-wide",
+                      "px-2 py-0.5 rounded-full text-[11px] font-heading font-semibold tracking-wide",
                       isActive
                         ? "bg-nova-green/20 text-nova-green"
                         : item.badge === "1 Active"
@@ -113,7 +113,7 @@ export function DesktopSidebar() {
 
         {/* System & Support Utilities */}
         <div className="pt-2 space-y-1.5 border-t border-nova-border/60">
-          <p className="px-2 pb-1 text-[12px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
+          <p className="px-2 pb-1 text-[11px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
             Preferences & Support
           </p>
           <button
@@ -157,7 +157,7 @@ export function DesktopSidebar() {
             <p className="text-[13px] font-heading font-bold text-nova-text-primary truncate group-hover:text-nova-green transition-colors">
               Passenger 8492-X
             </p>
-            <p className="text-[12px] font-heading text-nova-text-muted truncate">
+            <p className="text-[11px] font-heading text-nova-text-muted truncate">
               Biometric Transit Pass
             </p>
           </div>

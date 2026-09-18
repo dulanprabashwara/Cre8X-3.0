@@ -7,6 +7,7 @@ export interface DestinationItem {
   badge?: string;
   iconType: "airport" | "building" | "ferry" | "home" | "work";
   isBestConnection?: boolean;
+  modes: string[];
 }
 
 export const DESTINATIONS: DestinationItem[] = [
@@ -19,6 +20,7 @@ export const DESTINATIONS: DestinationItem[] = [
     badge: "Best connection now",
     iconType: "airport",
     isBestConnection: true,
+    modes: ["AeroLink", "HyperRail", "Pod"],
   },
   {
     id: "central-district",
@@ -27,6 +29,7 @@ export const DESTINATIONS: DestinationItem[] = [
     category: "recent",
     durationMinutes: 18,
     iconType: "building",
+    modes: ["HyperRail", "Pod", "Smart Road"],
   },
   {
     id: "port-city-ocean-hub",
@@ -35,6 +38,7 @@ export const DESTINATIONS: DestinationItem[] = [
     category: "recent",
     durationMinutes: 31,
     iconType: "ferry",
+    modes: ["Pod", "Smart Road", "AeroLink"],
   },
   {
     id: "home-ratmalana",
@@ -43,6 +47,7 @@ export const DESTINATIONS: DestinationItem[] = [
     category: "quick",
     durationMinutes: 12,
     iconType: "home",
+    modes: ["Pod", "HyperRail", "Smart Road"],
   },
   {
     id: "work-central",
@@ -51,6 +56,7 @@ export const DESTINATIONS: DestinationItem[] = [
     category: "quick",
     durationMinutes: 22,
     iconType: "work",
+    modes: ["HyperRail", "Pod", "Smart Road"],
   },
 ];
 

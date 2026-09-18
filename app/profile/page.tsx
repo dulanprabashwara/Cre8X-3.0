@@ -93,28 +93,28 @@ export default function ProfilePage() {
       {/* Passenger Identity Summary Card */}
       <div className="bg-white rounded-panel border border-nova-border/70 p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-4">
-          {/* Futuristic Monogram Initials Avatar (No AI face per spec) */}
+          {/* Neutral Passenger Monogram Initials Avatar */}
           <div className="relative w-16 h-16 min-w-[64px] rounded-2xl bg-gradient-to-br from-[#231D2B] via-[#332A3E] to-[#453754] p-1 shadow-md flex items-center justify-center">
             <div className="w-full h-full rounded-[12px] bg-[#2A2333] flex items-center justify-center text-white">
               <span className="font-heading font-extrabold text-[22px] tracking-wider text-white">
-                PX
+                NT
               </span>
             </div>
-            {/* Active Biometric Transit Status Dot */}
+            {/* Active Status Dot */}
             <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-nova-green border-2 border-white shadow-xs" />
           </div>
 
           <div>
             <div className="flex items-center gap-2">
               <h2 className="font-heading font-bold text-[20px] text-nova-text-primary tracking-tight">
-                Passenger 8492-X
+                NOVA Traveler
               </h2>
               <span className="px-2.5 py-0.5 rounded-full bg-nova-green-soft text-nova-green border border-nova-green/40 text-[12px] font-heading font-bold uppercase tracking-wider">
-                Verified Pass
+                Preferences Synced
               </span>
             </div>
             <p className="text-[13px] font-heading text-nova-text-secondary mt-0.5">
-              Multimodal Transit Credential · Universal Smart City Network 2100
+              Personal mobility profile · Universal Transit Network
             </p>
           </div>
         </div>

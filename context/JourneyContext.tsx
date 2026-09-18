@@ -120,8 +120,12 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
   const [activeTrip] = useState<TripItem>(TRIPS_DATA[0]);
 
   // Network & Explore selection
-  const [selectedNetworkMode, setSelectedNetworkMode] = useState<string | null>(null);
-  const [selectedExplorePlace, setSelectedExplorePlace] = useState<string | null>(null);
+  const [selectedNetworkMode, setSelectedNetworkMode] = useState<string | null>(
+    null,
+  );
+  const [selectedExplorePlace, setSelectedExplorePlace] = useState<
+    string | null
+  >(null);
 
   // Sheet Controls
   const [destinationSheetOpen, setDestinationSheetOpen] = useState(false);

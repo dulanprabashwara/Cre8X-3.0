@@ -2,7 +2,13 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, MoreVertical, Sparkles, ArrowRight, Route } from "lucide-react";
+import {
+  ArrowLeft,
+  MoreVertical,
+  Sparkles,
+  ArrowRight,
+  Route,
+} from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
 import { JourneySummaryCard } from "@/components/journey/JourneySummaryCard";
 import { JourneyGuardianCard } from "@/components/journey/JourneyGuardianCard";

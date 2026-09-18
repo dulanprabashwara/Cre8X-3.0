@@ -194,10 +194,21 @@ export function CityMobilityOverview() {
               return (
                 <g
                   key={hub.id}
-                  className="cursor-pointer transition-transform"
+                  role="button"
+                  tabIndex={hub.destId ? 0 : -1}
+                  aria-label={`Select hub ${hub.name}`}
+                  className="cursor-pointer transition-transform focus:outline-hidden"
                   onMouseEnter={() => setHoveredNode(hub.id)}
                   onMouseLeave={() => setHoveredNode(null)}
+                  onFocus={() => setHoveredNode(hub.id)}
+                  onBlur={() => setHoveredNode(null)}
                   onClick={() => handleSelectHub(hub.destId)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleSelectHub(hub.destId);
+                    }
+                  }}
                 >
                   {/* Outer pulse */}
                   <circle
@@ -326,13 +337,15 @@ export function CityMobilityOverview() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {DESTINATIONS.slice(0, 4).map((dest) => (
-            <div
+            <button
+              type="button"
               key={dest.id}
-              className="p-3.5 rounded-2xl bg-nova-surface hover:bg-[#F2EDF7] border border-nova-border/60 transition-all flex items-center justify-between group cursor-pointer"
+              className="p-3.5 rounded-2xl bg-nova-surface hover:bg-[#F2EDF7] border border-nova-border/60 transition-all flex items-center justify-between group cursor-pointer text-left w-full focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-nova-green"
               onClick={() => handleQuickPlan(dest)}
+              aria-label={`Plan journey to ${dest.name}, ${dest.district}`}
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-10 h-10 rounded-xl bg-white border border-nova-border/70 flex items-center justify-center text-nova-green group-hover:scale-105 transition-transform shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-white border border-nova-border/70 flex items-center justify-center text-nova-green group-hover:scale-105 transition-transform shadow-xs shrink-0">
                   <Route className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
@@ -345,13 +358,13 @@ export function CityMobilityOverview() {
                 </div>
               </div>
 
-              <button
-                aria-label={`Plan journey to ${dest.name}`}
-                className="w-9 h-9 min-w-[36px] rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-nova-text-secondary flex items-center justify-center transition-all shadow-2xs"
+              <div
+                aria-hidden="true"
+                className="w-9 h-9 min-w-[36px] rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-nova-text-secondary flex items-center justify-center transition-all shadow-2xs shrink-0"
               >
                 <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+              </div>
+            </button>
           ))}
         </div>
       </div>

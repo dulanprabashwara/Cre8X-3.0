@@ -63,8 +63,13 @@ export default function HomePage() {
             <span className="flex items-center gap-1.5 text-nova-text-secondary font-medium">
               <ShieldCheck className="w-4 h-4 text-nova-green" />
               <span>
-                {preferences.stepFree ? "Step-free verified" : "Multimodal standard"} ·{" "}
-                {preferences.reduceWalking ? "Low walking (<5 min)" : "Standard walking"}
+                {preferences.stepFree
+                  ? "Step-free verified"
+                  : "Multimodal standard"}{" "}
+                ·{" "}
+                {preferences.reduceWalking
+                  ? "Low walking (<5 min)"
+                  : "Standard walking"}
               </span>
             </span>
             <button

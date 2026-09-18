@@ -116,9 +116,19 @@ export default function TripsPage() {
               return (
                 <div
                   key={trip.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isSelected}
+                  aria-label={`Select journey to ${trip.destination}`}
                   onClick={() => setSelectedTripId(trip.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedTripId(trip.id);
+                    }
+                  }}
                   className={cn(
-                    "p-4 rounded-panel border transition-all cursor-pointer flex flex-col space-y-3 group",
+                    "p-4 rounded-panel border transition-all cursor-pointer flex flex-col space-y-3 group text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-nova-green",
                     isSelected
                       ? "bg-white border-nova-green/50 shadow-md ring-1 ring-nova-green/20"
                       : "bg-white/90 hover:bg-white border-nova-border/70 shadow-xs",

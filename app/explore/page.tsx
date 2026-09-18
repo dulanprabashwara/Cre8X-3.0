@@ -46,9 +46,11 @@ export default function ExplorePage() {
       const matchesSearch =
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.district.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesSearch;
+      const matchesMode =
+        selectedMode === "All" || (item.modes && item.modes.includes(selectedMode));
+      return matchesSearch && matchesMode;
     });
-  }, [searchQuery]);
+  }, [searchQuery, selectedMode]);
 
   const handleSelectAndPlan = (dest: DestinationItem) => {
     setDestination(dest);
@@ -107,15 +109,16 @@ export default function ExplorePage() {
         {/* Transport Mode Filter Chips */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
           <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted pr-1 flex items-center gap-1 shrink-0">
-            <SlidersHorizontal className="w-3 h-3" />
+            <SlidersHorizontal className="w-3.5 h-3.5" />
             Mode:
           </span>
           {modeFilters.map((mode) => (
             <button
               key={mode}
+              type="button"
               onClick={() => setSelectedMode(mode)}
               className={cn(
-                "px-3 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none",
+                "px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none",
                 selectedMode === mode
                   ? "bg-nova-green text-white shadow-xs"
                   : "bg-nova-surface hover:bg-nova-surface-hover text-nova-text-secondary border border-nova-border/50",
@@ -145,67 +148,103 @@ export default function ExplorePage() {
               </span>
             </div>
 
-            <div className="space-y-2.5">
-              {filteredDestinations.map((item) => {
-                const isSelected = selectedHubId === item.id;
+            {filteredDestinations.length === 0 ? (
+              <div className="p-6 text-center rounded-2xl bg-nova-surface/60 border border-nova-border/60 space-y-2.5">
+                <Compass className="w-8 h-8 text-nova-text-muted mx-auto" />
+                <p className="font-heading font-bold text-[15px] text-nova-text-primary">
+                  No destinations match “{selectedMode}”
+                </p>
+                <p className="text-[12px] font-heading text-nova-text-secondary">
+                  Try clearing the search query or switching to All modes.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedMode("All");
+                    setSearchQuery("");
+                  }}
+                  className="px-3.5 py-1.5 rounded-xl bg-white border border-nova-border/80 hover:bg-nova-surface text-[12px] font-heading font-semibold text-nova-green transition-colors"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-2.5">
+                {filteredDestinations.map((item) => {
+                  const isSelected = selectedHubId === item.id;
 
-                return (
-                  <div
-                    key={item.id}
-                    onClick={() => setSelectedHubId(item.id)}
-                    className={cn(
-                      "p-3.5 rounded-2xl border transition-all flex items-center justify-between cursor-pointer group",
-                      isSelected
-                        ? "bg-nova-green-soft/50 border-nova-green/40 shadow-xs"
-                        : "bg-nova-surface/60 hover:bg-nova-surface border-nova-border/50",
-                    )}
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div
-                        className={cn(
-                          "w-10 h-10 rounded-xl border flex items-center justify-center transition-transform group-hover:scale-105 shadow-2xs",
-                          isSelected
-                            ? "bg-nova-green text-white border-nova-green"
-                            : "bg-white text-nova-green border-nova-border/70",
-                        )}
-                      >
-                        {getDestinationIcon(item.iconType)}
-                      </div>
+                  return (
+                    <div
+                      key={item.id}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => setSelectedHubId(item.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setSelectedHubId(item.id);
+                        }
+                      }}
+                      className={cn(
+                        "p-3.5 rounded-2xl border transition-all flex items-center justify-between cursor-pointer group text-left",
+                        isSelected
+                          ? "bg-nova-green-soft/50 border-nova-green/40 shadow-xs"
+                          : "bg-nova-surface/60 hover:bg-nova-surface border-nova-border/50",
+                      )}
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div
+                          className={cn(
+                            "w-10 h-10 rounded-xl border flex items-center justify-center transition-transform group-hover:scale-105 shadow-2xs shrink-0",
+                            isSelected
+                              ? "bg-nova-green text-white border-nova-green"
+                              : "bg-white text-nova-green border-nova-border/70",
+                          )}
+                        >
+                          {getDestinationIcon(item.iconType)}
+                        </div>
 
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                          <p className="font-heading font-bold text-[14px] text-nova-text-primary truncate">
-                            {item.name}
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <p className="font-heading font-bold text-[14px] text-nova-text-primary truncate">
+                              {item.name}
+                            </p>
+                            {item.badge && (
+                              <span className="px-2 py-0.5 rounded-full bg-nova-coral-soft text-nova-coral border border-nova-coral/30 text-[12px] font-heading font-bold tracking-wide shrink-0">
+                                Fastest
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-[12px] font-heading text-nova-text-secondary truncate mt-0.5">
+                            {item.district} · {item.durationMinutes} min
                           </p>
-                          {item.badge && (
-                            <span className="px-2 py-0.5 rounded-full bg-nova-coral-soft text-nova-coral border border-nova-coral/30 text-[12px] font-heading font-bold tracking-wide">
-                              Fastest
-                            </span>
+                          {item.modes && (
+                            <p className="text-[12px] font-heading text-nova-green font-medium truncate mt-0.5">
+                              {item.modes.join(" · ")}
+                            </p>
                           )}
                         </div>
-                        <p className="text-[12px] font-heading text-nova-text-secondary truncate mt-0.5">
-                          {item.district} · {item.durationMinutes} min
-                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectAndPlan(item);
+                          }}
+                          title={`Plan journey to ${item.name}`}
+                          className="px-3 py-1.5 rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-[12px] font-heading font-semibold text-nova-text-primary flex items-center gap-1 transition-colors shadow-2xs"
+                        >
+                          <span>Plan</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
                       </div>
                     </div>
-
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleSelectAndPlan(item);
-                        }}
-                        title={`Plan journey to ${item.name}`}
-                        className="px-3 py-1.5 rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-[12px] font-heading font-semibold text-nova-text-primary flex items-center gap-1 transition-colors shadow-2xs"
-                      >
-                        <span>Plan</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Accessible Connections Panel */}
