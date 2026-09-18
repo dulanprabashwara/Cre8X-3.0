@@ -41,7 +41,7 @@ export function LiveMap() {
         : { x: 226, y: 236, angle: -42 };
 
   return (
-    <div className="relative w-full h-[460px] sm:h-[500px] bg-[#F3EEF7] overflow-hidden select-none border-b border-nova-border/50">
+    <div className="relative w-full h-[460px] sm:h-[500px] lg:h-[calc(100vh-140px)] lg:min-h-[580px] bg-[#F3EEF7] overflow-hidden select-none border-b lg:border-b-0 lg:border-r border-nova-border/50">
       {/* Top Floating Controls Row */}
       <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
         {/* Map / Instructions Segmented Control */}

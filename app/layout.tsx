@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { JourneyProvider } from "@/context/JourneyContext";
+import { ResponsiveAppShell } from "@/components/layout/ResponsiveAppShell";
 import { Toast } from "@/components/ui/Toast";
 
 const inter = Inter({
@@ -40,12 +41,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="bg-nova-bg text-nova-text-primary antialiased min-h-screen flex flex-col items-center selection:bg-nova-green/20 selection:text-nova-green-hover">
+      <body className="bg-nova-bg text-nova-text-primary antialiased min-h-screen selection:bg-nova-green/20 selection:text-nova-green-hover">
         <JourneyProvider>
-          <div className="w-full max-w-[480px] md:max-w-[768px] lg:max-w-[1100px] min-h-screen flex flex-col relative bg-nova-bg shadow-sm sm:border-x sm:border-nova-border/40">
+          <ResponsiveAppShell>
             {children}
             <Toast />
-          </div>
+          </ResponsiveAppShell>
         </JourneyProvider>
       </body>
     </html>

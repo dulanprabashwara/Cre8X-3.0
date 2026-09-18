@@ -9,6 +9,7 @@ export interface ToggleSwitchProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   label?: string;
+  ariaLabel?: string;
   id?: string;
   disabled?: boolean;
 }
@@ -17,6 +18,7 @@ export function ToggleSwitch({
   checked,
   onChange,
   label,
+  ariaLabel,
   id,
   disabled = false,
 }: ToggleSwitchProps) {
@@ -25,6 +27,7 @@ export function ToggleSwitch({
       type="button"
       role="switch"
       aria-checked={checked}
+      aria-label={ariaLabel || label || "Toggle setting"}
       id={id}
       disabled={disabled}
       onClick={() => onChange(!checked)}
@@ -33,7 +36,7 @@ export function ToggleSwitch({
         checked ? "bg-nova-green" : "bg-nova-border",
       )}
     >
-      <span className="sr-only">{label || "Toggle setting"}</span>
+      <span className="sr-only">{ariaLabel || label || "Toggle setting"}</span>
       <motion.span
         layout
         transition={{ type: "spring", stiffness: 500, damping: 30 }}

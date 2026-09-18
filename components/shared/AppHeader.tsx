@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Accessibility, User } from "lucide-react";
 import { NovaLogo } from "./NovaLogo";
 import { useJourney } from "@/context/JourneyContext";
@@ -27,12 +28,9 @@ export function AppHeader({ onProfileClick }: AppHeaderProps) {
           <Accessibility className="w-5 h-5 text-nova-text-secondary" />
         </button>
 
-        {/* Profile Avatar (Generic futuristic passenger avatar per spec) */}
-        <button
-          onClick={() => {
-            if (onProfileClick) onProfileClick();
-            else showToast("Passenger Profile: Citizen ID 8492-X", "info");
-          }}
+        {/* Profile Avatar */}
+        <Link
+          href="/profile"
           aria-label="User profile"
           className="relative w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-gradient-to-br from-[#231D2B] to-[#3B3247] p-0.5 shadow-xs flex items-center justify-center active:scale-95 transition-transform"
         >
@@ -41,7 +39,7 @@ export function AppHeader({ onProfileClick }: AppHeaderProps) {
           </div>
           {/* Active online status beacon */}
           <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-nova-green border-2 border-white shadow-xs" />
-        </button>
+        </Link>
       </div>
     </header>
   );

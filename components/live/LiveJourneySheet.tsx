@@ -23,9 +23,9 @@ export function LiveJourneySheet() {
   };
 
   return (
-    <div className="w-full bg-white rounded-t-sheet shadow-sheet border-t border-nova-border/70 p-5 pb-8 space-y-4 relative z-20">
-      {/* Top Drag Pill */}
-      <div className="w-full flex justify-center -mt-2 mb-1">
+    <div className="w-full bg-white rounded-t-sheet lg:rounded-none shadow-sheet lg:shadow-none border-t lg:border-t-0 border-nova-border/70 p-5 pb-8 lg:p-6 space-y-4 relative z-20">
+      {/* Top Drag Pill (mobile only) */}
+      <div className="w-full flex justify-center -mt-2 mb-1 lg:hidden">
         <div className="w-12 h-1 bg-nova-border rounded-full" />
       </div>
 

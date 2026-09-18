@@ -17,6 +17,8 @@ import {
   NETWORK_CHANGE_EVENT,
   SimulationPhase,
 } from "@/data/live-events";
+import { SAVED_PLACES, SavedPlace } from "@/data/places";
+import { TRIPS_DATA, TripItem } from "@/data/trips";
 
 interface ToastInfo {
   message: string;
@@ -34,6 +36,19 @@ interface JourneyContextType {
   preferences: JourneyPreferences;
   updatePreferences: (newPrefs: Partial<JourneyPreferences>) => void;
   savePreferences: (newPrefs: JourneyPreferences) => void;
+
+  // Saved Places & Trips
+  savedPlaces: SavedPlace[];
+  addSavedPlace: (place: SavedPlace) => void;
+  removeSavedPlace: (id: string) => void;
+  trips: TripItem[];
+  activeTrip: TripItem;
+
+  // Network & Explore Filters
+  selectedNetworkMode: string | null;
+  setSelectedNetworkMode: (mode: string | null) => void;
+  selectedExplorePlace: string | null;
+  setSelectedExplorePlace: (id: string | null) => void;
 
   // Journey Detail Data
   currentJourney: JourneyData;
@@ -99,6 +114,15 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
     "original",
   );
 
+  // Saved Places & Trips State
+  const [savedPlaces, setSavedPlaces] = useState<SavedPlace[]>(SAVED_PLACES);
+  const [trips] = useState<TripItem[]>(TRIPS_DATA);
+  const [activeTrip] = useState<TripItem>(TRIPS_DATA[0]);
+
+  // Network & Explore selection
+  const [selectedNetworkMode, setSelectedNetworkMode] = useState<string | null>(null);
+  const [selectedExplorePlace, setSelectedExplorePlace] = useState<string | null>(null);
+
   // Sheet Controls
   const [destinationSheetOpen, setDestinationSheetOpen] = useState(false);
   const [preferencesSheetOpen, setPreferencesSheetOpen] = useState(false);
@@ -118,6 +142,25 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
       }, 3800);
     },
     [],
+  );
+
+  const addSavedPlace = useCallback(
+    (place: SavedPlace) => {
+      setSavedPlaces((prev) => {
+        if (prev.some((p) => p.id === place.id)) return prev;
+        return [...prev, place];
+      });
+      showToast(`Saved “${place.name}” to your places`);
+    },
+    [showToast],
+  );
+
+  const removeSavedPlace = useCallback(
+    (id: string) => {
+      setSavedPlaces((prev) => prev.filter((p) => p.id !== id));
+      showToast("Removed from saved places", "info");
+    },
+    [showToast],
   );
 
   // Load preferences from localStorage on mount
@@ -228,6 +271,15 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
         preferences,
         updatePreferences,
         savePreferences,
+        savedPlaces,
+        addSavedPlace,
+        removeSavedPlace,
+        trips,
+        activeTrip,
+        selectedNetworkMode,
+        setSelectedNetworkMode,
+        selectedExplorePlace,
+        setSelectedExplorePlace,
         currentJourney,
         isPlanning,
         startPlanning,
