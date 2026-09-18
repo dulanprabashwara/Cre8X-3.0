@@ -250,7 +250,7 @@ export function CityMobilityOverview() {
                     y={hub.y + 29}
                     textAnchor="middle"
                     fill="#231D2B"
-                    fontSize="11"
+                    fontSize="12"
                     fontWeight="700"
                     fontFamily="var(--font-space-grotesk)"
                   >

@@ -13,9 +13,7 @@ import {
   Home,
   Briefcase,
   SlidersHorizontal,
-  Bookmark,
   Sparkles,
-  Zap,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ExploreMap } from "@/components/explore/ExploreMap";
@@ -27,7 +25,7 @@ type ModeFilter = "All" | "Pod" | "HyperRail" | "AeroLink" | "Smart Road";
 
 export default function ExplorePage() {
   const router = useRouter();
-  const { setDestination, startPlanning, savedPlaces, addSavedPlace } = useJourney();
+  const { setDestination, startPlanning } = useJourney();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMode, setSelectedMode] = useState<ModeFilter>("All");
@@ -98,8 +96,9 @@ export default function ExplorePage() {
           />
           {searchQuery && (
             <button
+              type="button"
               onClick={() => setSearchQuery("")}
-              className="absolute right-3 text-[12px] font-heading text-nova-text-muted hover:text-nova-text-primary"
+              className="absolute right-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3 text-[12px] font-heading text-nova-text-muted hover:text-nova-text-primary"
             >
               Clear
             </button>
@@ -118,7 +117,7 @@ export default function ExplorePage() {
               type="button"
               onClick={() => setSelectedMode(mode)}
               className={cn(
-                "px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none",
+                "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none",
                 selectedMode === mode
                   ? "bg-nova-green text-white shadow-xs"
                   : "bg-nova-surface hover:bg-nova-surface-hover text-nova-text-secondary border border-nova-border/50",
@@ -163,7 +162,7 @@ export default function ExplorePage() {
                     setSelectedMode("All");
                     setSearchQuery("");
                   }}
-                  className="px-3.5 py-1.5 rounded-xl bg-white border border-nova-border/80 hover:bg-nova-surface text-[12px] font-heading font-semibold text-nova-green transition-colors"
+                  className="min-h-[44px] px-4 py-2 rounded-xl bg-white border border-nova-border/80 hover:bg-nova-surface text-[12px] font-heading font-semibold text-nova-green transition-colors inline-flex items-center justify-center"
                 >
                   Reset Filters
                 </button>
@@ -234,7 +233,7 @@ export default function ExplorePage() {
                             handleSelectAndPlan(item);
                           }}
                           title={`Plan journey to ${item.name}`}
-                          className="px-3 py-1.5 rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-[12px] font-heading font-semibold text-nova-text-primary flex items-center gap-1 transition-colors shadow-2xs"
+                          className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-[12px] font-heading font-semibold text-nova-text-primary inline-flex items-center gap-1 transition-colors shadow-2xs"
                         >
                           <span>Plan</span>
                           <ArrowRight className="w-3.5 h-3.5" />

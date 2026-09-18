@@ -290,7 +290,7 @@ export function ExploreMap({ selectedId, onSelect, modeFilter }: ExploreMapProps
                 y={hub.y + 28}
                 textAnchor="middle"
                 fill="#231D2B"
-                fontSize="11"
+                fontSize="12"
                 fontWeight={isSelected ? "700" : "600"}
                 fontFamily="var(--font-space-grotesk)"
               >
@@ -324,10 +324,11 @@ export function ExploreMap({ selectedId, onSelect, modeFilter }: ExploreMapProps
 
         <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
           <button
+            type="button"
             onClick={handleToggleSave}
             title={isSaved ? "Saved" : "Save Place"}
             className={cn(
-              "px-3 py-2 rounded-xl border text-[12px] font-heading font-semibold flex items-center gap-1.5 transition-colors",
+              "min-h-[44px] px-3.5 py-2 rounded-xl border text-[12px] font-heading font-semibold inline-flex items-center gap-1.5 transition-colors",
               isSaved
                 ? "bg-nova-green-soft text-nova-green border-nova-green/40"
                 : "bg-white border-nova-border/80 text-nova-text-secondary hover:text-nova-text-primary",
@@ -338,8 +339,9 @@ export function ExploreMap({ selectedId, onSelect, modeFilter }: ExploreMapProps
           </button>
 
           <button
+            type="button"
             onClick={handlePlanJourney}
-            className="px-4 py-2 rounded-xl bg-nova-green text-white hover:bg-nova-green-hover text-[13px] font-heading font-bold flex items-center gap-1.5 shadow-sm shadow-nova-green/20 transition-all active:scale-95"
+            className="min-h-[44px] px-4 py-2 rounded-xl bg-nova-green text-white hover:bg-nova-green-hover text-[13px] font-heading font-bold inline-flex items-center gap-1.5 shadow-sm shadow-nova-green/20 transition-all active:scale-95"
           >
             <span>Plan Journey</span>
             <ArrowRight className="w-4 h-4" />

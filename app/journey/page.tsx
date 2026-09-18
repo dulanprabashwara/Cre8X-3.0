@@ -7,7 +7,6 @@ import {
   MoreVertical,
   Sparkles,
   ArrowRight,
-  Route,
 } from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
 import { JourneySummaryCard } from "@/components/journey/JourneySummaryCard";

@@ -7,14 +7,8 @@ import {
   Clock,
   ArrowRight,
   ShieldCheck,
-  CheckCircle2,
-  AlertTriangle,
   Play,
   RotateCcw,
-  Sparkles,
-  Calendar,
-  Layers,
-  MapPin,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
@@ -28,7 +22,7 @@ type TripTab = "active" | "upcoming" | "past";
 
 export default function TripsPage() {
   const router = useRouter();
-  const { setDestination, startPlanning, showToast } = useJourney();
+  const { setDestination, startPlanning } = useJourney();
 
   const [activeTab, setActiveTab] = useState<TripTab>("active");
   const [selectedTripId, setSelectedTripId] = useState<string>("trip-active-01");
@@ -196,33 +190,36 @@ export default function TripsPage() {
                   <div className="pt-1 flex sm:hidden">
                     {trip.status === "active" ? (
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleContinueLive();
                         }}
-                        className="w-full py-2.5 rounded-xl bg-nova-green text-white font-heading font-bold text-[13px] flex items-center justify-center gap-1.5 shadow-xs"
+                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-green text-white font-heading font-bold text-[13px] flex items-center justify-center gap-1.5 shadow-xs"
                       >
                         <Play className="w-4 h-4 fill-white" />
                         <span>Continue Live Journey</span>
                       </button>
                     ) : trip.status === "upcoming" ? (
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleViewJourney(trip);
                         }}
-                        className="w-full py-2.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5"
+                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5"
                       >
                         <span>View Journey Details</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     ) : (
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleRepeatJourney(trip);
                         }}
-                        className="w-full py-2.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5"
+                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5"
                       >
                         <RotateCcw className="w-4 h-4" />
                         <span>Repeat This Journey</span>

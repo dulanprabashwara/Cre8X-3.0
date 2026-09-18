@@ -30,13 +30,13 @@ export function NetworkTopologyMap({
           <span className="text-[12px] font-heading font-bold text-nova-text-primary">
             Citywide Topology Grid
           </span>
-          <span className="px-2 py-0.5 rounded-full bg-nova-green-soft text-nova-green text-[10px] font-heading font-bold">
+          <span className="px-2 py-0.5 rounded-full bg-nova-green-soft text-nova-green text-[12px] font-heading font-bold">
             99.4% Online
           </span>
         </div>
 
         {/* Advisory Tag Indicator */}
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-nova-border/80 shadow-xs flex items-center gap-1.5 text-[11px] font-heading font-semibold text-nova-coral">
+        <div className="pointer-events-auto bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-nova-border/80 shadow-xs flex items-center gap-1.5 text-[12px] font-heading font-semibold text-nova-coral">
           <span className="w-2 h-2 rounded-full bg-nova-coral animate-ping" />
           <span>AeroLink A12 Coastal Crosswind Zone</span>
         </div>
@@ -100,7 +100,7 @@ export function NetworkTopologyMap({
             y="55"
             textAnchor="middle"
             fill="#E85F8E"
-            fontSize="10"
+            fontSize="12"
             fontWeight="700"
             fontFamily="var(--font-space-grotesk)"
           >
@@ -277,7 +277,7 @@ export function NetworkTopologyMap({
                 y={hub.y + 28}
                 textAnchor="middle"
                 fill="#231D2B"
-                fontSize="11"
+                fontSize="12"
                 fontWeight="700"
                 fontFamily="var(--font-space-grotesk)"
               >
@@ -291,13 +291,14 @@ export function NetworkTopologyMap({
       {/* Bottom Mode Filter Pills Row */}
       <div className="p-3 bg-white/95 backdrop-blur-md border-t border-nova-border/70 flex items-center justify-between gap-2 z-20 overflow-x-auto scrollbar-none">
         <div className="flex items-center gap-2">
-          <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-nova-text-muted px-1">
+          <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted px-1">
             Focus System:
           </span>
           <button
+            type="button"
             onClick={() => onSelectSystem(null)}
             className={cn(
-              "px-3 py-1 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0",
+              "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0",
               selectedSystemId === null
                 ? "bg-nova-text-primary text-white"
                 : "bg-nova-surface text-nova-text-secondary hover:bg-nova-surface-hover",
@@ -312,12 +313,13 @@ export function NetworkTopologyMap({
             { id: "smartroads", label: "Smart Roads" },
           ].map((mode) => (
             <button
+              type="button"
               key={mode.id}
               onClick={() =>
                 onSelectSystem(selectedSystemId === mode.id ? null : mode.id)
               }
               className={cn(
-                "px-3 py-1 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0",
+                "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0",
                 selectedSystemId === mode.id
                   ? "bg-nova-green text-white"
                   : "bg-nova-surface text-nova-text-secondary hover:bg-nova-surface-hover",
@@ -328,7 +330,7 @@ export function NetworkTopologyMap({
           ))}
         </div>
 
-        <div className="hidden sm:flex items-center gap-3 text-[11px] font-heading font-medium text-nova-text-secondary pr-1 shrink-0">
+        <div className="hidden sm:flex items-center gap-3 text-[12px] font-heading font-medium text-nova-text-secondary pr-1 shrink-0">
           <span className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-nova-green" />
             Normal

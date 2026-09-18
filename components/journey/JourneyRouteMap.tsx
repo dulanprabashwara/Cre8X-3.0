@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Route, ShieldCheck, Clock, ArrowRight } from "lucide-react";
+import { Route, ShieldCheck } from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
 
 export function JourneyRouteMap() {
@@ -38,13 +38,13 @@ export function JourneyRouteMap() {
             <h3 className="font-heading font-bold text-[15px] text-nova-text-primary tracking-tight">
               Synchronized Corridor Map
             </h3>
-            <p className="text-[11px] font-heading text-nova-text-secondary">
+            <p className="text-[12px] font-heading text-nova-text-secondary">
               Direct connection via HyperRail H4 & AeroLink
             </p>
           </div>
         </div>
 
-        <span className="px-2.5 py-0.5 rounded-full bg-nova-green-soft text-nova-green border border-nova-green/40 text-[11px] font-heading font-bold uppercase tracking-wider">
+        <span className="px-2.5 py-0.5 rounded-full bg-nova-green-soft text-nova-green border border-nova-green/40 text-[12px] font-heading font-bold uppercase tracking-wider">
           Arrival Protected
         </span>
       </div>
@@ -143,7 +143,7 @@ export function JourneyRouteMap() {
                 y={stop.y < 90 ? stop.y + 22 : stop.y - 12}
                 textAnchor="middle"
                 fill="#231D2B"
-                fontSize="10"
+                fontSize="12"
                 fontWeight="700"
                 fontFamily="var(--font-space-grotesk)"
               >
@@ -151,10 +151,10 @@ export function JourneyRouteMap() {
               </text>
               <text
                 x={stop.x}
-                y={stop.y < 90 ? stop.y + 32 : stop.y - 2}
+                y={stop.y < 90 ? stop.y + 34 : stop.y - 2}
                 textAnchor="middle"
                 fill="#655D6F"
-                fontSize="9"
+                fontSize="12"
                 fontWeight="500"
                 fontFamily="var(--font-inter)"
               >
@@ -165,7 +165,7 @@ export function JourneyRouteMap() {
         </svg>
 
         {/* Legend overlay */}
-        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-nova-border/60 text-[10px] font-heading font-medium text-nova-text-secondary flex items-center gap-2">
+        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-nova-border/60 text-[12px] font-heading font-medium text-nova-text-secondary flex items-center gap-2">
           <span className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-nova-green" />
             Pod & HyperRail

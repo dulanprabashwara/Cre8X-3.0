@@ -17,12 +17,9 @@ import {
   CheckCircle2,
   Sparkles,
   ArrowRight,
-  Headphones,
-  Navigation,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ToggleSwitch } from "@/components/ui/ToggleSwitch";
-import { Button } from "@/components/ui/Button";
 import { useJourney } from "@/context/JourneyContext";
 import { DESTINATIONS } from "@/data/destinations";
 import { SavedPlace } from "@/data/places";
@@ -149,8 +146,9 @@ export default function ProfilePage() {
               </div>
 
               <button
+                type="button"
                 onClick={() => setIsAddingPlace(!isAddingPlace)}
-                className="px-3 py-1.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 text-[12px] font-heading font-semibold flex items-center gap-1 transition-colors"
+                className="min-h-[44px] px-3.5 py-2 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 text-[12px] font-heading font-semibold inline-flex items-center gap-1.5 transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Place</span>
@@ -173,27 +171,27 @@ export default function ProfilePage() {
                     value={newPlaceName}
                     onChange={(e) => setNewPlaceName(e.target.value)}
                     required
-                    className="h-10 px-3 rounded-xl bg-white border border-nova-border/70 text-[13px] font-heading focus:outline-none focus:border-nova-green"
+                    className="h-11 px-3 rounded-xl bg-white border border-nova-border/70 text-[13px] font-heading focus:outline-none focus:border-nova-green"
                   />
                   <input
                     type="text"
                     placeholder="District / Area"
                     value={newPlaceDistrict}
                     onChange={(e) => setNewPlaceDistrict(e.target.value)}
-                    className="h-10 px-3 rounded-xl bg-white border border-nova-border/70 text-[13px] font-heading focus:outline-none focus:border-nova-green"
+                    className="h-11 px-3 rounded-xl bg-white border border-nova-border/70 text-[13px] font-heading focus:outline-none focus:border-nova-green"
                   />
                 </div>
                 <div className="flex items-center justify-end gap-2 pt-1">
                   <button
                     type="button"
                     onClick={() => setIsAddingPlace(false)}
-                    className="px-3 py-1.5 rounded-lg text-[12px] font-heading text-nova-text-secondary hover:text-nova-text-primary"
+                    className="min-h-[44px] px-3.5 py-2 rounded-lg text-[12px] font-heading text-nova-text-secondary hover:text-nova-text-primary inline-flex items-center justify-center"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-1.5 rounded-lg bg-nova-green text-white text-[12px] font-heading font-bold shadow-xs hover:bg-nova-green-hover"
+                    className="min-h-[44px] px-4 py-2 rounded-lg bg-nova-green text-white text-[12px] font-heading font-bold shadow-xs hover:bg-nova-green-hover inline-flex items-center justify-center"
                   >
                     Save Location
                   </button>
@@ -229,9 +227,10 @@ export default function ProfilePage() {
 
                   <div className="flex items-center gap-1.5">
                     <button
+                      type="button"
                       onClick={() => handleRouteToPlace(place)}
                       title={`Plan journey to ${place.name}`}
-                      className="px-3 py-1.5 rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-[12px] font-heading font-semibold text-nova-text-primary flex items-center gap-1 transition-colors shadow-2xs"
+                      className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-[12px] font-heading font-semibold text-nova-text-primary inline-flex items-center gap-1 transition-colors shadow-2xs"
                     >
                       <span>Route</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -239,9 +238,10 @@ export default function ProfilePage() {
 
                     {place.tag === "custom" && (
                       <button
+                        type="button"
                         onClick={() => removeSavedPlace(place.id)}
                         title="Delete place"
-                        className="p-2 rounded-xl text-nova-text-muted hover:text-nova-error hover:bg-white transition-colors"
+                        className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2.5 rounded-xl text-nova-text-muted hover:text-nova-error hover:bg-white transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -331,8 +331,9 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setAssistanceSheetOpen(true)}
-                  className="px-3.5 py-2 rounded-xl bg-nova-green text-white text-[12px] font-heading font-bold hover:bg-nova-green-hover transition-colors shrink-0 shadow-xs"
+                  className="min-h-[44px] px-4 py-2.5 rounded-xl bg-nova-green text-white text-[12px] font-heading font-bold hover:bg-nova-green-hover transition-colors shrink-0 shadow-xs inline-flex items-center justify-center"
                 >
                   Request
                 </button>

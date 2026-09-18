@@ -37,8 +37,9 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <StatusBadge />
             <button
+              type="button"
               onClick={() => setPreferencesSheetOpen(true)}
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-nova-border/70 hover:bg-nova-surface text-[12px] font-heading font-medium text-nova-text-secondary hover:text-nova-text-primary transition-colors shadow-2xs"
+              className="hidden md:inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-full bg-white border border-nova-border/70 hover:bg-nova-surface text-[12px] font-heading font-medium text-nova-text-secondary hover:text-nova-text-primary transition-colors shadow-2xs"
             >
               <Sliders className="w-3.5 h-3.5 text-nova-green" />
               <span>Preferences</span>
@@ -73,8 +74,9 @@ export default function HomePage() {
               </span>
             </span>
             <button
+              type="button"
               onClick={() => setPreferencesSheetOpen(true)}
-              className="text-nova-green hover:underline font-semibold"
+              className="min-h-[44px] px-2 text-nova-green hover:underline font-semibold inline-flex items-center"
             >
               Change
             </button>

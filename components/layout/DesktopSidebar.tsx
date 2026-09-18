@@ -58,7 +58,7 @@ export function DesktopSidebar() {
 
         {/* Primary Navigation */}
         <nav className="space-y-1.5" aria-label="Main Navigation">
-          <p className="px-2 pb-1 text-[11px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
+          <p className="px-2 pb-1 text-[12px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
             Menu
           </p>
           {PRIMARY_NAV_ITEMS.map((item) => {
@@ -95,7 +95,7 @@ export function DesktopSidebar() {
                 {item.badge && (
                   <span
                     className={cn(
-                      "px-2 py-0.5 rounded-full text-[11px] font-heading font-semibold tracking-wide",
+                      "px-2 py-0.5 rounded-full text-[12px] font-heading font-semibold tracking-wide",
                       isActive
                         ? "bg-nova-green/20 text-nova-green"
                         : item.badge === "1 Active"
@@ -113,7 +113,7 @@ export function DesktopSidebar() {
 
         {/* System & Support Utilities */}
         <div className="pt-2 space-y-1.5 border-t border-nova-border/60">
-          <p className="px-2 pb-1 text-[11px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
+          <p className="px-2 pb-1 text-[12px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
             Preferences & Support
           </p>
           <button
@@ -147,7 +147,7 @@ export function DesktopSidebar() {
           <div className="relative w-10 h-10 min-w-[40px] rounded-xl bg-gradient-to-br from-[#231D2B] to-[#3B3247] p-0.5 shadow-xs flex items-center justify-center">
             <div className="w-full h-full rounded-[10px] bg-[#2A2333] flex items-center justify-center text-white/90">
               <span className="text-[12px] font-heading font-bold tracking-wider text-white">
-                PX
+                NT
               </span>
             </div>
             <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-nova-green border-2 border-white shadow-xs" />
@@ -155,10 +155,10 @@ export function DesktopSidebar() {
 
           <div className="flex-1 min-w-0">
             <p className="text-[13px] font-heading font-bold text-nova-text-primary truncate group-hover:text-nova-green transition-colors">
-              Passenger 8492-X
+              NOVA Traveler
             </p>
-            <p className="text-[11px] font-heading text-nova-text-muted truncate">
-              Biometric Transit Pass
+            <p className="text-[12px] font-heading text-nova-text-muted truncate">
+              Personal mobility profile
             </p>
           </div>
         </Link>

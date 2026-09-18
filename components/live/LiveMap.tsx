@@ -249,7 +249,7 @@ export function LiveMap() {
           <text
             x="8"
             y="3"
-            fontSize="10"
+            fontSize="12"
             fontFamily="var(--font-space-grotesk)"
             fontWeight="600"
             fill="#655D6F"
@@ -264,7 +264,7 @@ export function LiveMap() {
           <text
             x="8"
             y="4"
-            fontSize="11"
+            fontSize="12"
             fontFamily="var(--font-space-grotesk)"
             fontWeight="600"
             fill="#655D6F"
@@ -284,7 +284,7 @@ export function LiveMap() {
           {/* Prominent White Station Pill Badge */}
           <g transform="translate(10, -10)" filter="url(#map-shadow)">
             <rect
-              width="82"
+              width="94"
               height="22"
               rx="6"
               fill="#FFFFFF"
@@ -294,7 +294,7 @@ export function LiveMap() {
             <text
               x="8"
               y="15"
-              fontSize="10"
+              fontSize="12"
               fontFamily="var(--font-space-grotesk)"
               fontWeight="700"
               fill="#231D2B"
@@ -314,9 +314,9 @@ export function LiveMap() {
 
           {/* Label */}
           <text
-            x="-40"
+            x="-44"
             y="-10"
-            fontSize="10"
+            fontSize="12"
             fontFamily="var(--font-space-grotesk)"
             fontWeight="600"
             fill="#655D6F"

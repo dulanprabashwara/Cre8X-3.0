@@ -6,14 +6,10 @@ import {
   Activity,
   ShieldCheck,
   AlertTriangle,
-  Radio,
   CheckCircle2,
-  Clock,
   ArrowRight,
   Sparkles,
-  Zap,
   Info,
-  Sliders,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { NetworkTopologyMap } from "@/components/network/NetworkTopologyMap";
@@ -176,8 +172,9 @@ export default function NetworkPage() {
                   </h3>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setSelectedSystemId(null)}
-                  className="text-[12px] font-heading font-semibold text-nova-green hover:underline"
+                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-2.5 py-1 text-[12px] font-heading font-semibold text-nova-green hover:underline"
                 >
                   Show All
                 </button>
@@ -252,8 +249,9 @@ export default function NetworkPage() {
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={() => setPreferencesSheetOpen(true)}
-                className="text-[12px] font-heading font-semibold text-nova-green hover:underline flex items-center gap-1"
+                className="min-h-[44px] px-2.5 inline-flex items-center gap-1 text-[12px] font-heading font-semibold text-nova-green hover:underline"
               >
                 <span>Preferences</span>
                 <ArrowRight className="w-3 h-3" />
