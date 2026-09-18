@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { JourneyProvider } from "@/context/JourneyContext";
+import { Toast } from "@/components/ui/Toast";
 
 const inter = Inter({
   subsets: ["latin"],
