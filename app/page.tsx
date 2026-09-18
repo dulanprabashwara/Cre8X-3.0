@@ -33,13 +33,15 @@ export default function HomePage() {
       <div className="flex-1 flex flex-col md:grid md:grid-cols-12 gap-6 lg:gap-8 pt-1 sm:pt-2">
         {/* Left / Primary Column: Planner & Immediate Action */}
         <div className="md:col-span-6 lg:col-span-5 flex flex-col space-y-4 sm:space-y-5">
-          {/* Network Status Badge */}
+          {/* Network Status Badge (Mobile/Tablet) & Preferences Shortcut (Desktop sidebar shows network status) */}
           <div className="flex items-center justify-between">
-            <StatusBadge />
+            <div className="lg:hidden">
+              <StatusBadge />
+            </div>
             <button
               type="button"
               onClick={() => setPreferencesSheetOpen(true)}
-              className="hidden md:inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-full bg-white border border-nova-border/70 hover:bg-nova-surface text-[12px] font-heading font-medium text-nova-text-secondary hover:text-nova-text-primary transition-colors shadow-2xs"
+              className="hidden md:inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-full bg-white border border-nova-border/70 hover:bg-nova-surface text-[12px] font-heading font-medium text-nova-text-secondary hover:text-nova-text-primary transition-colors shadow-2xs lg:ml-auto"
             >
               <Sliders className="w-3.5 h-3.5 text-nova-green" />
               <span>Preferences</span>

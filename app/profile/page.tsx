@@ -84,11 +84,11 @@ export default function ProfilePage() {
       {/* Page Header */}
       <PageHeader
         title="Profile & Preferences"
-        subtitle="Personal multimodal travel parameters, accessibility settings & saved places"
+        subtitle="Places, accessibility and journey preferences"
       />
 
       {/* Passenger Identity Summary Card */}
-      <div className="bg-white rounded-panel border border-nova-border/70 p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="bg-white rounded-panel border border-nova-border/60 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-4">
           {/* Neutral Passenger Monogram Initials Avatar */}
           <div className="relative w-16 h-16 min-w-[64px] rounded-2xl bg-gradient-to-br from-[#231D2B] via-[#332A3E] to-[#453754] p-1 shadow-md flex items-center justify-center">
@@ -117,7 +117,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Quick status pill */}
-        <div className="flex items-center gap-3 self-start sm:self-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-nova-border/60">
+        <div className="flex items-center gap-3 self-start sm:self-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-nova-border/50">
           <div className="p-2 rounded-xl bg-nova-surface text-[12px] font-heading text-nova-text-secondary">
             <span className="font-bold text-nova-text-primary">NOVA Pearl</span> Bioluminescent
           </div>
@@ -125,18 +125,18 @@ export default function ProfilePage() {
       </div>
 
       {/* Responsive 2-Column Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-7 items-start">
         {/* Left Column (Desktop 6 cols): Saved Places & Mobility Assistance */}
-        <div className="lg:col-span-6 flex flex-col space-y-6">
+        <div className="lg:col-span-6 flex flex-col space-y-6 sm:space-y-7">
           {/* 1. Saved Places Section */}
-          <div className="bg-white rounded-panel border border-nova-border/70 p-5 sm:p-6 shadow-sm space-y-4">
+          <div className="bg-white rounded-panel border border-nova-border/60 p-5 sm:p-6 shadow-xs space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="p-2 rounded-xl bg-nova-green-soft text-nova-green">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-[16px] text-nova-text-primary tracking-tight">
+                  <h3 className="font-heading font-bold text-[17px] text-nova-text-primary tracking-tight">
                     Saved Places
                   </h3>
                   <p className="text-[12px] font-heading text-nova-text-secondary">
@@ -204,10 +204,10 @@ export default function ProfilePage() {
               {savedPlaces.map((place) => (
                 <div
                   key={place.id}
-                  className="p-3.5 rounded-2xl bg-nova-surface/60 hover:bg-nova-surface border border-nova-border/60 transition-all flex items-center justify-between group"
+                  className="p-3.5 rounded-2xl bg-[#FBF9FD] hover:bg-[#F8F5FB] border border-nova-border/40 transition-all flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-white border border-nova-border/70 flex items-center justify-center text-nova-green shadow-xs">
+                    <div className="w-10 h-10 rounded-xl bg-white border border-nova-border/60 flex items-center justify-center text-nova-green shadow-xs">
                       <MapPin className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
@@ -230,7 +230,7 @@ export default function ProfilePage() {
                       type="button"
                       onClick={() => handleRouteToPlace(place)}
                       title={`Plan journey to ${place.name}`}
-                      className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-nova-border/80 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-[12px] font-heading font-semibold text-nova-text-primary inline-flex items-center gap-1 transition-colors shadow-2xs"
+                      className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-nova-border/70 group-hover:bg-nova-green group-hover:text-white group-hover:border-nova-green text-[12px] font-heading font-semibold text-nova-text-primary inline-flex items-center gap-1 transition-colors shadow-2xs"
                     >
                       <span>Route</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -241,7 +241,7 @@ export default function ProfilePage() {
                         type="button"
                         onClick={() => removeSavedPlace(place.id)}
                         title="Delete place"
-                        className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2.5 rounded-xl text-nova-text-muted hover:text-nova-error hover:bg-white transition-colors"
+                        className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2.5 rounded-xl text-nova-text-muted hover:text-nova-error hover:bg-white transition-colors cursor-pointer"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -253,13 +253,13 @@ export default function ProfilePage() {
           </div>
 
           {/* 2. Accessibility & Mobility Assistance Section */}
-          <div className="bg-white rounded-panel border border-nova-border/70 p-5 sm:p-6 shadow-sm space-y-4">
+          <div className="bg-white rounded-panel border border-nova-border/60 p-5 sm:p-6 shadow-xs space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="p-2 rounded-xl bg-nova-green-soft text-nova-green">
                 <Accessibility className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-heading font-bold text-[16px] text-nova-text-primary tracking-tight">
+                <h3 className="font-heading font-bold text-[17px] text-nova-text-primary tracking-tight">
                   Accessibility & Mobility Support
                 </h3>
                 <p className="text-[12px] font-heading text-nova-text-secondary">
@@ -268,8 +268,8 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="space-y-3.5 pt-1">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+            <div className="space-y-3 pt-1">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Step-Free Route Guarantee
@@ -285,7 +285,7 @@ export default function ProfilePage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Simple Instructions Mode
@@ -301,7 +301,7 @@ export default function ProfilePage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Audio Guidance
@@ -318,7 +318,7 @@ export default function ProfilePage() {
               </div>
 
               {/* Direct Mobility Staff Dispatch CTA */}
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-nova-green-soft via-white to-nova-surface border border-nova-green/40 flex items-center justify-between gap-3">
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-nova-green-soft via-white to-nova-surface border border-nova-green/30 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <ShieldCheck className="w-6 h-6 text-nova-green shrink-0" />
                   <div>
@@ -333,7 +333,7 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   onClick={() => setAssistanceSheetOpen(true)}
-                  className="min-h-[44px] px-4 py-2.5 rounded-xl bg-nova-green text-white text-[12px] font-heading font-bold hover:bg-nova-green-hover transition-colors shrink-0 shadow-xs inline-flex items-center justify-center"
+                  className="min-h-[44px] px-4 py-2.5 rounded-xl bg-nova-green text-white text-[12px] font-heading font-bold hover:bg-nova-green-hover transition-colors shrink-0 shadow-xs inline-flex items-center justify-center cursor-pointer"
                 >
                   Request
                 </button>
@@ -343,15 +343,15 @@ export default function ProfilePage() {
         </div>
 
         {/* Right Column (Desktop 6 cols): Journey Preferences & System Experience */}
-        <div className="lg:col-span-6 flex flex-col space-y-6">
+        <div className="lg:col-span-6 flex flex-col space-y-6 sm:space-y-7">
           {/* 3. Journey Routing Preferences */}
-          <div className="bg-white rounded-panel border border-nova-border/70 p-5 sm:p-6 shadow-sm space-y-4">
+          <div className="bg-white rounded-panel border border-nova-border/60 p-5 sm:p-6 shadow-xs space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="p-2 rounded-xl bg-nova-green-soft text-nova-green">
                 <Sliders className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-heading font-bold text-[16px] text-nova-text-primary tracking-tight">
+                <h3 className="font-heading font-bold text-[17px] text-nova-text-primary tracking-tight">
                   Journey Optimization
                 </h3>
                 <p className="text-[12px] font-heading text-nova-text-secondary">
@@ -360,8 +360,8 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="space-y-3.5 pt-1">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+            <div className="space-y-3 pt-1">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Low Walking Tolerance
@@ -377,7 +377,7 @@ export default function ProfilePage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Extra Transfer Buffer Time
@@ -393,7 +393,7 @@ export default function ProfilePage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Avoid Steep Ramps & Overpasses
@@ -412,13 +412,13 @@ export default function ProfilePage() {
           </div>
 
           {/* 4. Notifications & Alerts */}
-          <div className="bg-white rounded-panel border border-nova-border/70 p-5 sm:p-6 shadow-sm space-y-4">
+          <div className="bg-white rounded-panel border border-nova-border/60 p-5 sm:p-6 shadow-xs space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="p-2 rounded-xl bg-nova-green-soft text-nova-green">
                 <Bell className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-heading font-bold text-[16px] text-nova-text-primary tracking-tight">
+                <h3 className="font-heading font-bold text-[17px] text-nova-text-primary tracking-tight">
                   Proactive Notifications
                 </h3>
                 <p className="text-[12px] font-heading text-nova-text-secondary">
@@ -427,8 +427,8 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="space-y-3.5 pt-1">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+            <div className="space-y-3 pt-1">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Quiet Notifications
@@ -444,7 +444,7 @@ export default function ProfilePage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Reduced Motion Interface
@@ -460,7 +460,7 @@ export default function ProfilePage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-xl bg-nova-surface/60 border border-nova-border/50">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
                 <div>
                   <p className="font-heading font-bold text-[13px] text-nova-text-primary">
                     Calm Display Mode
@@ -479,13 +479,13 @@ export default function ProfilePage() {
           </div>
 
           {/* 5. Appearance & System Architecture */}
-          <div className="bg-white rounded-panel border border-nova-border/70 p-5 sm:p-6 shadow-sm space-y-3.5">
+          <div className="bg-white rounded-panel border border-nova-border/60 p-5 sm:p-6 shadow-xs space-y-3.5">
             <div className="flex items-center gap-2.5">
               <div className="p-2 rounded-xl bg-nova-green-soft text-nova-green">
                 <Sun className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-heading font-bold text-[16px] text-nova-text-primary tracking-tight">
+                <h3 className="font-heading font-bold text-[17px] text-nova-text-primary tracking-tight">
                   Appearance & Design Language
                 </h3>
                 <p className="text-[12px] font-heading text-nova-text-secondary">
@@ -494,7 +494,7 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-nova-surface/60 border border-nova-border/60 flex items-center justify-between">
+            <div className="p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40 flex items-center justify-between">
               <div>
                 <p className="font-heading font-bold text-[14px] text-nova-text-primary">
                   NOVA Pearl Bioluminescent

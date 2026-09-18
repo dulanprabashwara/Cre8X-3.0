@@ -92,6 +92,7 @@ export function AssistanceSheet() {
     <Sheet
       isOpen={assistanceSheetOpen}
       onClose={() => setAssistanceSheetOpen(false)}
+      className="md:max-w-[620px] md:rounded-[26px]"
     >
       <div className="flex flex-col space-y-4">
         {/* Header */}

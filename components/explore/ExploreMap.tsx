@@ -156,8 +156,17 @@ export function ExploreMap({ selectedId, onSelect, modeFilter }: ExploreMapProps
           </filter>
         </defs>
 
+        {/* Ambient City Districts Background */}
+        <g opacity="0.5">
+          <rect x="180" y="80" width="120" height="85" rx="14" fill="#EAE3F2" />
+          <rect x="260" y="145" width="140" height="100" rx="14" fill="#EFE8F6" />
+          <rect x="120" y="215" width="130" height="90" rx="14" fill="#EDE6F4" />
+          <rect x="50" y="280" width="130" height="90" rx="14" fill="#EAE2F2" />
+          <rect x="420" y="60" width="150" height="100" rx="14" fill="#EAE2F3" />
+        </g>
+
         {/* Ambient Grid Lines */}
-        <g stroke="#E7E1ED" strokeWidth="0.8" opacity="0.6">
+        <g stroke="#E6DFED" strokeWidth="0.8" opacity="0.5">
           {[80, 160, 240, 320, 400, 480, 560].map((x) => (
             <line key={`exp-vx-${x}`} x1={x} y1="0" x2={x} y2="400" />
           ))}
@@ -168,10 +177,24 @@ export function ExploreMap({ selectedId, onSelect, modeFilter }: ExploreMapProps
 
         {/* Coastline Area */}
         <path
-          d="M 60 400 C 140 330, 210 260, 270 170 C 330 90, 440 50, 600 20 L 600 0 L 0 0 L 0 400 Z"
-          fill="#ECE6F2"
-          opacity="0.45"
+          d="M 40 400 C 120 330, 190 260, 250 170 C 310 90, 420 50, 600 20 L 600 0 L 0 0 L 0 400 Z"
+          fill="#EAE2F2"
+          opacity="0.55"
         />
+
+        {/* Mobility Zone Subtle Labels */}
+        <g fill="#7A7088" opacity="0.6" fontSize="12" fontWeight="600" fontFamily="var(--font-space-grotesk)">
+          <text x="45" y="70">SECTOR 1 · COASTAL</text>
+          <text x="270" y="130">SECTOR 2 · METRO CORE</text>
+          <text x="435" y="80">SECTOR 3 · SKYPORT</text>
+        </g>
+
+        {/* Soft Road Traces */}
+        <g stroke="#DAD1E5" strokeWidth="1.2" opacity="0.65" fill="none">
+          <path d="M 50 215 Q 170 185, 250 215 T 410 225" strokeDasharray="3 3" />
+          <path d="M 130 95 Q 270 55, 410 85" />
+          <path d="M 95 365 Q 195 295, 305 255" strokeDasharray="4 4" />
+        </g>
 
         {/* Transit Corridors */}
         {/* HyperRail Trunk: KDU -> Ratmalana -> Central -> Colombo */}

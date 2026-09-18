@@ -10,9 +10,16 @@ export interface SheetProps {
   children: React.ReactNode;
   title?: string;
   className?: string;
+  footer?: React.ReactNode;
 }
 
-export function Sheet({ isOpen, onClose, children, className }: SheetProps) {
+export function Sheet({
+  isOpen,
+  onClose,
+  children,
+  className,
+  footer,
+}: SheetProps) {
   // Handle escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -70,9 +77,16 @@ export function Sheet({ isOpen, onClose, children, className }: SheetProps) {
             </div>
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto px-5 pb-8 pt-2 md:pt-4">
+            <div className="flex-1 overflow-y-auto px-5 pb-6 pt-2 md:pt-4">
               {children}
             </div>
+
+            {/* Sticky Footer */}
+            {footer && (
+              <div className="shrink-0 px-5 py-3.5 sm:py-4 bg-white/95 backdrop-blur-md border-t border-nova-border/60">
+                {footer}
+              </div>
+            )}
           </motion.div>
         </div>
       )}

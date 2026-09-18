@@ -167,7 +167,15 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
     [showToast],
   );
 
-  // Load preferences from localStorage on mount
+  const handleSetRouteStyle = useCallback(
+    (style: "fastest" | "calmest" | "eco" | "low_walking") => {
+      setRouteStyle(style);
+      setPreferences((prev) => ({ ...prev, routeStyle: style }));
+    },
+    [],
+  );
+
+  // Load preferences from localStorage on mount and check modal query param
   useEffect(() => {
     try {
       const saved = localStorage.getItem(PREFS_STORAGE_KEY);
@@ -178,6 +186,15 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
           setRouteStyle(parsed.routeStyle);
         }
       }
+      if (typeof window !== "undefined") {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("preferences") === "open" || params.get("modal") === "preferences") {
+          setPreferencesSheetOpen(true);
+        }
+        if (params.get("assistance") === "open" || params.get("modal") === "assistance") {
+          setAssistanceSheetOpen(true);
+        }
+      }
     } catch (e) {
       console.warn("Could not load stored preferences:", e);
     }
@@ -185,7 +202,13 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
 
   const updatePreferences = useCallback(
     (newPrefs: Partial<JourneyPreferences>) => {
-      setPreferences((prev) => ({ ...prev, ...newPrefs }));
+      setPreferences((prev) => {
+        const next = { ...prev, ...newPrefs };
+        if (newPrefs.routeStyle) {
+          setRouteStyle(newPrefs.routeStyle);
+        }
+        return next;
+      });
     },
     [],
   );
@@ -271,7 +294,7 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
         destination,
         setDestination,
         routeStyle,
-        setRouteStyle,
+        setRouteStyle: handleSetRouteStyle,
         preferences,
         updatePreferences,
         savePreferences,

@@ -91,8 +91,8 @@ export default function TripsPage() {
 
       {/* Main Responsive Layout: Mobile Stacked / Desktop Master-Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left / Master List Column (Desktop 5 cols, Mobile full) */}
-        <div className="lg:col-span-5 flex flex-col space-y-3.5">
+        {/* Left / Master List Column (Desktop 4 cols ~36-40%, Mobile full) */}
+        <div className="lg:col-span-4 flex flex-col space-y-3.5">
           {displayedTrips.length === 0 ? (
             <div className="bg-white rounded-panel border border-nova-border/70 p-8 text-center space-y-2">
               <Route className="w-8 h-8 text-nova-text-muted mx-auto" />
@@ -230,10 +230,33 @@ export default function TripsPage() {
               );
             })
           )}
+
+          {/* Contextual Journey Guardian Status Card (Active tab only) */}
+          {activeTab === "active" && (
+            <div className="p-4 rounded-panel bg-[#FBF9FD] border border-nova-border/70 flex items-start gap-3 shadow-2xs">
+              <div className="w-8 h-8 rounded-xl bg-nova-green-soft text-nova-green flex items-center justify-center shrink-0 mt-0.5">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <h4 className="font-heading font-bold text-[13px] text-nova-text-primary">
+                    Journey Guardian
+                  </h4>
+                  <span className="w-1.5 h-1.5 rounded-full bg-nova-green" />
+                </div>
+                <p className="font-heading font-semibold text-[13px] text-nova-green mt-0.5">
+                  All transfers secured
+                </p>
+                <p className="text-[12px] font-heading text-nova-text-secondary mt-0.5 leading-snug">
+                  Next action: Central Skyport in 4 min. NOVA is monitoring your connections.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Right / Detail Inspector Column (Desktop 7 cols, Hidden on pure mobile if not selected) */}
-        <div className="hidden sm:block lg:col-span-7 bg-white rounded-panel border border-nova-border/70 p-6 shadow-sm space-y-6">
+        {/* Right / Detail Inspector Column (Desktop 8 cols ~60-64%, Hidden on pure mobile if not selected) */}
+        <div className="hidden sm:block lg:col-span-8 bg-white rounded-panel border border-nova-border/70 p-6 shadow-sm space-y-6">
           {/* Header row */}
           <div className="flex items-start justify-between flex-wrap gap-3 pb-4 border-b border-nova-border/60">
             <div>

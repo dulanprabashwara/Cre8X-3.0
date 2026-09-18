@@ -82,8 +82,8 @@ export default function ExplorePage() {
         subtitle="Discover future city mobility hubs, districts and corridors"
       />
 
-      {/* Search & Filter Bar */}
-      <div className="bg-white rounded-panel border border-nova-border/70 p-4 shadow-sm space-y-3">
+      {/* Search & Filter Bar (Mobile & Tablet Stacked View) */}
+      <div className="lg:hidden bg-white rounded-panel border border-nova-border/70 p-4 shadow-sm space-y-3">
         {/* Search Input */}
         <div className="relative flex items-center">
           <Search className="absolute left-3.5 w-4 h-4 text-nova-text-muted pointer-events-none" />
@@ -98,7 +98,7 @@ export default function ExplorePage() {
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="absolute right-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3 text-[12px] font-heading text-nova-text-muted hover:text-nova-text-primary"
+              className="absolute right-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3 text-[12px] font-heading text-nova-text-muted hover:text-nova-text-primary cursor-pointer"
             >
               Clear
             </button>
@@ -117,7 +117,7 @@ export default function ExplorePage() {
               type="button"
               onClick={() => setSelectedMode(mode)}
               className={cn(
-                "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none",
+                "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none cursor-pointer",
                 selectedMode === mode
                   ? "bg-nova-green text-white shadow-xs"
                   : "bg-nova-surface hover:bg-nova-surface-hover text-nova-text-secondary border border-nova-border/50",
@@ -131,8 +131,53 @@ export default function ExplorePage() {
 
       {/* Main Responsive Layout: Mobile Stacked / Desktop Split */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left Column (Desktop 400px / 5 Cols, Mobile full width) */}
+        {/* Left Column (Desktop ~38-40% / 5 Cols, Mobile full width) */}
         <div className="lg:col-span-5 flex flex-col space-y-5 order-2 lg:order-1">
+          {/* Desktop Search & Filter Bar (>=1024px) */}
+          <div className="hidden lg:block bg-white rounded-panel border border-nova-border/70 p-4 shadow-sm space-y-3">
+            <div className="relative flex items-center">
+              <Search className="absolute left-3.5 w-4 h-4 text-nova-text-muted pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search districts, hubs or landmarks..."
+                className="w-full h-11 pl-10 pr-4 rounded-xl bg-nova-surface/70 border border-nova-border/60 focus:border-nova-green focus:bg-white focus:outline-none text-[14px] font-heading font-medium text-nova-text-primary placeholder:text-nova-text-muted transition-colors"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3 text-[12px] font-heading text-nova-text-muted hover:text-nova-text-primary cursor-pointer"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Transport Mode Filter Chips */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+              <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted pr-1 flex items-center gap-1 shrink-0">
+                <SlidersHorizontal className="w-3.5 h-3.5" />
+                Mode:
+              </span>
+              {modeFilters.map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => setSelectedMode(mode)}
+                  className={cn(
+                    "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none cursor-pointer",
+                    selectedMode === mode
+                      ? "bg-nova-green text-white shadow-xs"
+                      : "bg-nova-surface hover:bg-nova-surface-hover text-nova-text-secondary border border-nova-border/50",
+                  )}
+                >
+                  {mode}
+                </button>
+              ))}
+            </div>
+          </div>
           {/* Popular Destinations List */}
           <div className="bg-white rounded-panel border border-nova-border/70 p-5 shadow-sm space-y-3">
             <div className="flex items-center justify-between">

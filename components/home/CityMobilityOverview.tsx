@@ -130,8 +130,16 @@ export function CityMobilityOverview() {
               </filter>
             </defs>
 
+            {/* Ambient City District Blocks */}
+            <g opacity="0.55">
+              <rect x="25" y="35" width="170" height="95" rx="16" fill="#EDE6F4" />
+              <rect x="235" y="85" width="180" height="115" rx="16" fill="#EFE8F6" />
+              <rect x="55" y="235" width="165" height="115" rx="16" fill="#EDE6F4" />
+              <rect x="425" y="55" width="155" height="105" rx="16" fill="#EAE2F3" />
+            </g>
+
             {/* Grid Pattern Lines */}
-            <g stroke="#E8E2EE" strokeWidth="0.8" opacity="0.6">
+            <g stroke="#E6DFED" strokeWidth="0.8" opacity="0.5">
               {[80, 160, 240, 320, 400, 480, 560].map((x) => (
                 <line key={`vx-${x}`} x1={x} y1="0" x2={x} y2="400" />
               ))}
@@ -142,16 +150,30 @@ export function CityMobilityOverview() {
 
             {/* Coastline / Water Accent */}
             <path
-              d="M 40 400 C 120 320, 200 280, 300 180 C 380 100, 460 60, 600 20 L 600 0 L 0 0 L 0 400 Z"
-              fill="#EFE9F5"
-              opacity="0.5"
+              d="M 30 400 C 110 320, 190 270, 290 170 C 370 95, 450 55, 600 15 L 600 0 L 0 0 L 0 400 Z"
+              fill="#EAE2F2"
+              opacity="0.55"
             />
 
-            {/* Main Multimodal Trunk Line */}
+            {/* Mobility Zone Subtle Labels */}
+            <g fill="#7A7088" opacity="0.6" fontSize="12" fontWeight="600" fontFamily="var(--font-space-grotesk)">
+              <text x="45" y="60">ZONE 1 · COASTAL</text>
+              <text x="250" y="108">ZONE 2 · METRO CORE</text>
+              <text x="440" y="78">ZONE 3 · SKYPORT</text>
+            </g>
+
+            {/* Quiet Road Traces */}
+            <g stroke="#DAD1E5" strokeWidth="1.2" opacity="0.65" fill="none">
+              <path d="M 50 215 Q 170 185, 250 215 T 410 225" strokeDasharray="3 3" />
+              <path d="M 130 95 Q 270 55, 410 85" />
+              <path d="M 95 365 Q 195 295, 305 255" strokeDasharray="4 4" />
+            </g>
+
+            {/* Main Multimodal Trunk Line (Active Focus) */}
             <path
               d="M 100 330 Q 180 260, 320 190 T 480 110"
               fill="none"
-              stroke="#E2DCE8"
+              stroke="#DDD6E5"
               strokeWidth="10"
               strokeLinecap="round"
             />
@@ -167,14 +189,14 @@ export function CityMobilityOverview() {
             <path
               d="M 180 260 Q 240 340, 360 330"
               fill="none"
-              stroke="#D4CDDD"
+              stroke="#CFC6DB"
               strokeWidth="3"
               strokeDasharray="4 4"
             />
             <path
               d="M 320 190 Q 420 280, 520 250"
               fill="none"
-              stroke="#D4CDDD"
+              stroke="#CFC6DB"
               strokeWidth="3"
               strokeDasharray="4 4"
             />

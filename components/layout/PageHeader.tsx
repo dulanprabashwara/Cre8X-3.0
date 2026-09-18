@@ -60,8 +60,8 @@ export function PageHeader({
 
       {/* Right Utility Actions */}
       <div className="flex items-center gap-2.5 self-start md:self-auto">
-        {/* Network Status pill - hidden on mobile if already on network page */}
-        <div className="hidden sm:block">
+        {/* Network Status pill - visible on tablet, hidden on desktop where sidebar displays it */}
+        <div className="hidden sm:block lg:hidden">
           <StatusBadge />
         </div>
 

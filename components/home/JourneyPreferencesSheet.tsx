@@ -69,6 +69,26 @@ export function JourneyPreferencesSheet() {
     <Sheet
       isOpen={preferencesSheetOpen}
       onClose={() => setPreferencesSheetOpen(false)}
+      className="md:max-w-[740px] md:max-h-[min(760px,86vh)] md:rounded-[26px]"
+      footer={
+        <div className="flex items-center justify-between gap-3 w-full">
+          <button
+            type="button"
+            onClick={() => setPreferencesSheetOpen(false)}
+            className="min-h-[44px] px-5 py-2.5 rounded-xl border border-nova-border/80 bg-white hover:bg-nova-surface text-[14px] font-heading font-semibold text-nova-text-secondary hover:text-nova-text-primary transition-colors select-none cursor-pointer"
+          >
+            Cancel
+          </button>
+          <Button
+            size="md"
+            onClick={handleSave}
+            icon={<CheckCircle2 className="w-4 h-4" />}
+            className="shadow-sm shadow-nova-green/20"
+          >
+            Save preferences
+          </Button>
+        </div>
+      }
     >
       <div className="flex flex-col space-y-6">
         {/* Header */}
@@ -345,19 +365,11 @@ export function JourneyPreferencesSheet() {
           </div>
         </div>
 
-        {/* Persistence note & CTA */}
-        <div className="pt-2">
-          <p className="text-[12px] text-nova-text-muted text-center mb-3">
+        {/* Persistence note */}
+        <div className="pt-2 pb-1">
+          <p className="text-[12px] font-heading text-nova-text-muted text-center">
             ✓ Apply automatically to future journeys
           </p>
-          <Button
-            size="lg"
-            fullWidth
-            onClick={handleSave}
-            icon={<CheckCircle2 className="w-5 h-5" />}
-          >
-            Save preferences
-          </Button>
         </div>
       </div>
     </Sheet>
