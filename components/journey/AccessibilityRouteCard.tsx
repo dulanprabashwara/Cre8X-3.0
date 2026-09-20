@@ -26,11 +26,10 @@ export function AccessibilityRouteCard() {
 
           <div className="min-w-0">
             <h4 className="font-heading font-semibold text-[14px] text-nova-text-primary truncate">
-              Low walking route
+              Accessible journey
             </h4>
             <p className="text-[12px] font-heading text-nova-text-secondary mt-0.5 truncate">
-              {accessibility.walkReductionPercent}% less walking · Elevators
-              available
+              {accessibility.walkReductionPercent}% less walking · Step-free boarding
             </p>
           </div>
         </div>
@@ -60,7 +59,7 @@ export function AccessibilityRouteCard() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
-              <span>Elevators at every transfer</span>
+              <span>Direct non-stop service</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
@@ -68,7 +67,7 @@ export function AccessibilityRouteCard() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
-              <span>Extra transfer time enabled</span>
+              <span>Level boarding & ramps verified</span>
             </div>
           </div>
 

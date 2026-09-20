@@ -18,14 +18,24 @@ import { ItineraryTimeline } from "@/components/journey/ItineraryTimeline";
 import { JourneyRouteMap } from "@/components/journey/JourneyRouteMap";
 import { JourneyGuardianCard } from "@/components/journey/JourneyGuardianCard";
 import { AccessibilityRouteCard } from "@/components/journey/AccessibilityRouteCard";
-import { TransferConfidenceCard } from "@/components/journey/TransferConfidenceCard";
 import { WhyJourneySheet } from "@/components/journey/WhyJourneySheet";
 import { Button } from "@/components/ui/Button";
+import { METHOD_CONFIGS } from "@/lib/journeyPlanner";
 
 export default function JourneyPage() {
   const router = useRouter();
-  const { currentJourney, setWhyJourneySheetOpen, showToast } = useJourney();
+  const {
+    currentJourney,
+    selectedMethod,
+    recommendedMethod,
+    setWhyJourneySheetOpen,
+    showToast,
+  } = useJourney();
   const [mobileMapVisible, setMobileMapVisible] = useState(false);
+
+  const isRecommended = selectedMethod === recommendedMethod;
+  const selectedConfig = METHOD_CONFIGS[selectedMethod];
+  const recommendedConfig = METHOD_CONFIGS[recommendedMethod];
 
   const handleStartJourney = () => {
     router.push("/live");
@@ -49,7 +59,7 @@ export default function JourneyPage() {
               {currentJourney.destination}
             </h1>
             <p className="text-[12px] sm:text-[13px] font-heading font-medium text-nova-text-secondary">
-              From {currentJourney.origin}
+              From {currentJourney.origin} · Direct {selectedConfig.label}
             </p>
           </div>
         </div>
@@ -57,7 +67,7 @@ export default function JourneyPage() {
         <button
           onClick={() =>
             showToast(
-              "Journey options: Share, Export itinerary, Cancel reservations",
+              "Journey options: Share, Export itinerary, Boarding pass",
               "info",
             )
           }
@@ -81,7 +91,7 @@ export default function JourneyPage() {
           {/* 4. Itinerary Timeline */}
           <ItineraryTimeline />
 
-          {/* Mobile-only: Compact Guardian, Accessibility, Why NOVA, Transfer info, CTA, and Map toggle */}
+          {/* Mobile-only: Compact Guardian, Accessibility, Why NOVA, CTA, and Map toggle */}
           <div className="lg:hidden flex flex-col space-y-4 pt-2">
             {/* 5. Compact Journey Guardian */}
             <JourneyGuardianCard />
@@ -89,23 +99,24 @@ export default function JourneyPage() {
             {/* 6. Compact Accessibility Status */}
             <AccessibilityRouteCard />
 
-            {/* 7. Why NOVA Chose This Route */}
+            {/* 7. Why NOVA Recommendation Button */}
             <button
               type="button"
               onClick={() => setWhyJourneySheetOpen(true)}
               className="w-full min-h-[44px] px-4 py-2.5 rounded-xl bg-nova-coral-soft border border-nova-coral/30 hover:bg-nova-coral-soft/80 text-nova-coral font-heading font-semibold text-[13px] flex items-center justify-between transition-colors shadow-2xs"
             >
               <span className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4" />
-                <span>Why NOVA chose this route</span>
+                <Sparkles className="w-4 h-4 shrink-0" />
+                <span>
+                  {isRecommended
+                    ? `Why NOVA recommends ${selectedConfig.label}`
+                    : `Why NOVA recommends ${recommendedConfig.label}`}
+                </span>
               </span>
               <span className="text-[12px] font-heading font-bold uppercase tracking-wider">
                 Learn why &rarr;
               </span>
             </button>
-
-            {/* 8. Transfer Details */}
-            <TransferConfidenceCard />
 
             {/* Mobile Map Toggle Option */}
             <div className="pt-1">
@@ -117,7 +128,7 @@ export default function JourneyPage() {
                 <span className="flex items-center gap-2">
                   <Map className="w-4 h-4 text-nova-green" />
                   <span>
-                    {mobileMapVisible ? "Hide route map" : "View route map"}
+                    {mobileMapVisible ? "Hide corridor map" : "View corridor map"}
                   </span>
                 </span>
                 {mobileMapVisible ? (
@@ -134,7 +145,7 @@ export default function JourneyPage() {
               )}
             </div>
 
-            {/* 9. Mobile Primary CTA */}
+            {/* 8. Mobile Primary CTA */}
             <div className="bg-white rounded-panel border border-nova-border/70 p-4 shadow-sm space-y-3">
               <div className="flex items-center justify-between text-[13px] font-heading font-medium">
                 <span className="flex items-center gap-1.5 text-nova-green font-semibold">
@@ -151,7 +162,7 @@ export default function JourneyPage() {
                 fullWidth
                 onClick={handleStartJourney}
                 icon={<ArrowRight className="w-5 h-5" />}
-                className="shadow-md shadow-nova-green/20 text-[16px] h-13"
+                className="shadow-md shadow-nova-green/20 text-[16px] h-13 min-h-[52px]"
               >
                 Start journey
               </Button>
@@ -159,7 +170,7 @@ export default function JourneyPage() {
           </div>
         </div>
 
-        {/* Right Column (Desktop ~42%, Hidden on Mobile): Map, Guardian, Accessibility, Why NOVA, Transfer info, CTA */}
+        {/* Right Column (Desktop ~42%, Hidden on Mobile): Map, Guardian, Accessibility, Why NOVA, CTA */}
         <div className="hidden lg:flex lg:col-span-5 flex-col space-y-4 lg:sticky lg:top-20">
           <JourneyRouteMap />
 
@@ -173,15 +184,17 @@ export default function JourneyPage() {
             className="w-full min-h-[44px] px-4 py-2.5 rounded-xl bg-nova-coral-soft border border-nova-coral/30 hover:bg-nova-coral-soft/80 text-nova-coral font-heading font-semibold text-[13px] flex items-center justify-between transition-colors shadow-2xs"
           >
             <span className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4" />
-              <span>Why NOVA chose this route</span>
+              <Sparkles className="w-4 h-4 shrink-0" />
+              <span>
+                {isRecommended
+                  ? `Why NOVA recommends ${selectedConfig.label}`
+                  : `Why NOVA recommends ${recommendedConfig.label}`}
+              </span>
             </span>
             <span className="text-[12px] font-heading font-bold uppercase tracking-wider">
               Learn why &rarr;
             </span>
           </button>
-
-          <TransferConfidenceCard />
 
           <div className="bg-white rounded-panel border border-nova-border/70 p-5 shadow-sm space-y-3">
             <div className="flex items-center justify-between text-[13px] font-heading font-medium">
@@ -199,7 +212,7 @@ export default function JourneyPage() {
               fullWidth
               onClick={handleStartJourney}
               icon={<ArrowRight className="w-5 h-5" />}
-              className="shadow-md shadow-nova-green/20 text-[16px] h-13"
+              className="shadow-md shadow-nova-green/20 text-[16px] h-13 min-h-[52px]"
             >
               Start journey
             </Button>

@@ -1,29 +1,36 @@
 "use client";
 
 import React from "react";
-import { Route, ShieldCheck } from "lucide-react";
+import { Route } from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
+import { METHOD_CONFIGS } from "@/lib/journeyPlanner";
 
 export function JourneyRouteMap() {
-  const { currentJourney } = useJourney();
+  const { currentJourney, selectedMethod } = useJourney();
+  const config = METHOD_CONFIGS[selectedMethod];
 
   const stops = [
-    { name: "KDU Mobility Hub", time: "09:18", mode: "Pod P17", x: 60, y: 150 },
     {
-      name: "Ratmalana Station",
-      time: "09:24",
-      mode: "Transfer (3m)",
-      x: 170,
-      y: 110,
+      name: currentJourney.origin,
+      time: currentJourney.departureTime,
+      mode: "Start",
+      x: 80,
+      y: 130,
     },
     {
-      name: "Central Skyport",
-      time: "09:35",
-      mode: "Gate 04 (3m)",
-      x: 290,
-      y: 70,
+      name: config.vehicleName,
+      time: "Non-stop",
+      mode: config.label,
+      x: 240,
+      y: 90,
     },
-    { name: "Colombo Skyport", time: "09:42", mode: "Arrival", x: 410, y: 40 },
+    {
+      name: currentJourney.destination,
+      time: currentJourney.arrivalTime,
+      mode: "Arrival",
+      x: 400,
+      y: 50,
+    },
   ];
 
   return (
@@ -36,10 +43,10 @@ export function JourneyRouteMap() {
           </div>
           <div>
             <h3 className="font-heading font-bold text-[15px] text-nova-text-primary tracking-tight">
-              Synchronized Corridor Map
+              Direct Corridor Map
             </h3>
             <p className="text-[12px] font-heading text-nova-text-secondary">
-              Direct connection via HyperRail H4 & AeroLink
+              Direct connection via {config.label}
             </p>
           </div>
         </div>
@@ -50,7 +57,7 @@ export function JourneyRouteMap() {
       </div>
 
       {/* SVG Corridor Visualization */}
-      <div className="relative w-full h-[190px] bg-[#F5F0F8] rounded-xl overflow-hidden border border-nova-border/60 select-none">
+      <div className="relative w-full h-[180px] bg-[#F5F0F8] rounded-xl overflow-hidden border border-nova-border/60 select-none">
         <svg
           viewBox="0 0 480 180"
           className="w-full h-full object-cover"
@@ -60,7 +67,7 @@ export function JourneyRouteMap() {
             <linearGradient id="j-route-grad" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#2FAE63" />
               <stop offset="65%" stopColor="#2FAE63" />
-              <stop offset="100%" stopColor="#E85F8E" />
+              <stop offset="100%" stopColor="#EE6F72" />
             </linearGradient>
             <filter
               id="j-node-glow"
@@ -78,103 +85,99 @@ export function JourneyRouteMap() {
           </defs>
 
           {/* Grid lines */}
-          <g stroke="#E8E2EE" strokeWidth="0.8" opacity="0.6">
-            {[60, 120, 180, 240, 300, 360, 420].map((x) => (
-              <line key={`jx-${x}`} x1={x} y1="0" x2={x} y2="180" />
-            ))}
-            {[45, 90, 135].map((y) => (
-              <line key={`jy-${y}`} x1="0" y1={y} x2="480" y2={y} />
-            ))}
+          <g stroke="#E8E0EC" strokeWidth="1" strokeDasharray="3 4">
+            <line x1="0" y1="40" x2="480" y2="40" />
+            <line x1="0" y1="90" x2="480" y2="90" />
+            <line x1="0" y1="140" x2="480" y2="140" />
+            <line x1="120" y1="0" x2="120" y2="180" />
+            <line x1="240" y1="0" x2="240" y2="180" />
+            <line x1="360" y1="0" x2="360" y2="180" />
           </g>
 
-          {/* Background Corridor line */}
+          {/* Direct Route Corridor Path */}
           <path
-            d="M 60 150 Q 170 110, 290 70 T 410 40"
-            fill="none"
-            stroke="#DFD8E6"
-            strokeWidth="10"
-            strokeLinecap="round"
-          />
-
-          {/* Active Gradient Line */}
-          <path
-            d="M 60 150 Q 170 110, 290 70 T 410 40"
+            d="M 80,130 C 160,110 320,70 400,50"
             fill="none"
             stroke="url(#j-route-grad)"
             strokeWidth="5"
             strokeLinecap="round"
           />
 
-          {/* Active vehicle indicator */}
-          <circle
-            cx="210"
-            cy="98"
-            r="5"
-            fill="#2FAE63"
-            className="animate-ping"
-            opacity="0.75"
+          {/* Animated Glow Dash overlay */}
+          <path
+            d="M 80,130 C 160,110 320,70 400,50"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="2.5"
+            strokeDasharray="6 8"
+            strokeLinecap="round"
+            opacity="0.8"
           />
-          <circle cx="210" cy="98" r="4" fill="#2FAE63" />
 
-          {/* Stations / Hubs */}
-          {stops.map((stop, idx) => (
-            <g key={idx}>
-              {/* Outer halo */}
-              <circle
-                cx={stop.x}
-                cy={stop.y}
-                r="12"
-                fill={idx === stops.length - 1 ? "#E85F8E" : "#2FAE63"}
-                opacity="0.15"
-              />
-              {/* Core */}
-              <circle
-                cx={stop.x}
-                cy={stop.y}
-                r="6"
-                fill="#FFFFFF"
-                stroke={idx === stops.length - 1 ? "#E85F8E" : "#2FAE63"}
-                strokeWidth="3"
-                filter="url(#j-node-glow)"
-              />
-              {/* Station name text */}
-              <text
-                x={stop.x}
-                y={stop.y < 90 ? stop.y + 22 : stop.y - 12}
-                textAnchor="middle"
-                fill="#231D2B"
-                fontSize="12"
-                fontWeight="700"
-                fontFamily="var(--font-space-grotesk)"
-              >
-                {stop.name.split(" ")[0]}
-              </text>
-              <text
-                x={stop.x}
-                y={stop.y < 90 ? stop.y + 34 : stop.y - 2}
-                textAnchor="middle"
-                fill="#655D6F"
-                fontSize="12"
-                fontWeight="500"
-                fontFamily="var(--font-inter)"
-              >
-                {stop.time}
-              </text>
-            </g>
-          ))}
+          {/* Stops */}
+          {stops.map((stop, i) => {
+            const isFirst = i === 0;
+            const isMid = i === 1;
+            const isLast = i === stops.length - 1;
+
+            return (
+              <g key={stop.name}>
+                {/* Outer halo */}
+                <circle
+                  cx={stop.x}
+                  cy={stop.y}
+                  r={isMid ? 6 : 9}
+                  fill={isLast ? "#EE6F72" : "#2FAE63"}
+                  opacity="0.2"
+                />
+
+                {/* Main node */}
+                <circle
+                  cx={stop.x}
+                  cy={stop.y}
+                  r={isMid ? 4.5 : 6.5}
+                  fill={isLast ? "#EE6F72" : isFirst ? "#2FAE63" : "#FFFFFF"}
+                  stroke={isMid ? "#2FAE63" : "#FFFFFF"}
+                  strokeWidth="2"
+                  filter="url(#j-node-glow)"
+                />
+
+                {/* Stop time */}
+                <text
+                  x={stop.x}
+                  y={stop.y + (isMid ? -16 : 22)}
+                  textAnchor="middle"
+                  className="text-[12px] font-heading font-bold"
+                  fill={isLast ? "#EE6F72" : isFirst ? "#2FAE63" : "#625B71"}
+                >
+                  {stop.time}
+                </text>
+
+                {/* Stop name */}
+                <text
+                  x={stop.x}
+                  y={stop.y + (isMid ? -28 : 36)}
+                  textAnchor="middle"
+                  className="text-[12px] font-heading font-semibold"
+                  fill="#1C1B1F"
+                >
+                  {stop.name}
+                </text>
+              </g>
+            );
+          })}
         </svg>
+      </div>
 
-        {/* Legend overlay */}
-        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-nova-border/60 text-[12px] font-heading font-medium text-nova-text-secondary flex items-center gap-2">
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-nova-green" />
-            Pod & HyperRail
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-nova-coral" />
-            AeroLink Shuttle
-          </span>
-        </div>
+      {/* Corridor Summary Badges */}
+      <div className="flex items-center justify-between text-[12px] text-nova-text-secondary pt-1">
+        <span className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-nova-green" />
+          <span>{currentJourney.durationMinutes} min non-stop transit</span>
+        </span>
+        <span className="font-heading font-medium text-nova-text-primary">
+          Step-free boarding confirmed
+        </span>
       </div>
     </div>
   );

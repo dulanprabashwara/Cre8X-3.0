@@ -97,7 +97,7 @@ export default function ProfilePage() {
     activePreferencesSummary.push("Step-free routes");
   }
   if (preferences.extraTransferTime) {
-    activePreferencesSummary.push("Extra transfer time");
+    activePreferencesSummary.push("Extra boarding buffer");
   }
   if (preferences.avoidSteep) {
     activePreferencesSummary.push("Avoid steep ramps");
@@ -445,7 +445,7 @@ export default function ProfilePage() {
             {/* Default Clean Summary Row */}
             <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF9FD] border border-nova-border/40">
               <span className="text-[13px] font-heading text-nova-text-primary">
-                Journey changes & transfer reminders
+                Journey changes & arrival reminders
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-nova-green-soft text-nova-green border border-nova-green/30 text-[12px] font-heading font-bold">
                 On

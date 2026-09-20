@@ -18,6 +18,7 @@ import { LiveJourneySheet } from "@/components/live/LiveJourneySheet";
 export default function LivePage() {
   const router = useRouter();
   const {
+    destination,
     liveMode,
     triggerApproachingTransfer,
     triggerNetworkChange,
@@ -29,7 +30,7 @@ export default function LivePage() {
 
   // Automatic simulation progression for competition review:
   // 0 sec: Live Journey opens normally
-  // 8 sec: Approaching transfer state
+  // 8 sec: Approaching destination state
   // 16 sec: Network change appears (remains until passenger acts)
   useEffect(() => {
     const timerTransfer = setTimeout(() => {
@@ -65,7 +66,7 @@ export default function LivePage() {
               Live journey
             </h1>
             <p className="hidden sm:block text-[12px] font-heading font-medium text-nova-text-secondary">
-              On the way to Colombo Skyport
+              On the way to {destination.name}
             </p>
           </div>
         </div>
@@ -120,7 +121,7 @@ export default function LivePage() {
                       onClick={() => {
                         setMenuOpen(false);
                         showToast(
-                          "Audio guidance active for next transfer",
+                          "Audio guidance active for this journey",
                           "info",
                         );
                       }}

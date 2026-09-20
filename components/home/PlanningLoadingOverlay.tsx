@@ -7,14 +7,27 @@ import {
   CarFront,
   TrainFront,
   Plane,
+  BusFront,
   Sparkles,
 } from "lucide-react";
 import { NovaLogo } from "@/components/shared/NovaLogo";
 import { useJourney } from "@/context/JourneyContext";
+import { METHOD_CONFIGS } from "@/lib/journeyPlanner";
 
 export function PlanningLoadingOverlay() {
-  const { isPlanning } = useJourney();
+  const { isPlanning, selectedMethod } = useJourney();
   const [step, setStep] = useState(0);
+
+  const config = METHOD_CONFIGS[selectedMethod];
+
+  const MethodIcon =
+    selectedMethod === "pod"
+      ? CarFront
+      : selectedMethod === "rail"
+        ? TrainFront
+        : selectedMethod === "aero"
+          ? Plane
+          : BusFront;
 
   useEffect(() => {
     let t1: NodeJS.Timeout;
@@ -23,9 +36,9 @@ export function PlanningLoadingOverlay() {
 
     if (isPlanning) {
       setStep(0);
-      t1 = setTimeout(() => setStep(1), 500);
-      t2 = setTimeout(() => setStep(2), 1000);
-      t3 = setTimeout(() => setStep(3), 1500);
+      t1 = setTimeout(() => setStep(1), 400);
+      t2 = setTimeout(() => setStep(2), 800);
+      t3 = setTimeout(() => setStep(3), 1200);
     }
 
     return () => {
@@ -36,9 +49,9 @@ export function PlanningLoadingOverlay() {
   }, [isPlanning]);
 
   const stages = [
-    { label: "Autonomous Pod P17 allocated", icon: CarFront },
-    { label: "HyperRail H4 seat reserved", icon: TrainFront },
-    { label: "AeroLink A12 corridor locked", icon: Plane },
+    { label: "Direct corridor clearance verified", icon: Sparkles },
+    { label: `${config.vehicleName} reserved`, icon: MethodIcon },
+    { label: "Step-free automated boarding locked", icon: CheckCircle2 },
   ];
 
   return (
@@ -59,40 +72,46 @@ export function PlanningLoadingOverlay() {
             transition={{ type: "spring", stiffness: 350, damping: 28 }}
             className="relative z-10 w-full max-w-sm bg-white rounded-cardLg p-6 shadow-dock border border-nova-border flex flex-col items-center text-center"
           >
-            {/* Header emblem */}
-            <div className="w-14 h-14 rounded-2xl bg-white border border-nova-border/70 shadow-xs flex items-center justify-center mb-3">
-              <NovaLogo variant="mark" size={40} priority />
+            {/* Spinning Brand Icon */}
+            <div className="relative mb-4">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="w-16 h-16 rounded-full border-2 border-dashed border-nova-green flex items-center justify-center"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <NovaLogo size={32} />
+              </div>
             </div>
 
-            <span className="text-[12px] font-heading font-semibold text-nova-green tracking-widest uppercase mb-1">
-              Universal Mobility OS
-            </span>
-
-            <h3 className="font-heading font-bold text-[20px] text-nova-text-primary mb-5">
-              Planning your journey…
+            <h3 className="font-heading font-bold text-[18px] text-nova-text-primary">
+              Securing your direct journey
             </h3>
+            <p className="text-[13px] font-heading font-medium text-nova-text-secondary mt-1">
+              Coordinating {config.label} corridor
+            </p>
 
-            {/* Stage items */}
-            <div className="w-full space-y-3 mb-4">
-              {stages.map((stage, idx) => {
+            {/* Checklist progression */}
+            <div className="w-full mt-5 space-y-2.5">
+              {stages.map((stage, i) => {
                 const Icon = stage.icon;
-                const isComplete = step > idx;
-                const isCurrent = step === idx;
+                const isComplete = step > i;
+                const isCurrent = step === i;
 
                 return (
                   <div
                     key={stage.label}
-                    className={`flex items-center justify-between p-3 rounded-xl border transition-all duration-300 ${
+                    className={`flex items-center justify-between p-2.5 rounded-xl border transition-all ${
                       isComplete
-                        ? "bg-nova-green-soft/60 border-nova-green/40 text-nova-text-primary"
+                        ? "bg-nova-green-soft border-nova-green/30 text-nova-text-primary"
                         : isCurrent
-                          ? "bg-[#FAF8FC] border-nova-coral/40 text-nova-text-primary shadow-xs"
-                          : "bg-nova-surface/40 border-nova-border/40 text-nova-text-muted opacity-50"
+                          ? "bg-white border-nova-coral shadow-2xs text-nova-text-primary"
+                          : "bg-nova-surface/40 border-nova-border/40 text-nova-text-muted"
                     }`}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5 min-w-0">
                       <div
-                        className={`p-1.5 rounded-lg ${
+                        className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
                           isComplete
                             ? "bg-nova-green text-white"
                             : isCurrent
@@ -102,13 +121,13 @@ export function PlanningLoadingOverlay() {
                       >
                         <Icon className="w-4 h-4" />
                       </div>
-                      <span className="text-[14px] font-heading font-medium text-left">
+                      <span className="text-[13px] font-heading font-medium text-left truncate">
                         {stage.label}
                       </span>
                     </div>
 
                     {isComplete ? (
-                      <CheckCircle2 className="w-5 h-5 text-nova-green shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
                     ) : isCurrent ? (
                       <span className="w-2 h-2 rounded-full bg-nova-coral animate-ping" />
                     ) : (
@@ -123,10 +142,10 @@ export function PlanningLoadingOverlay() {
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-[14px] font-heading font-semibold text-nova-green flex items-center gap-1.5 mt-1"
+                className="text-[13px] font-heading font-semibold text-nova-green flex items-center gap-1.5 mt-2"
               >
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Journey ready · Seamless transfers secured</span>
+                <span>Journey ready · Direct route secured</span>
               </motion.div>
             )}
           </motion.div>

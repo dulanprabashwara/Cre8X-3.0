@@ -48,7 +48,7 @@ export function JourneyPreferencesSheet() {
     {
       id: "calmest" as const,
       label: "Calmest",
-      desc: "Fewer busy transfers",
+      desc: "Calm and quiet route",
       icon: Sparkles,
     },
     {
@@ -258,10 +258,10 @@ export function JourneyPreferencesSheet() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-heading font-medium text-[14px] text-nova-text-primary">
-                  Extra transfer time
+                  Extra boarding buffer
                 </p>
                 <p className="text-[12px] text-nova-text-muted">
-                  Allow more time between connections
+                  Allow extra time for boarding and ramp access
                 </p>
               </div>
               <ToggleSwitch
@@ -269,7 +269,7 @@ export function JourneyPreferencesSheet() {
                 onChange={(val) =>
                   setLocalPrefs((p) => ({ ...p, extraTransferTime: val }))
                 }
-                label="Extra transfer time"
+                label="Extra boarding buffer"
               />
             </div>
 

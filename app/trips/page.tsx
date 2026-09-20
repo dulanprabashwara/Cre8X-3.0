@@ -22,7 +22,7 @@ type TripTab = "active" | "upcoming" | "past";
 
 export default function TripsPage() {
   const router = useRouter();
-  const { setDestination, startPlanning } = useJourney();
+  const { setDestination, startPlanning, activeTrip } = useJourney();
 
   const [activeTab, setActiveTab] = useState<TripTab>("active");
   const [selectedTripId, setSelectedTripId] = useState<string>("trip-active-01");
@@ -33,10 +33,15 @@ export default function TripsPage() {
     { value: "past", label: "Past" },
   ];
 
-  const displayedTrips = TRIPS_DATA.filter((t) => t.status === activeTab);
+  const allTrips = [
+    activeTrip,
+    ...TRIPS_DATA.filter((t) => t.id !== "trip-active-01"),
+  ];
+
+  const displayedTrips = allTrips.filter((t) => t.status === activeTab);
 
   const selectedTrip =
-    TRIPS_DATA.find((t) => t.id === selectedTripId) || displayedTrips[0] || TRIPS_DATA[0];
+    allTrips.find((t) => t.id === selectedTripId) || displayedTrips[0] || activeTrip;
 
   const handleContinueLive = () => {
     router.push("/live");
@@ -65,7 +70,7 @@ export default function TripsPage() {
       {/* Page Header */}
       <PageHeader
         title="My Journeys"
-        subtitle="Manage active, scheduled and completed multimodal itineraries"
+        subtitle="Manage active, scheduled and completed travel itineraries"
       />
 
       {/* Tab Controls Bar */}
@@ -77,7 +82,7 @@ export default function TripsPage() {
             onChange={(val) => {
               const newTab = val as TripTab;
               setActiveTab(newTab);
-              const firstInTab = TRIPS_DATA.find((t) => t.status === newTab);
+              const firstInTab = allTrips.find((t) => t.status === newTab);
               if (firstInTab) setSelectedTripId(firstInTab.id);
             }}
             size="md"
@@ -138,56 +143,42 @@ export default function TripsPage() {
                         trip.status === "past" && "bg-nova-surface text-nova-text-muted",
                       )}
                     >
-                      {trip.status === "active" ? "In Progress" : trip.dateLabel}
+                      {trip.status === "active" ? "Active Live" : trip.dateLabel}
                     </span>
 
-                    <span className="text-[13px] font-heading font-semibold text-nova-text-primary">
+                    <span className="text-[12px] font-heading font-semibold text-nova-text-muted flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
                       {trip.durationMinutes} min
                     </span>
                   </div>
 
-                  {/* Origin -> Destination */}
+                  {/* Route & Times */}
                   <div>
-                    <h3 className="font-heading font-bold text-[17px] text-nova-text-primary group-hover:text-nova-green transition-colors">
+                    <h3 className="font-heading font-bold text-[17px] text-nova-text-primary leading-tight group-hover:text-nova-green transition-colors">
                       {trip.destination}
                     </h3>
                     <p className="text-[12px] font-heading text-nova-text-secondary mt-0.5">
-                      From {trip.origin} · {trip.departureTime} → {trip.arrivalTime}
+                      {trip.origin} → {trip.destination}
+                    </p>
+                    <p className="text-[12px] font-heading font-medium text-nova-green mt-1">
+                      {trip.departureTime} → {trip.arrivalTime}
                     </p>
                   </div>
 
-                  {/* Active trip special banner if in transit */}
-                  {trip.status === "active" && trip.currentLeg && (
-                    <div className="p-2.5 rounded-xl bg-nova-green-soft/70 border border-nova-green/30 flex items-center justify-between text-[12px] font-heading">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-nova-green animate-ping" />
-                        <span className="font-bold text-nova-green">
-                          {trip.currentLeg.vehicle}
-                        </span>
-                        <span className="text-nova-text-secondary">
-                          Next: {trip.currentLeg.nextStop}
-                        </span>
-                      </div>
-                      <span className="font-bold text-nova-green">
-                        {trip.currentLeg.minutesToNext} min
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Accessibility & Modes Pills */}
-                  <div className="flex items-center gap-1.5 flex-wrap pt-1">
-                    {trip.accessibilityBadges.map((badge, idx) => (
+                  {/* Modes / Legs Summary */}
+                  <div className="flex flex-wrap gap-1.5 pt-1 border-t border-nova-border/40">
+                    {trip.modes.map((mode, i) => (
                       <span
-                        key={idx}
-                        className="px-2 py-0.5 rounded-md bg-nova-surface border border-nova-border/50 text-[12px] font-heading font-medium text-nova-text-secondary"
+                        key={i}
+                        className="px-2 py-0.5 rounded-md bg-nova-surface text-[12px] font-heading text-nova-text-secondary"
                       >
-                        {badge}
+                        {mode}
                       </span>
                     ))}
                   </div>
 
-                  {/* Mobile Quick Action Button */}
-                  <div className="pt-1 flex sm:hidden">
+                  {/* Action CTA within card */}
+                  <div className="pt-2">
                     {trip.status === "active" ? (
                       <button
                         type="button"
@@ -195,7 +186,7 @@ export default function TripsPage() {
                           e.stopPropagation();
                           handleContinueLive();
                         }}
-                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-green text-white font-heading font-bold text-[13px] flex items-center justify-center gap-1.5 shadow-xs"
+                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-green hover:bg-nova-green-hover text-white font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5 shadow-sm shadow-nova-green/20"
                       >
                         <Play className="w-4 h-4 fill-white" />
                         <span>Continue Live Journey</span>
@@ -245,10 +236,10 @@ export default function TripsPage() {
                   <span className="w-1.5 h-1.5 rounded-full bg-nova-green" />
                 </div>
                 <p className="font-heading font-semibold text-[13px] text-nova-green mt-0.5">
-                  All transfers secured
+                  Arrival monitored
                 </p>
                 <p className="text-[12px] font-heading text-nova-text-secondary mt-0.5 leading-snug">
-                  Next action: Central Skyport in 4 min. NOVA is monitoring your connections.
+                  Direct service. NOVA is monitoring your arrival in real time.
                 </p>
               </div>
             </div>
@@ -311,7 +302,7 @@ export default function TripsPage() {
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-nova-green" />
                   </span>
                   <span className="font-heading font-bold text-[14px] text-nova-green">
-                    Vehicle Connected: HyperRail H4
+                    Vehicle Connected: {selectedTrip.modes[0] || "HyperRail H4"}
                   </span>
                 </div>
                 <span className="text-[12px] font-heading font-semibold text-nova-text-primary">
@@ -328,15 +319,15 @@ export default function TripsPage() {
               </div>
 
               <p className="text-[12px] font-heading text-nova-text-secondary">
-                Next action: Exit at Central Skyport. Doors open on the left.
+                Next action: Prepare to arrive at {selectedTrip.destination}. Step-free ramp deployed.
               </p>
             </div>
           )}
 
-          {/* Multimodal Corridor Segments */}
+          {/* Direct Route Transit Corridor */}
           <div className="space-y-3">
             <h3 className="font-heading font-bold text-[15px] text-nova-text-primary tracking-tight">
-              Multimodal Transit Route
+              Transit Route
             </h3>
 
             <div className="space-y-2.5">
@@ -354,11 +345,7 @@ export default function TripsPage() {
                         {mode}
                       </p>
                       <p className="text-[12px] font-heading text-nova-text-secondary">
-                        {idx === 0
-                          ? "Initial feeder boarding"
-                          : idx === selectedTrip.modes.length - 1
-                            ? "Final terminal arrival"
-                            : "Step-free synchronized transfer"}
+                        Direct service corridor · Step-free boarding
                       </p>
                     </div>
                   </div>

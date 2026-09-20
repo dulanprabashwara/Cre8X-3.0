@@ -41,10 +41,10 @@ export function NetworkChangeCard() {
         <div className="flex items-center justify-between pt-1">
           <div>
             <h4 className="font-heading font-bold text-[20px] text-nova-text-primary leading-tight">
-              09:42 On Schedule
+              {liveState.estimatedArrival} On Schedule
             </h4>
             <p className="text-[13px] text-nova-text-secondary mt-0.5">
-              Connecting via AeroLink Express A14 (Gate 05). No action required.
+              Switched to {liveState.vehicleCode}. Arrival time protected.
             </p>
           </div>
 
@@ -63,7 +63,8 @@ export function NetworkChangeCard() {
 
   // Active prompt when network change occurs
   if (simulationPhase === "network_change" && liveState.networkChange) {
-    const { cause, solution, impact } = liveState.networkChange;
+    const { cause, solution, impact, originalVehicle, suggestedVehicle } =
+      liveState.networkChange;
 
     return (
       <motion.div
@@ -108,21 +109,21 @@ export function NetworkChangeCard() {
               className="mt-3 p-3 rounded-xl bg-[#FAF8FC] border border-nova-border/70 text-[13px] space-y-1.5"
             >
               <div className="flex justify-between">
-                <span className="text-nova-text-muted">Original:</span>
+                <span className="text-nova-text-muted">Standard track:</span>
                 <span className="font-medium text-nova-text-secondary">
-                  AeroLink A12 (Gate 04, +6 min delay)
+                  {originalVehicle}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-nova-text-muted">Recommended:</span>
+                <span className="text-nova-text-muted">Express bypass:</span>
                 <span className="font-medium text-nova-green">
-                  AeroLink Express A14 (Gate 05, direct)
+                  {suggestedVehicle}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-nova-text-muted">Walking diff:</span>
-                <span className="font-medium text-nova-text-secondary">
-                  Step-free Elevator B, 45 seconds closer
+                <span className="text-nova-text-muted">Arrival impact:</span>
+                <span className="font-medium text-nova-green">
+                  On-schedule arrival preserved
                 </span>
               </div>
             </motion.div>
@@ -138,7 +139,7 @@ export function NetworkChangeCard() {
             onClick={acceptReroute}
             icon={<ArrowRight className="w-4 h-4" />}
           >
-            Accept new route
+            Use {suggestedVehicle}
           </Button>
 
           <div className="grid grid-cols-2 gap-2 pt-0.5">

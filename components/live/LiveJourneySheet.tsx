@@ -5,15 +5,32 @@ import {
   CheckCircle2,
   Headphones,
   Volume2,
-  ArrowRightLeft,
+  CarFront,
+  TrainFront,
+  Plane,
+  BusFront,
 } from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
 import { ApproachingTransferBanner } from "./ApproachingTransferBanner";
 import { NetworkChangeCard } from "./NetworkChangeCard";
 
 export function LiveJourneySheet() {
-  const { liveState, simulationPhase, setAssistanceSheetOpen, showToast } =
-    useJourney();
+  const {
+    liveState,
+    simulationPhase,
+    selectedMethod,
+    setAssistanceSheetOpen,
+    showToast,
+  } = useJourney();
+
+  const MethodIcon =
+    selectedMethod === "pod"
+      ? CarFront
+      : selectedMethod === "rail"
+        ? TrainFront
+        : selectedMethod === "aero"
+          ? Plane
+          : BusFront;
 
   const handleRepeatInstruction = () => {
     showToast(
@@ -60,7 +77,7 @@ export function LiveJourneySheet() {
         />
       </div>
 
-      {/* Approaching Transfer Notice (if in approaching phase) */}
+      {/* Approaching Destination Notice (if in approaching phase) */}
       {simulationPhase === "approaching_transfer" && (
         <ApproachingTransferBanner />
       )}
@@ -89,9 +106,9 @@ export function LiveJourneySheet() {
             </p>
           </div>
 
-          {/* Transfer Icon */}
+          {/* Vehicle / Method Icon */}
           <div className="w-12 h-12 rounded-xl bg-nova-green-soft border border-nova-green/30 text-nova-green flex items-center justify-center shrink-0 shadow-2xs">
-            <ArrowRightLeft className="w-6 h-6" />
+            <MethodIcon className="w-6 h-6" />
           </div>
         </div>
 
@@ -99,7 +116,7 @@ export function LiveJourneySheet() {
         <div className="h-px bg-nova-divider my-3" />
 
         {/* Secured connection verification */}
-        <div className="flex items-center justify-between text-[13px]">
+        <div className="flex items-center justify-between text-[13px] flex-wrap gap-2">
           <div className="flex items-center gap-1.5 text-nova-text-primary font-heading font-medium">
             <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0 stroke-[2.2]" />
             <span>{liveState.nextAction.securedConnection}</span>
