@@ -23,14 +23,14 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex-1 flex flex-col w-full max-w-[1240px] mx-auto pt-1 sm:pt-2">
+    <main className="flex-1 flex flex-col w-full max-w-[1240px] mx-auto lg:justify-center py-1 sm:py-2">
       {/* Mobile-only AppHeader */}
       <div className="md:hidden mb-2">
         <AppHeader />
       </div>
 
       {/* Main Responsive Grid Layout (>= 1024px: 58% / 42% composition) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start py-2 sm:py-4">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start py-2 sm:py-4 my-auto lg:my-auto">
         {/* Left Column: Primary Journey Planner (~58-60%) */}
         <div className="lg:col-span-7 flex flex-col space-y-4 sm:space-y-5 max-w-[650px] w-full">
           {/* Top Bar on Tablet */}
@@ -64,8 +64,9 @@ export default function HomePage() {
             size="lg"
             fullWidth
             onClick={handleFindJourney}
-            icon={<ArrowRight className="w-5 h-5" />}
-            className="shadow-md shadow-nova-green/20 text-[16px] h-13"
+            icon={<ArrowRight className="w-4 h-4 text-white" />}
+            iconPosition="right-edge"
+            className="h-[56px] min-h-[56px] rounded-[16px] px-5 sm:px-6 bg-nova-green hover:bg-nova-green-hover text-white text-[16px] font-heading font-semibold shadow-[0_4px_16px_rgba(47,174,99,0.28)] hover:shadow-[0_6px_20px_rgba(47,174,99,0.36)] active:bg-nova-green-hover transition-all"
           >
             Find my journey
           </Button>

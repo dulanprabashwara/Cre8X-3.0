@@ -43,8 +43,8 @@ export default function RootLayout({
         <JourneyProvider>
           <ResponsiveAppShell>
             {children}
-            <Toast />
           </ResponsiveAppShell>
+          <Toast />
         </JourneyProvider>
       </body>
     </html>

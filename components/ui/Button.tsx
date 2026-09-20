@@ -18,7 +18,7 @@ export interface ButtonProps extends Omit<
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
   icon?: React.ReactNode;
-  iconPosition?: "left" | "right";
+  iconPosition?: "left" | "right" | "right-edge";
   fullWidth?: boolean;
 }
 
@@ -81,9 +81,20 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {icon}
           </span>
         )}
-        <span>{children}</span>
+        <span
+          className={cn(
+            iconPosition === "right-edge" && "w-full text-center",
+          )}
+        >
+          {children}
+        </span>
         {icon && iconPosition === "right" && (
           <span className="inline-flex shrink-0 items-center justify-center">
+            {icon}
+          </span>
+        )}
+        {icon && iconPosition === "right-edge" && (
+          <span className="absolute right-3 sm:right-3.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/[0.14] flex items-center justify-center shrink-0 pointer-events-none">
             {icon}
           </span>
         )}
