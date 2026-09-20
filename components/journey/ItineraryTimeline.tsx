@@ -91,7 +91,8 @@ export function ItineraryTimeline() {
               </h4>
             </div>
             <p className="text-[13px] text-nova-text-secondary mt-0.5">
-              {seg?.badgeText || config.badgeLabel} · Direct service to destination
+              {seg?.badgeText || config.badgeLabel} · Direct service to
+              destination
             </p>
           </div>
 

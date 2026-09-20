@@ -113,7 +113,10 @@ export const DEFAULT_PLANNER_DESTINATION = PLANNER_LOCATIONS[1]; // Colombo Skyp
 /**
  * Add minutes to a 24-hour "HH:MM" string.
  */
-export function addMinutesToTime(timeStr: string, minutesToAdd: number): string {
+export function addMinutesToTime(
+  timeStr: string,
+  minutesToAdd: number,
+): string {
   const [hoursStr, minutesStr] = timeStr.split(":");
   const hours = parseInt(hoursStr || "9", 10);
   const minutes = parseInt(minutesStr || "18", 10);
@@ -151,7 +154,8 @@ export function calculateMethodEstimates(
 
   // Deterministic baseline durations for key corridors
   const isKduToSkyport =
-    (origin.id === "kdu-mobility-hub" && destination.id === "colombo-skyport") ||
+    (origin.id === "kdu-mobility-hub" &&
+      destination.id === "colombo-skyport") ||
     (origin.id === "colombo-skyport" && destination.id === "kdu-mobility-hub");
 
   const durations: Record<TravelMethod, number> = isKduToSkyport
@@ -232,7 +236,8 @@ export function getRecommendedMethod(
 
   // If KDU to Colombo Skyport (the primary showcase route)
   if (
-    (origin.id === "kdu-mobility-hub" && destination.id === "colombo-skyport") ||
+    (origin.id === "kdu-mobility-hub" &&
+      destination.id === "colombo-skyport") ||
     (origin.id === "colombo-skyport" && destination.id === "kdu-mobility-hub")
   ) {
     return {
@@ -243,9 +248,9 @@ export function getRecommendedMethod(
   }
 
   // General logic: pick fastest available method
-  const availableMethods = (["rail", "pod", "aero", "road"] as TravelMethod[]).filter(
-    (m) => estimates[m].isAvailable,
-  );
+  const availableMethods = (
+    ["rail", "pod", "aero", "road"] as TravelMethod[]
+  ).filter((m) => estimates[m].isAvailable);
 
   if (availableMethods.length === 0) {
     return {
@@ -339,8 +344,8 @@ export function buildSingleMethodJourney(
           : selectedMethod === "pod"
             ? "Private cabin sanitized and temperature set to 21°C."
             : selectedMethod === "aero"
-            ? "Elevator access confirmed from departure lounge to SkyDeck."
-            : "Autonomous priority lane active with zero traffic stoppages.",
+              ? "Elevator access confirmed from departure lounge to SkyDeck."
+              : "Autonomous priority lane active with zero traffic stoppages.",
     },
   };
 
@@ -396,7 +401,9 @@ export function buildSingleMethodJourney(
       comparison: {
         selected: {
           time: `${estimate.durationMinutes} min`,
-          tag: isRecommended ? "NOVA Recommended · Optimal" : "Passenger Selection",
+          tag: isRecommended
+            ? "NOVA Recommended · Optimal"
+            : "Passenger Selection",
           details: `Direct journey via ${config.vehicleName}. ${estimate.statusNote}.`,
         },
         fastest: {
@@ -473,7 +480,8 @@ export function getLiveScenarioForMethod(
       networkChangeEvent: {
         title: "NETWORK CHANGE",
         cause: "Signal regulation on standard track approaching terminal.",
-        solution: "NOVA allocated Express Guideway bypass via HyperRail H6 Express.",
+        solution:
+          "NOVA allocated Express Guideway bypass via HyperRail H6 Express.",
         impact: `Your arrival stays ${arrTime}.`,
         originalVehicle: "HyperRail H4",
         suggestedVehicle: "HyperRail H6 Express (Track 2B)",
@@ -488,7 +496,8 @@ export function getLiveScenarioForMethod(
         estimatedArrival: arrTime,
         nextAction: {
           title: `Switching to HyperRail H6 Express Track`,
-          description: "Automated magnetic switch engaged · No disembarking needed",
+          description:
+            "Automated magnetic switch engaged · No disembarking needed",
           securedConnection: "Arrival protected at " + arrTime,
           walkingTimeTag: "Track 2B direct arrival",
         },
@@ -510,7 +519,8 @@ export function getLiveScenarioForMethod(
         progressPercent: 70,
         nextAction: {
           title: `En route via Autonomous Pod P17`,
-          description: "Direct point-to-point cabin · Smooth autonomous transit",
+          description:
+            "Direct point-to-point cabin · Smooth autonomous transit",
           securedConnection: "Arrival protected at " + arrTime,
           walkingTimeTag: "Private cabin",
         },
@@ -528,7 +538,8 @@ export function getLiveScenarioForMethod(
       networkChangeEvent: {
         title: "NETWORK CHANGE",
         cause: "Local guideway density on standard pod approach.",
-        solution: "NOVA switched your pod route to High-Speed Tube P19 Express.",
+        solution:
+          "NOVA switched your pod route to High-Speed Tube P19 Express.",
         impact: `Your arrival stays ${arrTime}.`,
         originalVehicle: "Pod P17",
         suggestedVehicle: "Pod P19 Express Corridor",
@@ -583,7 +594,8 @@ export function getLiveScenarioForMethod(
       networkChangeEvent: {
         title: "NETWORK CHANGE",
         cause: "Corridor crosswind advisory on standard A12 skyway.",
-        solution: "NOVA shifted flight path to Lower-Altitude Express Skyway A14.",
+        solution:
+          "NOVA shifted flight path to Lower-Altitude Express Skyway A14.",
         impact: `Your arrival stays ${arrTime}.`,
         originalVehicle: "AeroLink A12",
         suggestedVehicle: "AeroLink Express A14",
@@ -598,7 +610,8 @@ export function getLiveScenarioForMethod(
         estimatedArrival: arrTime,
         nextAction: {
           title: "Cruising on AeroLink Express A14 Corridor",
-          description: "Lower altitude express vector · Smooth flight maintained",
+          description:
+            "Lower altitude express vector · Smooth flight maintained",
           securedConnection: "Arrival protected at " + arrTime,
           walkingTimeTag: "SkyDeck 05 direct",
         },

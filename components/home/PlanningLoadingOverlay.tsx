@@ -2,152 +2,140 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  CheckCircle2,
-  CarFront,
-  TrainFront,
-  Plane,
-  BusFront,
-  Sparkles,
-} from "lucide-react";
+import { Check } from "lucide-react";
 import { NovaLogo } from "@/components/shared/NovaLogo";
 import { useJourney } from "@/context/JourneyContext";
 import { METHOD_CONFIGS } from "@/lib/journeyPlanner";
 
 export function PlanningLoadingOverlay() {
-  const { isPlanning, selectedMethod } = useJourney();
+  const { isPlanning, selectedMethod, currentJourney, preferences } =
+    useJourney();
   const [step, setStep] = useState(0);
 
   const config = METHOD_CONFIGS[selectedMethod];
-
-  const MethodIcon =
-    selectedMethod === "pod"
-      ? CarFront
-      : selectedMethod === "rail"
-        ? TrainFront
-        : selectedMethod === "aero"
-          ? Plane
-          : BusFront;
+  const isReducedMotion = preferences.reducedMotion;
 
   useEffect(() => {
     let t1: NodeJS.Timeout;
     let t2: NodeJS.Timeout;
-    let t3: NodeJS.Timeout;
 
     if (isPlanning) {
       setStep(0);
-      t1 = setTimeout(() => setStep(1), 400);
-      t2 = setTimeout(() => setStep(2), 800);
-      t3 = setTimeout(() => setStep(3), 1200);
+      // Status progression within total 1050ms
+      t1 = setTimeout(() => setStep(1), 380);
+      t2 = setTimeout(() => setStep(2), 760);
     }
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
-      clearTimeout(t3);
     };
   }, [isPlanning]);
 
-  const stages = [
-    { label: "Direct corridor clearance verified", icon: Sparkles },
-    { label: `${config.vehicleName} reserved`, icon: MethodIcon },
-    { label: "Step-free automated boarding locked", icon: CheckCircle2 },
+  const statusMessages = [
+    "Checking live network…",
+    "Confirming accessibility…",
+    "Journey ready",
   ];
 
   return (
     <AnimatePresence>
       {isPlanning && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div
+          role="status"
+          aria-live="polite"
+          aria-label="Planning your journey"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/15 backdrop-blur-[2px]"
+        >
+          {/* Compact Centered Loading Card */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-nova-text-primary/40 backdrop-blur-md"
-          />
-
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 15 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 15 }}
-            transition={{ type: "spring", stiffness: 350, damping: 28 }}
-            className="relative z-10 w-full max-w-sm bg-white rounded-cardLg p-6 shadow-dock border border-nova-border flex flex-col items-center text-center"
+            initial={{
+              opacity: 0,
+              scale: isReducedMotion ? 1 : 0.97,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: isReducedMotion ? 1 : 0.97,
+            }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            className="w-[calc(100vw-32px)] sm:w-[340px] max-w-[350px] bg-white rounded-2xl p-6 shadow-xl border border-nova-border/70 flex flex-col items-center text-center select-none"
           >
-            {/* Spinning Brand Icon */}
-            <div className="relative mb-4">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                className="w-16 h-16 rounded-full border-2 border-dashed border-nova-green flex items-center justify-center"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <NovaLogo size={32} />
-              </div>
+            {/* Logo with subtle ambient pulse */}
+            <div className="relative flex items-center justify-center">
+              {!isReducedMotion && (
+                <motion.div
+                  animate={{
+                    scale: [1, 1.14, 1],
+                    opacity: [0.35, 0.7, 0.35],
+                  }}
+                  transition={{
+                    duration: 1.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute w-12 h-12 rounded-full bg-nova-green/15"
+                />
+              )}
+              <NovaLogo variant="mark" size={36} />
             </div>
 
-            <h3 className="font-heading font-bold text-[18px] text-nova-text-primary">
-              Securing your direct journey
+            {/* Title */}
+            <h3 className="font-heading font-bold text-[18px] text-nova-text-primary leading-tight mt-3.5">
+              Planning your journey
             </h3>
+
+            {/* Subtext: Selected method · duration · Direct */}
             <p className="text-[13px] font-heading font-medium text-nova-text-secondary mt-1">
-              Coordinating {config.label} corridor
+              {config.label} · {currentJourney.durationMinutes} min · Direct
             </p>
 
-            {/* Checklist progression */}
-            <div className="w-full mt-5 space-y-2.5">
-              {stages.map((stage, i) => {
-                const Icon = stage.icon;
-                const isComplete = step > i;
-                const isCurrent = step === i;
-
-                return (
-                  <div
-                    key={stage.label}
-                    className={`flex items-center justify-between p-2.5 rounded-xl border transition-all ${
-                      isComplete
-                        ? "bg-nova-green-soft border-nova-green/30 text-nova-text-primary"
-                        : isCurrent
-                          ? "bg-white border-nova-coral shadow-2xs text-nova-text-primary"
-                          : "bg-nova-surface/40 border-nova-border/40 text-nova-text-muted"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <div
-                        className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
-                          isComplete
-                            ? "bg-nova-green text-white"
-                            : isCurrent
-                              ? "bg-nova-coral text-white"
-                              : "bg-nova-border text-nova-text-muted"
-                        }`}
-                      >
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      <span className="text-[13px] font-heading font-medium text-left truncate">
-                        {stage.label}
-                      </span>
-                    </div>
-
-                    {isComplete ? (
-                      <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
-                    ) : isCurrent ? (
-                      <span className="w-2 h-2 rounded-full bg-nova-coral animate-ping" />
-                    ) : (
-                      <span className="w-2 h-2 rounded-full bg-nova-border" />
-                    )}
-                  </div>
-                );
-              })}
+            {/* Subtle Progress Line */}
+            <div className="w-full h-1 bg-nova-surface rounded-full overflow-hidden mt-4 mb-3">
+              <motion.div
+                className="h-full bg-gradient-to-r from-nova-green via-nova-green to-nova-green-hover rounded-full"
+                initial={{ width: "10%" }}
+                animate={{
+                  width: step === 0 ? "40%" : step === 1 ? "80%" : "100%",
+                }}
+                transition={{
+                  duration: isReducedMotion ? 0 : 0.35,
+                  ease: "easeInOut",
+                }}
+              />
             </div>
 
-            {step >= 3 && (
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-[13px] font-heading font-semibold text-nova-green flex items-center gap-1.5 mt-2"
-              >
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Journey ready · Direct route secured</span>
-              </motion.div>
-            )}
+            {/* Status message transition */}
+            <div className="h-5 flex items-center justify-center text-[12px] sm:text-[13px] font-heading font-medium">
+              <AnimatePresence mode="wait">
+                {step < 2 ? (
+                  <motion.span
+                    key={`status-${step}`}
+                    initial={{ opacity: 0, y: 2 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -2 }}
+                    transition={{ duration: 0.12 }}
+                    className="text-nova-text-secondary"
+                  >
+                    {statusMessages[step]}
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="status-ready"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.14 }}
+                    className="text-nova-green font-semibold flex items-center gap-1.5"
+                  >
+                    <Check className="w-3.5 h-3.5 stroke-[2.8]" />
+                    <span>Journey ready</span>
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.div>
         </div>
       )}

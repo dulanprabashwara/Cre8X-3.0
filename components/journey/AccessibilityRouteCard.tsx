@@ -29,7 +29,8 @@ export function AccessibilityRouteCard() {
               Accessible journey
             </h4>
             <p className="text-[12px] font-heading text-nova-text-secondary mt-0.5 truncate">
-              {accessibility.walkReductionPercent}% less walking · Step-free boarding
+              {accessibility.walkReductionPercent}% less walking · Step-free
+              boarding
             </p>
           </div>
         </div>

@@ -128,7 +128,9 @@ export default function JourneyPage() {
                 <span className="flex items-center gap-2">
                   <Map className="w-4 h-4 text-nova-green" />
                   <span>
-                    {mobileMapVisible ? "Hide corridor map" : "View corridor map"}
+                    {mobileMapVisible
+                      ? "Hide corridor map"
+                      : "View corridor map"}
                   </span>
                 </span>
                 {mobileMapVisible ? (

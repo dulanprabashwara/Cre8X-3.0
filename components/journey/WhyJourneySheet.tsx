@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { Sparkles, Check, CarFront, TrainFront, Plane, BusFront } from "lucide-react";
+import {
+  Sparkles,
+  Check,
+  CarFront,
+  TrainFront,
+  Plane,
+  BusFront,
+} from "lucide-react";
 import { Sheet } from "@/components/ui/Sheet";
 import { Button } from "@/components/ui/Button";
 import { useJourney } from "@/context/JourneyContext";
@@ -47,10 +54,19 @@ export function WhyJourneySheet() {
   }, [destination]);
 
   const estimates = useMemo(() => {
-    return calculateMethodEstimates(origin, destPlannerLoc, departureTime, preferences);
+    return calculateMethodEstimates(
+      origin,
+      destPlannerLoc,
+      departureTime,
+      preferences,
+    );
   }, [origin, destPlannerLoc, departureTime, preferences]);
 
-  const methodsList: { id: TravelMethod; label: string; icon: React.ElementType }[] = [
+  const methodsList: {
+    id: TravelMethod;
+    label: string;
+    icon: React.ElementType;
+  }[] = [
     { id: "rail", label: "HyperRail", icon: TrainFront },
     { id: "pod", label: "Autonomous Pod", icon: CarFront },
     { id: "aero", label: "AeroLink", icon: Plane },

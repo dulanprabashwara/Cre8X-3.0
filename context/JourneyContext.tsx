@@ -377,7 +377,7 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
     setTimeout(() => {
       setIsPlanning(false);
       if (onComplete) onComplete();
-    }, 1400);
+    }, 1050);
   }, []);
 
   // Simulation Triggers

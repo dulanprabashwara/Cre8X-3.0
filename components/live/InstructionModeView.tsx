@@ -1,7 +1,15 @@
 "use client";
 
 import React from "react";
-import { TrainFront, LogOut, CheckCircle2, CarFront, Plane, BusFront, MapPin } from "lucide-react";
+import {
+  TrainFront,
+  LogOut,
+  CheckCircle2,
+  CarFront,
+  Plane,
+  BusFront,
+  MapPin,
+} from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
 import { METHOD_CONFIGS } from "@/lib/journeyPlanner";
 
@@ -43,7 +51,8 @@ export function InstructionModeView() {
             Stay on {liveState.vehicleCode}
           </h4>
           <p className="text-[13px] text-nova-text-secondary mt-0.5">
-            {liveState.minutesRemaining} min remaining · {config.label} direct transit
+            {liveState.minutesRemaining} min remaining · {config.label} direct
+            transit
           </p>
         </div>
       </div>
