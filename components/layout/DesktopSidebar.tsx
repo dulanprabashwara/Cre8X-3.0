@@ -38,29 +38,12 @@ export function DesktopSidebar() {
   return (
     <aside
       aria-label="Desktop Navigation Sidebar"
-      className="hidden lg:flex fixed top-0 left-0 bottom-0 z-40 w-[240px] bg-white/95 backdrop-blur-md border-r border-nova-border/70 flex-col justify-between p-5 select-none shadow-xs"
+      className="hidden lg:flex fixed top-0 left-0 bottom-0 z-40 w-[220px] bg-white/95 backdrop-blur-md border-r border-nova-border/70 flex-col justify-between p-4 select-none shadow-xs"
     >
-      {/* Top Section: Brand & System Badge */}
-      <div className="space-y-6">
-        <div>
-          <NovaLogo />
-          {/* Subtitle status badge */}
-          <div className="mt-3 flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-nova-surface border border-nova-border/60">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-nova-green opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-nova-green" />
-            </span>
-            <span className="text-[12px] font-heading font-medium text-nova-text-secondary truncate">
-              Network Operating Normally
-            </span>
-          </div>
-        </div>
+      <div className="space-y-5">
+        <NovaLogo />
 
-        {/* Primary Navigation */}
-        <nav className="space-y-1.5" aria-label="Main Navigation">
-          <p className="px-2 pb-1 text-[12px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
-            Menu
-          </p>
+        <nav className="space-y-1" aria-label="Main Navigation">
           {PRIMARY_NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive =
@@ -72,19 +55,17 @@ export function DesktopSidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center justify-between px-3 py-2.5 rounded-xl text-[14px] font-heading font-medium transition-all duration-200 group",
+                  "flex items-center justify-between px-3 py-2.5 rounded-xl text-[14px] font-heading font-medium transition-all duration-200",
                   isActive
-                    ? "bg-nova-green-soft text-nova-green font-semibold shadow-xs"
-                    : "text-nova-text-secondary hover:text-nova-text-primary hover:bg-nova-surface",
+                    ? "bg-nova-green-soft text-nova-green shadow-xs"
+                    : "text-nova-text-secondary hover:bg-nova-surface hover:text-nova-text-primary",
                 )}
               >
                 <div className="flex items-center gap-3">
                   <div
                     className={cn(
-                      "p-1 rounded-lg transition-colors",
-                      isActive
-                        ? "bg-nova-green text-white"
-                        : "text-nova-text-secondary group-hover:text-nova-text-primary",
+                      "p-1.5 rounded-lg",
+                      isActive ? "bg-nova-green text-white" : "bg-transparent",
                     )}
                   >
                     <Icon className="w-4 h-4" />
@@ -95,12 +76,10 @@ export function DesktopSidebar() {
                 {item.badge && (
                   <span
                     className={cn(
-                      "px-2 py-0.5 rounded-full text-[12px] font-heading font-semibold tracking-wide",
+                      "rounded-full px-2 py-0.5 text-[11px] font-heading font-semibold",
                       isActive
-                        ? "bg-nova-green/20 text-nova-green"
-                        : item.badge === "1 Active"
-                          ? "bg-nova-coral-soft text-nova-coral border border-nova-coral/30"
-                          : "bg-nova-surface text-nova-text-muted",
+                        ? "bg-nova-green/10 text-nova-green"
+                        : "bg-nova-surface text-nova-text-muted",
                     )}
                   >
                     {item.badge}
@@ -110,57 +89,33 @@ export function DesktopSidebar() {
             );
           })}
         </nav>
-
-        {/* System & Support Utilities */}
-        <div className="pt-2 space-y-1.5 border-t border-nova-border/60">
-          <p className="px-2 pb-1 text-[12px] font-heading font-semibold uppercase tracking-wider text-nova-text-muted">
-            Preferences & Support
-          </p>
-          <button
-            onClick={() => setPreferencesSheetOpen(true)}
-            className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[13px] font-heading font-medium text-nova-text-secondary hover:text-nova-text-primary hover:bg-nova-surface transition-colors text-left"
-          >
-            <div className="p-1 rounded-lg text-nova-text-secondary">
-              <Accessibility className="w-4 h-4" />
-            </div>
-            <span>Accessibility & Travel</span>
-          </button>
-
-          <button
-            onClick={() => setAssistanceSheetOpen(true)}
-            className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[13px] font-heading font-medium text-nova-text-secondary hover:text-nova-text-primary hover:bg-nova-surface transition-colors text-left"
-          >
-            <div className="p-1 rounded-lg text-nova-text-secondary">
-              <HelpCircle className="w-4 h-4" />
-            </div>
-            <span>Mobility Assistance</span>
-          </button>
-        </div>
       </div>
 
-      {/* Bottom: Passenger Profile Card */}
-      <div className="pt-4 border-t border-nova-border/60">
+      <div className="space-y-2 border-t border-nova-border/60 pt-3">
+        <button
+          onClick={() => setPreferencesSheetOpen(true)}
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary"
+        >
+          <Accessibility className="w-4 h-4" />
+          Accessibility
+        </button>
+
+        <button
+          onClick={() => setAssistanceSheetOpen(true)}
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary"
+        >
+          <HelpCircle className="w-4 h-4" />
+          Help
+        </button>
+
         <Link
           href="/profile"
-          className="flex items-center gap-3 p-2 rounded-2xl hover:bg-nova-surface transition-colors group"
+          className="flex items-center gap-3 rounded-xl px-3 py-2 text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary"
         >
-          <div className="relative w-10 h-10 min-w-[40px] rounded-xl bg-gradient-to-br from-[#231D2B] to-[#3B3247] p-0.5 shadow-xs flex items-center justify-center">
-            <div className="w-full h-full rounded-[10px] bg-[#2A2333] flex items-center justify-center text-white/90">
-              <span className="text-[12px] font-heading font-bold tracking-wider text-white">
-                NT
-              </span>
-            </div>
-            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-nova-green border-2 border-white shadow-xs" />
+          <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#231D2B] to-[#3B3247] text-[11px] font-bold text-white">
+            NT
           </div>
-
-          <div className="flex-1 min-w-0">
-            <p className="text-[13px] font-heading font-bold text-nova-text-primary truncate group-hover:text-nova-green transition-colors">
-              NOVA Traveler
-            </p>
-            <p className="text-[12px] font-heading text-nova-text-muted truncate">
-              Personal mobility profile
-            </p>
-          </div>
+          Nove traveler
         </Link>
       </div>
     </aside>
