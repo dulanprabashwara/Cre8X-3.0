@@ -38,7 +38,10 @@ export function NovaLogo({
     const dim = size || 40;
     return (
       <div
-        className={cn("relative shrink-0 select-none flex items-center justify-center", className)}
+        className={cn(
+          "relative shrink-0 select-none flex items-center justify-center",
+          className,
+        )}
         style={{ width: dim, height: dim }}
       >
         <Image
