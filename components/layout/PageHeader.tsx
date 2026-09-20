@@ -2,11 +2,8 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Accessibility } from "lucide-react";
-import Link from "next/link";
-import { useJourney } from "@/context/JourneyContext";
-import { StatusBadge } from "@/components/shared/StatusBadge";
-import { TravelerAvatar } from "@/components/shared/TravelerAvatar";
+import { ArrowLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface PageHeaderProps {
   title: string;
@@ -14,6 +11,7 @@ interface PageHeaderProps {
   showBack?: boolean;
   backHref?: string;
   actionSlot?: React.ReactNode;
+  className?: string;
 }
 
 export function PageHeader({
@@ -22,9 +20,9 @@ export function PageHeader({
   showBack = false,
   backHref,
   actionSlot,
+  className,
 }: PageHeaderProps) {
   const router = useRouter();
-  const { setPreferencesSheetOpen } = useJourney();
 
   const handleBack = () => {
     if (backHref) {
@@ -35,19 +33,24 @@ export function PageHeader({
   };
 
   return (
-    <header className="w-full pb-4 pt-2 flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-nova-border/50 mb-4 sm:mb-6">
-      <div className="flex items-center gap-3">
+    <header
+      className={cn(
+        "w-full pb-4 pt-2 flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-nova-border/50 mb-4 sm:mb-6",
+        className,
+      )}
+    >
+      <div className="flex items-center gap-3 min-w-0 flex-1">
         {showBack && (
           <button
             onClick={handleBack}
             aria-label="Go back"
-            className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
+            className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95 shrink-0"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
         )}
 
-        <div>
+        <div className="min-w-0 flex-1">
           <h1 className="font-heading font-bold text-[22px] sm:text-[26px] md:text-[28px] text-nova-text-primary tracking-tight leading-tight">
             {title}
           </h1>
@@ -59,37 +62,11 @@ export function PageHeader({
         </div>
       </div>
 
-      {/* Right Utility Actions */}
-      <div className="flex items-center gap-2.5 self-start md:self-auto">
-        {/* Network Status pill - visible on tablet, hidden on desktop where sidebar displays it */}
-        <div className="hidden sm:block lg:hidden">
-          <StatusBadge />
+      {actionSlot && (
+        <div className="flex items-center gap-2.5 self-start md:self-auto shrink-0">
+          {actionSlot}
         </div>
-
-        {/* Accessibility Quick Preferences */}
-        <button
-          onClick={() => setPreferencesSheetOpen(true)}
-          title="Accessibility & Preferences"
-          aria-label="Journey & Accessibility Preferences"
-          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-white border border-nova-border/70 hover:bg-nova-surface text-nova-text-secondary hover:text-nova-text-primary flex items-center justify-center transition-colors shadow-2xs active:scale-95"
-        >
-          <Accessibility className="w-4 h-4" />
-        </button>
-
-        {/* Action Slot (optional custom button per page) */}
-        {actionSlot}
-
-        {/* Mobile-only profile avatar (tablet & desktop have it in rail/sidebar) */}
-        <div className="md:hidden">
-          <Link
-            href="/profile"
-            aria-label="Profile"
-            className="block min-w-[44px] min-h-[44px] active:scale-95 transition-transform"
-          >
-            <TravelerAvatar size={44} />
-          </Link>
-        </div>
-      </div>
+      )}
     </header>
   );
 }
