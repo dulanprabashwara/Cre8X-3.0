@@ -9,6 +9,7 @@ import {
   Plane,
   Sparkles,
 } from "lucide-react";
+import { NovaLogo } from "@/components/shared/NovaLogo";
 import { useJourney } from "@/context/JourneyContext";
 
 export function PlanningLoadingOverlay() {
@@ -59,11 +60,8 @@ export function PlanningLoadingOverlay() {
             className="relative z-10 w-full max-w-sm bg-white rounded-cardLg p-6 shadow-dock border border-nova-border flex flex-col items-center text-center"
           >
             {/* Header emblem */}
-            <div className="w-12 h-12 rounded-2xl bg-nova-green-soft border border-nova-green/30 flex items-center justify-center text-nova-green mb-3 shadow-xs">
-              <Sparkles
-                className="w-6 h-6 animate-spin"
-                style={{ animationDuration: "4s" }}
-              />
+            <div className="w-14 h-14 rounded-2xl bg-white border border-nova-border/70 shadow-xs flex items-center justify-center mb-3">
+              <NovaLogo variant="mark" size={40} priority />
             </div>
 
             <span className="text-[12px] font-heading font-semibold text-nova-green tracking-widest uppercase mb-1">

@@ -2,10 +2,11 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Accessibility, User } from "lucide-react";
+import { ArrowLeft, Accessibility } from "lucide-react";
 import Link from "next/link";
 import { useJourney } from "@/context/JourneyContext";
 import { StatusBadge } from "@/components/shared/StatusBadge";
+import { TravelerAvatar } from "@/components/shared/TravelerAvatar";
 
 interface PageHeaderProps {
   title: string;
@@ -83,12 +84,9 @@ export function PageHeader({
           <Link
             href="/profile"
             aria-label="Profile"
-            className="relative w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-gradient-to-br from-[#231D2B] to-[#3B3247] p-0.5 shadow-xs flex items-center justify-center active:scale-95 transition-transform"
+            className="block min-w-[44px] min-h-[44px] active:scale-95 transition-transform"
           >
-            <div className="w-full h-full rounded-[10px] bg-[#2A2333] flex items-center justify-center text-white/90">
-              <User className="w-4 h-4 text-white/80" />
-            </div>
-            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-nova-green border-2 border-white shadow-xs" />
+            <TravelerAvatar size={44} />
           </Link>
         </div>
       </div>

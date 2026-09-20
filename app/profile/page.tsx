@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ToggleSwitch } from "@/components/ui/ToggleSwitch";
+import { TravelerAvatar } from "@/components/shared/TravelerAvatar";
 import { useJourney } from "@/context/JourneyContext";
 import { DESTINATIONS } from "@/data/destinations";
 import { SavedPlace } from "@/data/places";
@@ -90,16 +91,8 @@ export default function ProfilePage() {
       {/* Passenger Identity Summary Card */}
       <div className="bg-white rounded-panel border border-nova-border/60 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-4">
-          {/* Neutral Passenger Monogram Initials Avatar */}
-          <div className="relative w-16 h-16 min-w-[64px] rounded-2xl bg-gradient-to-br from-[#231D2B] via-[#332A3E] to-[#453754] p-1 shadow-md flex items-center justify-center">
-            <div className="w-full h-full rounded-[12px] bg-[#2A2333] flex items-center justify-center text-white">
-              <span className="font-heading font-extrabold text-[22px] tracking-wider text-white">
-                NT
-              </span>
-            </div>
-            {/* Active Status Dot */}
-            <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-nova-green border-2 border-white shadow-xs" />
-          </div>
+          {/* Official NOVA Traveler Profile Avatar */}
+          <TravelerAvatar size={80} />
 
           <div>
             <div className="flex items-center gap-2">

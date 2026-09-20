@@ -1,51 +1,76 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
-export function NovaLogo() {
+export interface NovaLogoProps {
+  variant?: "full" | "mark" | "horizontal";
+  size?: number;
+  className?: string;
+  priority?: boolean;
+}
+
+export function NovaLogo({
+  variant = "horizontal",
+  size,
+  className,
+  priority = false,
+}: NovaLogoProps) {
+  if (variant === "full") {
+    const width = size || 155;
+    return (
+      <div className={cn("select-none flex flex-col items-start", className)}>
+        <Image
+          src="/images/brand/nova-logo.png"
+          alt="NOVA Mobility OS 2100"
+          width={width}
+          height={width}
+          className="w-auto object-contain"
+          style={{ width: `${width}px`, height: "auto" }}
+          priority={priority}
+        />
+      </div>
+    );
+  }
+
+  if (variant === "mark") {
+    const dim = size || 40;
+    return (
+      <div
+        className={cn("relative shrink-0 select-none flex items-center justify-center", className)}
+        style={{ width: dim, height: dim }}
+      >
+        <Image
+          src="/images/brand/nova-mark.png"
+          alt="NOVA Mobility OS 2100"
+          width={dim * 2}
+          height={dim * 2}
+          className="w-full h-full object-contain"
+          priority={priority}
+        />
+      </div>
+    );
+  }
+
+  // "horizontal" (mark + wordmark lockup)
+  const markSize = size || 38;
   return (
-    <div className="flex items-center gap-2.5 select-none">
-      {/* Bioluminescent App Icon */}
-      <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-white to-[#F3EEFA] border border-nova-border/60 shadow-xs flex items-center justify-center overflow-hidden">
-        {/* Subtle ambient glow inside */}
-        <div className="absolute inset-0 bg-radial from-nova-green/10 via-nova-coral/10 to-transparent" />
-
-        {/* Stylized geometric N logo with connecting node dots */}
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="relative z-10"
-        >
-          <path
-            d="M5 19V5L19 19V5"
-            stroke="url(#nova-logo-grad)"
-            strokeWidth="3.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <circle cx="5" cy="5" r="2.2" fill="#2FAE63" />
-          <circle cx="19" cy="19" r="2.2" fill="#E85F8E" />
-          <defs>
-            <linearGradient
-              id="nova-logo-grad"
-              x1="5"
-              y1="5"
-              x2="19"
-              y2="19"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#2FAE63" />
-              <stop offset="0.5" stopColor="#9C6CEE" />
-              <stop offset="1" stopColor="#E85F8E" />
-            </linearGradient>
-          </defs>
-        </svg>
+    <div className={cn("flex items-center gap-3 select-none", className)}>
+      <div
+        className="relative shrink-0 flex items-center justify-center"
+        style={{ width: markSize, height: markSize }}
+      >
+        <Image
+          src="/images/brand/nova-mark.png"
+          alt="NOVA Mobility OS 2100"
+          width={markSize * 2}
+          height={markSize * 2}
+          className="w-full h-full object-contain"
+          priority={priority}
+        />
       </div>
 
-      {/* Brand typography */}
       <div className="flex flex-col">
         <span className="font-heading font-bold text-[18px] leading-tight text-nova-text-primary tracking-tight">
           NOVA

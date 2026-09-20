@@ -12,6 +12,8 @@ import {
   Accessibility,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { NovaLogo } from "@/components/shared/NovaLogo";
+import { TravelerAvatar } from "@/components/shared/TravelerAvatar";
 import { useJourney } from "@/context/JourneyContext";
 
 interface NavItem {
@@ -50,12 +52,7 @@ export function TabletNavRail() {
           aria-label="NOVA 2100 Home"
           className="w-11 h-11 rounded-2xl bg-white border border-nova-border/80 shadow-xs flex items-center justify-center group active:scale-95 transition-transform"
         >
-          <div className="relative">
-            <span className="font-heading font-extrabold text-[20px] text-nova-text-primary tracking-tighter">
-              N
-            </span>
-            <span className="absolute -top-0.5 -right-1 w-2 h-2 rounded-full bg-nova-green shadow-sm animate-pulse" />
-          </div>
+          <NovaLogo variant="mark" size={34} priority />
         </Link>
       </div>
 
@@ -115,14 +112,9 @@ export function TabletNavRail() {
           href="/profile"
           title="Traveler Profile"
           aria-label="Traveler Profile"
-          className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-[#231D2B] to-[#3B3247] p-0.5 shadow-xs flex items-center justify-center active:scale-95 transition-transform"
+          className="active:scale-95 transition-transform flex items-center justify-center"
         >
-          <div className="w-full h-full rounded-[10px] bg-[#2A2333] flex items-center justify-center text-white/90">
-            <span className="text-[12px] font-heading font-bold tracking-wider text-white/90">
-              NT
-            </span>
-          </div>
-          <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-nova-green border-2 border-white shadow-xs" />
+          <TravelerAvatar size={42} />
         </Link>
       </div>
     </aside>

@@ -2,8 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import { Accessibility, User } from "lucide-react";
+import { Accessibility } from "lucide-react";
 import { NovaLogo } from "./NovaLogo";
+import { TravelerAvatar } from "./TravelerAvatar";
 import { useJourney } from "@/context/JourneyContext";
 
 interface AppHeaderProps {
@@ -11,11 +12,11 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({ onProfileClick }: AppHeaderProps) {
-  const { setPreferencesSheetOpen, showToast } = useJourney();
+  const { setPreferencesSheetOpen } = useJourney();
 
   return (
     <header className="w-full pt-1 pb-3 flex items-center justify-between">
-      <NovaLogo />
+      <NovaLogo variant="horizontal" priority />
 
       <div className="flex items-center gap-2">
         {/* Accessibility & Travel Preferences action */}
@@ -32,13 +33,9 @@ export function AppHeader({ onProfileClick }: AppHeaderProps) {
         <Link
           href="/profile"
           aria-label="User profile"
-          className="relative w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-gradient-to-br from-[#231D2B] to-[#3B3247] p-0.5 shadow-xs flex items-center justify-center active:scale-95 transition-transform"
+          className="block min-w-[44px] min-h-[44px] active:scale-95 transition-transform"
         >
-          <div className="w-full h-full rounded-[10px] bg-[#2A2333] flex items-center justify-center text-white/90">
-            <User className="w-5 h-5 text-white/80" />
-          </div>
-          {/* Active online status beacon */}
-          <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-nova-green border-2 border-white shadow-xs" />
+          <TravelerAvatar size={44} />
         </Link>
       </div>
     </header>
