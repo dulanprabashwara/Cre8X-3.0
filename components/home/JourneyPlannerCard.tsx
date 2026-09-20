@@ -2,164 +2,126 @@
 
 import React from "react";
 import {
-  MapPin,
-  Mic,
-  Search,
-  Crosshair,
-  Footprints,
-  ShieldCheck,
-  Clock,
-  SlidersHorizontal,
+  Accessibility,
+  BusFront,
+  CarFront,
+  Check,
+  ChevronDown,
+  Clock3,
+  Plane,
+  Sparkles,
+  TrainFront,
 } from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
-import { DEFAULT_ORIGIN } from "@/data/destinations";
+import { DEFAULT_ORIGIN, DESTINATIONS } from "@/data/destinations";
+import { cn } from "@/lib/utils";
 
 export function JourneyPlannerCard() {
   const {
     destination,
     routeStyle,
     preferences,
-    setDestinationSheetOpen,
-    setVoiceModalOpen,
-    setPreferencesSheetOpen,
-    showToast,
+    setDestination,
+    setRouteStyle,
+    updatePreferences,
   } = useJourney();
+  const [origin, setOrigin] = React.useState(DEFAULT_ORIGIN.name);
+  const [transport, setTransport] = React.useState<string[]>(["recommended"]);
+  const [departureTime, setDepartureTime] = React.useState("09:00");
 
-  const getRouteStyleLabel = () => {
-    switch (routeStyle) {
-      case "fastest":
-        return "Fastest route";
-      case "calmest":
-        return "Calmest route";
-      case "eco":
-        return "Eco route";
-      case "low_walking":
-      default:
-        return "Low walking";
+  const transportModes = [
+    { id: "recommended", label: "Recommended", icon: Sparkles },
+    { id: "pod", label: "Pod", icon: CarFront },
+    { id: "rail", label: "HyperRail", icon: TrainFront },
+    { id: "aero", label: "AeroLink", icon: Plane },
+    { id: "road", label: "Smart Road", icon: BusFront },
+  ];
+
+  const routeStyles = [
+    { id: "fastest" as const, label: "Fastest" },
+    { id: "calmest" as const, label: "Calmest" },
+    { id: "eco" as const, label: "Eco" },
+    { id: "low_walking" as const, label: "Low walking" },
+  ];
+
+  const mobilityOptions = [
+    { key: "stepFree" as const, label: "Step-free" },
+    { key: "reduceWalking" as const, label: "Reduce walking" },
+    { key: "avoidSteep" as const, label: "Avoid steep paths" },
+  ];
+
+  const toggleTransport = (modeId: string) => {
+    if (modeId === "recommended") {
+      setTransport(["recommended"]);
+      return;
     }
+
+    setTransport((current) => {
+      const concreteModes = current.filter((id) => id !== "recommended");
+      return concreteModes.includes(modeId)
+        ? concreteModes.length > 1
+          ? concreteModes.filter((id) => id !== modeId)
+          : concreteModes
+        : [...concreteModes, modeId];
+    });
   };
 
   return (
-    <div className="w-full bg-white rounded-card p-4 sm:p-5 border border-nova-border/70 shadow-card">
-      <div className="flex flex-col space-y-3">
-        {/* Origin Row */}
-        <div className="flex items-center gap-3">
-          <div className="flex flex-col items-center">
-            <div className="w-4 h-4 rounded-full border-2 border-nova-green flex items-center justify-center bg-white">
-              <div className="w-1.5 h-1.5 rounded-full bg-nova-green" />
-            </div>
-            <div className="w-0.5 h-8 bg-gradient-to-b from-nova-green to-nova-coral my-0.5 rounded-full" />
-          </div>
+    <div className="w-full bg-white rounded-card p-4 sm:p-5 border border-nova-border/70 shadow-card space-y-5">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <label className="space-y-1.5">
+          <span className="text-[12px] font-heading font-semibold text-nova-text-muted">Start</span>
+          <span className="relative block">
+            <select value={origin} onChange={(event) => setOrigin(event.target.value)} className="w-full min-h-11 appearance-none rounded-xl border border-nova-border bg-[#FAF8FC] px-3 pr-9 text-[14px] font-heading font-medium text-nova-text-primary focus:border-nova-green focus:outline-none">
+              <option>{DEFAULT_ORIGIN.name}</option>
+              {DESTINATIONS.map((item) => <option key={`origin-${item.id}`}>{item.name}</option>)}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-3 top-3.5 h-4 w-4 text-nova-text-muted" />
+          </span>
+        </label>
+        <label className="space-y-1.5">
+          <span className="text-[12px] font-heading font-semibold text-nova-text-muted">Destination</span>
+          <span className="relative block">
+            <select value={destination.id} onChange={(event) => { const next = DESTINATIONS.find((item) => item.id === event.target.value); if (next) setDestination(next); }} className="w-full min-h-11 appearance-none rounded-xl border border-nova-border bg-[#FAF8FC] px-3 pr-9 text-[14px] font-heading font-medium text-nova-text-primary focus:border-nova-green focus:outline-none">
+              {DESTINATIONS.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-3 top-3.5 h-4 w-4 text-nova-text-muted" />
+          </span>
+        </label>
+      </div>
 
-          <div className="flex-1 min-w-0">
-            <p className="text-[12px] font-heading font-medium text-nova-text-muted">
-              From
-            </p>
-            <h3 className="font-heading font-semibold text-[16px] sm:text-[17px] text-nova-text-primary truncate">
-              {DEFAULT_ORIGIN.name}
-            </h3>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => showToast("GPS updated: KDU Mobility Hub", "info")}
-            className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl text-nova-green hover:bg-nova-green-soft border border-transparent hover:border-nova-green/30 flex items-center justify-center transition-colors"
-            aria-label="Use current GPS location"
-            title="Use current GPS"
-          >
-            <Crosshair className="w-5 h-5" />
-          </button>
+      <div className="space-y-2.5">
+        <div className="flex items-center justify-between">
+          <span className="text-[12px] font-heading font-semibold text-nova-text-muted">Preferred transport</span>
+          <span className="text-[12px] text-nova-green">Choose one or more</span>
         </div>
-
-        {/* Destination Row */}
-        <div className="flex items-center gap-3 -mt-1">
-          <div className="w-4 flex justify-center">
-            <div className="w-3.5 h-3.5 rounded-[4px] bg-nova-coral border border-nova-coral-mid flex items-center justify-center">
-              <div className="w-1 h-1 rounded-full bg-white" />
-            </div>
-          </div>
-
-          <div
-            onClick={() => setDestinationSheetOpen(true)}
-            className="flex-1 bg-[#F9F7FB] hover:bg-[#F3EEF8] border border-nova-border rounded-xl pl-3 pr-1 py-1.5 flex items-center justify-between cursor-pointer transition-colors shadow-2xs group min-w-0"
-          >
-            <div className="flex items-center gap-2.5 min-w-0 flex-1 pr-1">
-              <MapPin className="w-4 h-4 text-nova-text-secondary shrink-0 group-hover:text-nova-coral transition-colors" />
-              <div className="min-w-0 flex-1">
-                <p className="text-[12px] font-heading font-medium text-nova-text-muted">
-                  To
-                </p>
-                <span className="font-heading font-semibold text-[15px] sm:text-[16px] text-nova-text-primary truncate block">
-                  {destination.name}
-                </span>
-              </div>
-            </div>
-
-            <div
-              className="flex items-center shrink-0"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                type="button"
-                onClick={() => setVoiceModalOpen(true)}
-                className="w-11 h-11 min-w-[44px] min-h-[44px] text-nova-text-secondary hover:text-nova-green hover:bg-nova-green-soft rounded-xl flex items-center justify-center transition-colors"
-                aria-label="Voice search destination"
-                title="Voice Search"
-              >
-                <Mic className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setDestinationSheetOpen(true)}
-                className="w-11 h-11 min-w-[44px] min-h-[44px] text-nova-text-muted hover:text-nova-text-primary rounded-xl flex items-center justify-center transition-colors"
-                aria-label="Change destination"
-                title="Change Destination"
-              >
-                <Search className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+          {transportModes.map((mode) => {
+            const Icon = mode.icon;
+            const selected = transport.includes(mode.id);
+            return <button key={mode.id} type="button" aria-pressed={selected} onClick={() => toggleTransport(mode.id)} className={cn("min-h-11 rounded-xl border px-2 py-2 text-[12px] font-heading font-semibold transition-colors", selected ? "border-nova-green bg-nova-green-soft text-nova-green" : "border-nova-border bg-white text-nova-text-secondary hover:bg-nova-surface")}>{Icon && <Icon className="mx-auto mb-1 h-3.5 w-3.5" />}<span>{mode.label}</span></button>;
+          })}
         </div>
       </div>
 
-      {/* Simplified Preference Summary Row */}
-      <div className="mt-4 pt-3.5 border-t border-nova-divider flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5 flex-wrap min-w-0">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-nova-green-soft border border-nova-green/30 text-[12px] font-heading font-semibold text-nova-text-primary">
-            <Footprints className="w-3.5 h-3.5 text-nova-green shrink-0" />
-            <span>{getRouteStyleLabel()}</span>
-          </span>
-
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-nova-surface border border-nova-border/70 text-[12px] font-heading font-medium text-nova-text-secondary">
-            <ShieldCheck className="w-3.5 h-3.5 text-nova-green shrink-0" />
-            <span>{preferences.stepFree ? "Step-free" : "Standard"}</span>
-          </span>
+      <div className="grid gap-5 border-t border-nova-divider pt-4 sm:grid-cols-2">
+        <div className="space-y-2.5">
+          <span className="text-[12px] font-heading font-semibold text-nova-text-muted">Mobility options</span>
+          <div className="flex flex-wrap gap-2">
+            {mobilityOptions.map((option) => { const selected = preferences[option.key]; return <button key={option.key} type="button" aria-pressed={selected} onClick={() => updatePreferences({ [option.key]: !selected })} className={cn("inline-flex min-h-10 items-center gap-1.5 rounded-xl border px-3 text-[12px] font-heading font-semibold", selected ? "border-nova-green bg-nova-green-soft text-nova-green" : "border-nova-border bg-white text-nova-text-secondary")}>{selected && <Check className="h-3.5 w-3.5" />}{option.label}</button>; })}
+          </div>
         </div>
-
-        <button
-          type="button"
-          onClick={() => setPreferencesSheetOpen(true)}
-          className="min-h-[44px] px-2 sm:px-3 inline-flex items-center gap-1 text-[13px] font-heading font-semibold text-nova-green hover:underline shrink-0"
-        >
-          <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>Change</span>
-        </button>
+        <label className="space-y-2.5">
+          <span className="flex items-center gap-1.5 text-[12px] font-heading font-semibold text-nova-text-muted"><Clock3 className="h-3.5 w-3.5" /> Start time</span>
+          <input type="time" value={departureTime} onChange={(event) => setDepartureTime(event.target.value)} className="min-h-11 w-full rounded-xl border border-nova-border bg-[#FAF8FC] px-3 text-[14px] font-heading font-semibold text-nova-text-primary focus:border-nova-green focus:outline-none" />
+        </label>
       </div>
 
-      {/* Departure / Timing Row */}
-      <div className="mt-3 pt-3 border-t border-nova-border/50 flex items-center justify-between text-[13px] text-nova-text-secondary">
-        <div className="flex items-center gap-2">
-          <Clock className="w-4 h-4 text-nova-coral shrink-0" />
-          <span className="font-heading font-medium text-nova-text-primary">
-            Recommended departure
-          </span>
-          <span className="text-nova-text-muted">· 09:18</span>
+      <div className="space-y-2.5 border-t border-nova-divider pt-4">
+        <span className="flex items-center gap-1.5 text-[12px] font-heading font-semibold text-nova-text-muted"><Accessibility className="h-3.5 w-3.5" /> Route style</span>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {routeStyles.map((style) => <button key={style.id} type="button" aria-pressed={routeStyle === style.id} onClick={() => setRouteStyle(style.id)} className={cn("min-h-10 rounded-xl border px-2 text-[12px] font-heading font-semibold", routeStyle === style.id ? "border-nova-green bg-nova-green-soft text-nova-green" : "border-nova-border bg-white text-nova-text-secondary")}>{style.label}</button>)}
         </div>
-
-        <span className="inline-flex items-center gap-1.5 text-[12px] font-heading font-medium text-nova-green">
-          <span className="w-1.5 h-1.5 rounded-full bg-nova-green" />
-          On schedule
-        </span>
       </div>
     </div>
   );
