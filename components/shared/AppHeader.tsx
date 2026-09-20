@@ -14,7 +14,7 @@ export function AppHeader({ onProfileClick }: AppHeaderProps) {
   const { setPreferencesSheetOpen, showToast } = useJourney();
 
   return (
-    <header className="w-full px-5 pt-4 pb-3 flex items-center justify-between">
+    <header className="w-full pt-1 pb-3 flex items-center justify-between">
       <NovaLogo />
 
       <div className="flex items-center gap-2">

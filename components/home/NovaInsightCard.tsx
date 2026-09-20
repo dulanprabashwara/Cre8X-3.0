@@ -16,51 +16,29 @@ export function NovaInsightCard() {
   };
 
   return (
-    <div className="w-full bg-white rounded-card p-5 border border-nova-coral/30 shadow-card relative overflow-hidden group hover:border-nova-coral/50 transition-colors">
-      {/* Soft coral bioluminescent gradient highlight in top corner */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-radial from-nova-coral/10 via-transparent to-transparent pointer-events-none" />
-
-      {/* Header Row */}
-      <div className="flex items-start justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-nova-coral-soft border border-nova-coral/20 flex items-center justify-center text-nova-coral shrink-0">
-            <Sparkles className="w-5 h-5" />
-          </div>
-          <span className="font-heading font-bold text-[15px] text-nova-coral flex items-center gap-1">
-            ✦ NOVA Insight
-          </span>
+    <div className="w-full bg-gradient-to-r from-nova-coral-soft/60 via-white to-white rounded-card p-3.5 sm:p-4 border border-nova-coral/30 shadow-2xs flex items-center justify-between gap-3">
+      <div className="flex items-center gap-2.5 min-w-0">
+        <div className="w-8 h-8 rounded-lg bg-nova-coral-soft border border-nova-coral/30 flex items-center justify-center text-nova-coral shrink-0">
+          <Sparkles className="w-4 h-4" />
         </div>
-
-        <span className="text-[13px] font-heading font-semibold text-nova-coral tracking-wide">
-          Predictive
-        </span>
+        <div className="min-w-0">
+          <span className="font-heading font-bold text-[12px] text-nova-coral uppercase tracking-wider block">
+            NOVA Insight
+          </span>
+          <p className="text-[12px] sm:text-[13px] font-heading font-medium text-nova-text-primary leading-tight">
+            Leave in 6 min to avoid a predicted delay.
+          </p>
+        </div>
       </div>
 
-      {/* Content */}
-      <div className="mt-3">
-        <h3 className="font-heading font-bold text-[17px] text-nova-text-primary leading-tight">
-          Leave in 6 minutes
-        </h3>
-        <p className="text-[14px] text-nova-text-secondary mt-1.5 leading-relaxed">
-          HyperRail traffic is expected to increase after 09:30. Avoids a
-          predicted 14 min delay.
-        </p>
-      </div>
-
-      {/* Footer Divider & CTA */}
-      <div className="mt-4 pt-3 border-t border-nova-divider flex items-center justify-between">
-        <span className="text-[13px] font-medium text-nova-text-muted">
-          Take Pod P17 directly
-        </span>
-
-        <button
-          onClick={handlePlanTrip}
-          className="inline-flex items-center gap-1 text-[14px] font-heading font-semibold text-nova-coral hover:text-nova-coral-mid transition-colors active:translate-x-0.5"
-        >
-          <span>Plan this trip</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={handlePlanTrip}
+        className="min-h-[44px] px-3 inline-flex items-center gap-1 text-[13px] font-heading font-semibold text-nova-coral hover:text-nova-coral-mid transition-colors shrink-0"
+      >
+        <span>Plan trip</span>
+        <ArrowRight className="w-3.5 h-3.5" />
+      </button>
     </div>
   );
 }

@@ -106,7 +106,7 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
     "Pod",
     "HyperRail",
   ]);
-  const [departureTime, setDepartureTime] = useState("08:30");
+  const [departureTime, setDepartureTime] = useState("09:18");
   const [destination, setDestination] = useState<DestinationItem>(
     DESTINATIONS[0],
   );

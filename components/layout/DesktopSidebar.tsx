@@ -38,7 +38,7 @@ export function DesktopSidebar() {
   return (
     <aside
       aria-label="Desktop Navigation Sidebar"
-      className="hidden lg:flex fixed top-0 left-0 bottom-0 z-40 w-[220px] bg-white/95 backdrop-blur-md border-r border-nova-border/70 flex-col justify-between p-4 select-none shadow-xs"
+      className="hidden lg:flex fixed top-0 left-0 bottom-0 z-40 w-[240px] bg-white/95 backdrop-blur-md border-r border-nova-border/70 flex-col justify-between p-4 select-none shadow-xs"
     >
       <div className="space-y-5">
         <NovaLogo />
@@ -55,7 +55,7 @@ export function DesktopSidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center justify-between px-3 py-2.5 rounded-xl text-[14px] font-heading font-medium transition-all duration-200",
+                  "flex items-center justify-between px-3 py-2.5 rounded-xl text-[14px] font-heading font-medium min-h-[44px] transition-all duration-200",
                   isActive
                     ? "bg-nova-green-soft text-nova-green shadow-xs"
                     : "text-nova-text-secondary hover:bg-nova-surface hover:text-nova-text-primary",
@@ -76,7 +76,7 @@ export function DesktopSidebar() {
                 {item.badge && (
                   <span
                     className={cn(
-                      "rounded-full px-2 py-0.5 text-[11px] font-heading font-semibold",
+                      "rounded-full px-2 py-0.5 text-[12px] font-heading font-semibold",
                       isActive
                         ? "bg-nova-green/10 text-nova-green"
                         : "bg-nova-surface text-nova-text-muted",
@@ -91,31 +91,39 @@ export function DesktopSidebar() {
         </nav>
       </div>
 
-      <div className="space-y-2 border-t border-nova-border/60 pt-3">
+      <div className="space-y-1.5 border-t border-nova-border/60 pt-3">
         <button
           onClick={() => setPreferencesSheetOpen(true)}
-          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 min-h-[44px] text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary"
         >
           <Accessibility className="w-4 h-4" />
-          Accessibility
+          <span>Accessibility</span>
         </button>
 
         <button
           onClick={() => setAssistanceSheetOpen(true)}
-          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 min-h-[44px] text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary"
         >
           <HelpCircle className="w-4 h-4" />
-          Help
+          <span>Help</span>
         </button>
 
         <Link
           href="/profile"
-          className="flex items-center gap-3 rounded-xl px-3 py-2 text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary"
+          className="flex items-center gap-3 rounded-xl px-3 py-2.5 min-h-[44px] text-left text-[13px] font-heading font-medium text-nova-text-secondary transition-colors hover:bg-nova-surface hover:text-nova-text-primary group"
         >
-          <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#231D2B] to-[#3B3247] text-[11px] font-bold text-white">
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-[#231D2B] to-[#3B3247] text-[12px] font-bold text-white shadow-xs">
             NT
+            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-nova-green border-2 border-white" />
           </div>
-          Nove traveler
+          <div>
+            <p className="font-heading font-bold text-[13px] text-nova-text-primary group-hover:text-nova-green transition-colors leading-none">
+              NOVA Traveler
+            </p>
+            <p className="text-[12px] font-heading text-nova-text-muted mt-0.5">
+              Personal profile
+            </p>
+          </div>
         </Link>
       </div>
     </aside>

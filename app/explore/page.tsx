@@ -30,6 +30,7 @@ export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMode, setSelectedMode] = useState<ModeFilter>("All");
   const [selectedHubId, setSelectedHubId] = useState<string>("colombo-skyport");
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const modeFilters: ModeFilter[] = [
     "All",
@@ -84,49 +85,69 @@ export default function ExplorePage() {
 
       {/* Search & Filter Bar (Mobile & Tablet Stacked View) */}
       <div className="lg:hidden bg-white rounded-panel border border-nova-border/70 p-4 shadow-sm space-y-3">
-        {/* Search Input */}
-        <div className="relative flex items-center">
-          <Search className="absolute left-3.5 w-4 h-4 text-nova-text-muted pointer-events-none" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search districts, hubs or landmarks..."
-            className="w-full h-11 pl-10 pr-4 rounded-xl bg-nova-surface/70 border border-nova-border/60 focus:border-nova-green focus:bg-white focus:outline-none text-[14px] font-heading font-medium text-nova-text-primary placeholder:text-nova-text-muted transition-colors"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={() => setSearchQuery("")}
-              className="absolute right-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3 text-[12px] font-heading text-nova-text-muted hover:text-nova-text-primary cursor-pointer"
-            >
-              Clear
-            </button>
-          )}
+        {/* Search Input and Filters Toggle */}
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1 flex items-center">
+            <Search className="absolute left-3.5 w-4 h-4 text-nova-text-muted pointer-events-none" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search districts, hubs or landmarks..."
+              className="w-full h-11 pl-10 pr-4 rounded-xl bg-nova-surface/70 border border-nova-border/60 focus:border-nova-green focus:bg-white focus:outline-none text-[14px] font-heading font-medium text-nova-text-primary placeholder:text-nova-text-muted transition-colors"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute right-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3 text-[12px] font-heading text-nova-text-muted hover:text-nova-text-primary cursor-pointer"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowMobileFilters(!showMobileFilters)}
+            className={cn(
+              "min-h-[44px] px-3.5 rounded-xl border text-[13px] font-heading font-semibold flex items-center gap-1.5 transition-colors shrink-0",
+              showMobileFilters || selectedMode !== "All"
+                ? "bg-nova-green text-white border-nova-green shadow-xs"
+                : "bg-nova-surface hover:bg-nova-surface-hover border-nova-border text-nova-text-secondary hover:text-nova-text-primary",
+            )}
+          >
+            <SlidersHorizontal className="w-3.5 h-3.5" />
+            <span>Filters</span>
+            {selectedMode !== "All" && (
+              <span className="w-2 h-2 rounded-full bg-white" />
+            )}
+          </button>
         </div>
 
-        {/* Transport Mode Filter Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted pr-1 flex items-center gap-1 shrink-0">
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            Mode:
-          </span>
-          {modeFilters.map((mode) => (
-            <button
-              key={mode}
-              type="button"
-              onClick={() => setSelectedMode(mode)}
-              className={cn(
-                "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none cursor-pointer",
-                selectedMode === mode
-                  ? "bg-nova-green text-white shadow-xs"
-                  : "bg-nova-surface hover:bg-nova-surface-hover text-nova-text-secondary border border-nova-border/50",
-              )}
-            >
-              {mode}
-            </button>
-          ))}
-        </div>
+        {/* Transport Mode Filter Chips (Revealed when Filters toggled or active) */}
+        {(showMobileFilters || selectedMode !== "All") && (
+          <div className="flex items-center gap-2 overflow-x-auto pt-1 pb-1 scrollbar-none animate-in fade-in duration-200">
+            <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted pr-1 flex items-center gap-1 shrink-0">
+              Mode:
+            </span>
+            {modeFilters.map((mode) => (
+              <button
+                key={mode}
+                type="button"
+                onClick={() => setSelectedMode(mode)}
+                className={cn(
+                  "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-all shrink-0 select-none cursor-pointer",
+                  selectedMode === mode
+                    ? "bg-nova-green text-white shadow-xs"
+                    : "bg-nova-surface hover:bg-nova-surface-hover text-nova-text-secondary border border-nova-border/50",
+                )}
+              >
+                {mode}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Main Responsive Layout: Mobile Stacked / Desktop Split */}

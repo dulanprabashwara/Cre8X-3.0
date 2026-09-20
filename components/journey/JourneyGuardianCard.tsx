@@ -1,53 +1,85 @@
 "use client";
 
-import React from "react";
-import { Sparkles, CheckCircle2, Radio } from "lucide-react";
+import React, { useState } from "react";
+import {
+  Sparkles,
+  CheckCircle2,
+  ChevronDown,
+  ChevronUp,
+  Radio,
+} from "lucide-react";
 import { useJourney } from "@/context/JourneyContext";
 
 export function JourneyGuardianCard() {
   const { currentJourney } = useJourney();
-  const { guardian } = currentJourney;
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="w-full bg-white rounded-card p-5 border border-nova-border/70 shadow-card">
-      {/* Badges Row */}
-      <div className="flex items-center justify-between">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-nova-coral-soft border border-nova-coral/20 text-nova-coral text-[12px] font-heading font-semibold">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Journey Guardian</span>
-        </div>
-
-        <div className="inline-flex items-center gap-1.5 text-[12px] font-heading font-semibold text-nova-green">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-nova-green opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-nova-green" />
-          </span>
-          <span>{guardian.status}</span>
-        </div>
-      </div>
-
-      {/* Headline */}
-      <h3 className="font-heading font-bold text-[18px] text-nova-text-primary mt-3">
-        {guardian.title}
-      </h3>
-
-      {/* Verified Checklist */}
-      <div className="mt-3 space-y-2">
-        {guardian.verifiedPoints.map((point) => (
-          <div key={point} className="flex items-center gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0 stroke-[2.2]" />
-            <span className="font-heading text-[14px] font-medium text-nova-text-primary">
-              {point}
-            </span>
+    <div className="w-full bg-white rounded-card p-4 border border-nova-border/70 shadow-xs">
+      {/* Compact Status Strip */}
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="w-8 h-8 rounded-lg bg-nova-coral-soft border border-nova-coral/30 flex items-center justify-center text-nova-coral shrink-0">
+            <Sparkles className="w-4 h-4" />
           </div>
-        ))}
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="font-heading font-bold text-[12px] text-nova-coral uppercase tracking-wider">
+                Journey Guardian
+              </span>
+              <span className="inline-flex items-center gap-1 text-[12px] font-heading font-semibold text-nova-green">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                Everything is ready
+              </span>
+            </div>
+            <p className="text-[13px] font-heading text-nova-text-secondary truncate mt-0.5">
+              Vehicles · Transfers · Step-free route secured
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setExpanded(!expanded)}
+          className="min-h-[44px] px-2.5 inline-flex items-center gap-1 text-[13px] font-heading font-semibold text-nova-green hover:underline shrink-0"
+          aria-expanded={expanded}
+        >
+          <span>{expanded ? "Less" : "Details"}</span>
+          {expanded ? (
+            <ChevronUp className="w-4 h-4" />
+          ) : (
+            <ChevronDown className="w-4 h-4" />
+          )}
+        </button>
       </div>
 
-      {/* Bottom Monitoring Note */}
-      <div className="mt-4 pt-3 border-t border-nova-divider flex items-center justify-between text-nova-text-secondary text-[13px]">
-        <span>{guardian.monitoringNote}</span>
-        <Radio className="w-4 h-4 text-nova-coral animate-pulse" />
-      </div>
+      {/* Expandable Details */}
+      {expanded && (
+        <div className="mt-3 pt-3 border-t border-nova-divider space-y-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[13px] text-nova-text-primary">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
+              <span>Vehicles reserved</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
+              <span>Transfers secured</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
+              <span>Accessible route confirmed</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
+              <span>Arrival protected</span>
+            </div>
+          </div>
+          <div className="pt-2 border-t border-nova-border/40 flex items-center justify-between text-[12px] text-nova-text-secondary">
+            <span>NOVA is monitoring every connection.</span>
+            <Radio className="w-3.5 h-3.5 text-nova-coral animate-pulse" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
