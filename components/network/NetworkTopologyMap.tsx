@@ -3,10 +3,9 @@
 import React, { useState } from "react";
 import {
   Activity,
-  Radio,
-  AlertTriangle,
-  ShieldCheck,
-  RefreshCw,
+  Sliders,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +18,7 @@ export function NetworkTopologyMap({
   selectedSystemId,
   onSelectSystem,
 }: NetworkTopologyMapProps) {
-  const [hoveredLine, setHoveredLine] = useState<string | null>(null);
+  const [showMapOptions, setShowMapOptions] = useState(false);
 
   return (
     <div className="relative w-full h-[380px] sm:h-[460px] lg:h-[540px] bg-[#F5EFF8] rounded-panel border border-nova-border/70 overflow-hidden select-none shadow-sm flex flex-col justify-between">
@@ -30,15 +29,12 @@ export function NetworkTopologyMap({
           <span className="text-[12px] font-heading font-bold text-nova-text-primary">
             Citywide Topology Grid
           </span>
-          <span className="px-2 py-0.5 rounded-full bg-nova-green-soft text-nova-green text-[12px] font-heading font-bold">
-            99.4% Online
-          </span>
         </div>
 
         {/* Advisory Tag Indicator */}
         <div className="pointer-events-auto bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-nova-border/80 shadow-xs flex items-center gap-1.5 text-[12px] font-heading font-semibold text-nova-coral">
           <span className="w-2 h-2 rounded-full bg-nova-coral animate-ping" />
-          <span>AeroLink A12 Coastal Crosswind Zone</span>
+          <span>AeroLink A12 Advisory</span>
         </div>
       </div>
 
@@ -288,62 +284,103 @@ export function NetworkTopologyMap({
         })}
       </svg>
 
-      {/* Bottom Mode Filter Pills Row */}
-      <div className="p-3 bg-white/95 backdrop-blur-md border-t border-nova-border/70 flex items-center justify-between gap-2 z-20 overflow-x-auto scrollbar-none">
-        <div className="flex items-center gap-2">
-          <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted px-1">
-            Focus System:
-          </span>
-          <button
-            type="button"
-            onClick={() => onSelectSystem(null)}
-            className={cn(
-              "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0",
-              selectedSystemId === null
-                ? "bg-nova-text-primary text-white"
-                : "bg-nova-surface text-nova-text-secondary hover:bg-nova-surface-hover",
-            )}
-          >
-            All Lines
-          </button>
-          {[
-            { id: "pods", label: "Pods" },
-            { id: "hyperrail", label: "HyperRail" },
-            { id: "aerolink", label: "AeroLink" },
-            { id: "smartroads", label: "Smart Roads" },
-          ].map((mode) => (
+      {/* Bottom Mode Filter Disclosure Bar */}
+      <div className="bg-white/95 backdrop-blur-md border-t border-nova-border/70 z-20">
+        {!showMapOptions ? (
+          <div className="px-4 py-2.5 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="text-[12px] font-heading text-nova-text-secondary">
+                Interactive city network topology
+              </span>
+              {selectedSystemId && (
+                <span className="px-2 py-0.5 rounded-full bg-nova-green-soft text-nova-green text-[12px] font-heading font-bold capitalize">
+                  Filtered: {selectedSystemId}
+                </span>
+              )}
+            </div>
             <button
               type="button"
-              key={mode.id}
-              onClick={() =>
-                onSelectSystem(selectedSystemId === mode.id ? null : mode.id)
-              }
-              className={cn(
-                "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0",
-                selectedSystemId === mode.id
-                  ? "bg-nova-green text-white"
-                  : "bg-nova-surface text-nova-text-secondary hover:bg-nova-surface-hover",
-              )}
+              onClick={() => setShowMapOptions(true)}
+              aria-expanded="false"
+              className="min-h-[44px] px-3.5 py-1.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 text-[12px] font-heading font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
             >
-              {mode.label}
+              <Sliders className="w-3.5 h-3.5 text-nova-text-secondary" />
+              <span>Map options</span>
+              <ChevronDown className="w-3.5 h-3.5 text-nova-text-muted" />
             </button>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="p-3.5 space-y-3">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted">
+                Filter by transport system
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowMapOptions(false)}
+                aria-expanded="true"
+                className="min-h-[44px] px-3 py-1 rounded-lg text-[12px] font-heading font-medium text-nova-text-secondary hover:text-nova-text-primary inline-flex items-center gap-1 cursor-pointer"
+              >
+                <span>Hide options</span>
+                <ChevronUp className="w-3.5 h-3.5" />
+              </button>
+            </div>
 
-        <div className="hidden sm:flex items-center gap-3 text-[12px] font-heading font-medium text-nova-text-secondary pr-1 shrink-0">
-          <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-nova-green" />
-            Normal
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-nova-warning" />
-            High Load
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-nova-coral" />
-            Advisory
-          </span>
-        </div>
+            <div className="flex items-center justify-between gap-2 overflow-x-auto scrollbar-none flex-wrap">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <button
+                  type="button"
+                  onClick={() => onSelectSystem(null)}
+                  className={cn(
+                    "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0 cursor-pointer",
+                    selectedSystemId === null
+                      ? "bg-nova-text-primary text-white"
+                      : "bg-nova-surface text-nova-text-secondary hover:bg-nova-surface-hover",
+                  )}
+                >
+                  All Lines
+                </button>
+                {[
+                  { id: "pods", label: "Pods" },
+                  { id: "hyperrail", label: "HyperRail" },
+                  { id: "aerolink", label: "AeroLink" },
+                  { id: "smartroads", label: "Smart Roads" },
+                ].map((mode) => (
+                  <button
+                    type="button"
+                    key={mode.id}
+                    onClick={() =>
+                      onSelectSystem(selectedSystemId === mode.id ? null : mode.id)
+                    }
+                    className={cn(
+                      "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0 cursor-pointer",
+                      selectedSystemId === mode.id
+                        ? "bg-nova-green text-white"
+                        : "bg-nova-surface text-nova-text-secondary hover:bg-nova-surface-hover",
+                    )}
+                  >
+                    {mode.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="hidden sm:flex items-center gap-3 text-[12px] font-heading font-medium text-nova-text-secondary shrink-0">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-nova-green" />
+                  Normal
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-nova-warning" />
+                  High Load
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-nova-coral" />
+                  Advisory
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

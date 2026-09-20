@@ -82,9 +82,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </span>
         )}
         <span
-          className={cn(
-            iconPosition === "right-edge" && "w-full text-center",
-          )}
+          className={cn(iconPosition === "right-edge" && "w-full text-center")}
         >
           {children}
         </span>
