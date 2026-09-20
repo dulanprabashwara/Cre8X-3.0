@@ -71,7 +71,7 @@ export function JourneyGuardianCard() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-nova-green shrink-0" />
-              <span>Arrival protected</span>
+              <span>Arrival monitored</span>
             </div>
           </div>
           <div className="pt-2 border-t border-nova-border/40 flex items-center justify-between text-[12px] text-nova-text-secondary">
