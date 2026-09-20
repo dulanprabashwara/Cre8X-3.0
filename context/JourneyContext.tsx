@@ -26,14 +26,6 @@ interface ToastInfo {
 }
 
 interface JourneyContextType {
-  // Trip setup and booking flow
-  currentLocation: string;
-  setCurrentLocation: (location: string) => void;
-  preferredModes: string[];
-  setPreferredModes: (modes: string[]) => void;
-  departureTime: string;
-  setDepartureTime: (time: string) => void;
-
   // Destination & Route Selection
   destination: DestinationItem;
   setDestination: (dest: DestinationItem) => void;
@@ -101,12 +93,6 @@ const JourneyContext = createContext<JourneyContextType | undefined>(undefined);
 const PREFS_STORAGE_KEY = "nova_journey_preferences_2100";
 
 export function JourneyProvider({ children }: { children: React.ReactNode }) {
-  const [currentLocation, setCurrentLocation] = useState("KDU Mobility Hub");
-  const [preferredModes, setPreferredModes] = useState<string[]>([
-    "Pod",
-    "HyperRail",
-  ]);
-  const [departureTime, setDepartureTime] = useState("09:18");
   const [destination, setDestination] = useState<DestinationItem>(
     DESTINATIONS[0],
   );
@@ -311,12 +297,6 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
   return (
     <JourneyContext.Provider
       value={{
-        currentLocation,
-        setCurrentLocation,
-        preferredModes,
-        setPreferredModes,
-        departureTime,
-        setDepartureTime,
         destination,
         setDestination,
         routeStyle,

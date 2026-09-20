@@ -151,20 +151,15 @@ export function JourneyPlannerCard() {
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4 text-nova-coral shrink-0" />
           <span className="font-heading font-medium text-nova-text-primary">
-            Leave now
+            Recommended departure
           </span>
-          <span className="text-nova-text-muted">· Departure 09:18</span>
+          <span className="text-nova-text-muted">· 09:18</span>
         </div>
 
-        <button
-          type="button"
-          onClick={() =>
-            showToast("Demo schedule set to leave now (09:18 AM)", "info")
-          }
-          className="min-h-[44px] px-2 text-[12px] font-heading font-semibold text-nova-text-muted hover:text-nova-text-primary"
-        >
-          Schedule
-        </button>
+        <span className="inline-flex items-center gap-1.5 text-[12px] font-heading font-medium text-nova-green">
+          <span className="w-1.5 h-1.5 rounded-full bg-nova-green" />
+          On schedule
+        </span>
       </div>
     </div>
   );
