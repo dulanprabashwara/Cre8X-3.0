@@ -14,6 +14,7 @@ import { useJourney } from "@/context/JourneyContext";
 import { LiveMap } from "@/components/live/LiveMap";
 import { InstructionModeView } from "@/components/live/InstructionModeView";
 import { LiveJourneySheet } from "@/components/live/LiveJourneySheet";
+import { LiveViewToggle } from "@/components/live/LiveViewToggle";
 
 export default function LivePage() {
   const router = useRouter();
@@ -152,7 +153,12 @@ export default function LivePage() {
       {/* Main Responsive View: Mobile Vertical Stack / Desktop 62/38 True Split-Screen */}
       <main className="flex-1 flex flex-col lg:flex-row relative">
         {/* Left Column (Desktop 62% / Mobile top): Map or Turn-by-Turn View */}
-        <div className="flex-1 lg:w-[62%] relative">
+        <div className="flex-1 lg:w-[62%] relative flex flex-col">
+          {/* Persistent Live View Toggle (always visible in both modes) */}
+          <div className="absolute top-4 left-4 z-30 pointer-events-auto">
+            <LiveViewToggle />
+          </div>
+
           {liveMode === "map" ? <LiveMap /> : <InstructionModeView />}
         </div>
 

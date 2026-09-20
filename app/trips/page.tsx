@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import {
   Route,
   Clock,
-  ArrowRight,
   ShieldCheck,
   Play,
   RotateCcw,
@@ -18,7 +17,7 @@ import { DESTINATIONS } from "@/data/destinations";
 import { useJourney } from "@/context/JourneyContext";
 import { cn } from "@/lib/utils";
 
-type TripTab = "active" | "upcoming" | "past";
+type TripTab = "active" | "past";
 
 export default function TripsPage() {
   const router = useRouter();
@@ -27,9 +26,8 @@ export default function TripsPage() {
   const [activeTab, setActiveTab] = useState<TripTab>("active");
   const [selectedTripId, setSelectedTripId] = useState<string>("trip-active-01");
 
-  const tabOptions = [
+  const tabOptions: { value: TripTab; label: string }[] = [
     { value: "active", label: "Active" },
-    { value: "upcoming", label: "Upcoming" },
     { value: "past", label: "Past" },
   ];
 
@@ -47,14 +45,6 @@ export default function TripsPage() {
     router.push("/live");
   };
 
-  const handleViewJourney = (trip: TripItem) => {
-    const dest =
-      DESTINATIONS.find((d) => d.name.toLowerCase().includes(trip.destination.toLowerCase())) ||
-      DESTINATIONS[0];
-    setDestination(dest);
-    router.push("/journey");
-  };
-
   const handleRepeatJourney = (trip: TripItem) => {
     const dest =
       DESTINATIONS.find((d) => d.name.toLowerCase().includes(trip.destination.toLowerCase())) ||
@@ -70,12 +60,12 @@ export default function TripsPage() {
       {/* Page Header */}
       <PageHeader
         title="My Journeys"
-        subtitle="Manage active, scheduled and completed travel itineraries"
+        subtitle="View your current journey and recent travel history"
       />
 
       {/* Tab Controls Bar */}
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <div className="w-full sm:w-80">
+        <div className="w-full sm:w-64">
           <SegmentedControl
             options={tabOptions}
             value={activeTab}
@@ -86,6 +76,7 @@ export default function TripsPage() {
               if (firstInTab) setSelectedTripId(firstInTab.id);
             }}
             size="md"
+            layoutId="trips-tab-pill"
           />
         </div>
 
@@ -138,9 +129,9 @@ export default function TripsPage() {
                     <span
                       className={cn(
                         "px-2.5 py-0.5 rounded-full text-[12px] font-heading font-bold tracking-wide uppercase",
-                        trip.status === "active" && "bg-nova-green-soft text-nova-green border border-nova-green/40",
-                        trip.status === "upcoming" && "bg-nova-surface text-nova-text-secondary border border-nova-border/60",
-                        trip.status === "past" && "bg-nova-surface text-nova-text-muted",
+                        trip.status === "active"
+                          ? "bg-nova-green-soft text-nova-green border border-nova-green/40"
+                          : "bg-nova-surface text-nova-text-muted",
                       )}
                     >
                       {trip.status === "active" ? "Active Live" : trip.dateLabel}
@@ -186,22 +177,10 @@ export default function TripsPage() {
                           e.stopPropagation();
                           handleContinueLive();
                         }}
-                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-green hover:bg-nova-green-hover text-white font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5 shadow-sm shadow-nova-green/20"
+                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-green hover:bg-nova-green-hover text-white font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5 shadow-sm shadow-nova-green/20 active:scale-95 transition-transform"
                       >
                         <Play className="w-4 h-4 fill-white" />
                         <span>Continue Live Journey</span>
-                      </button>
-                    ) : trip.status === "upcoming" ? (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleViewJourney(trip);
-                        }}
-                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5"
-                      >
-                        <span>View Journey Details</span>
-                        <ArrowRight className="w-4 h-4" />
                       </button>
                     ) : (
                       <button
@@ -210,7 +189,7 @@ export default function TripsPage() {
                           e.stopPropagation();
                           handleRepeatJourney(trip);
                         }}
-                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5"
+                        className="w-full min-h-[44px] py-2.5 rounded-xl bg-nova-surface hover:bg-nova-surface-hover text-nova-text-primary border border-nova-border/70 font-heading font-semibold text-[13px] flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
                       >
                         <RotateCcw className="w-4 h-4" />
                         <span>Repeat This Journey</span>
@@ -255,9 +234,9 @@ export default function TripsPage() {
                 <span
                   className={cn(
                     "px-3 py-1 rounded-full text-[12px] font-heading font-bold uppercase tracking-wider",
-                    selectedTrip.status === "active" && "bg-nova-green-soft text-nova-green border border-nova-green/40",
-                    selectedTrip.status === "upcoming" && "bg-nova-surface text-nova-text-secondary border border-nova-border/60",
-                    selectedTrip.status === "past" && "bg-nova-surface text-nova-text-muted",
+                    selectedTrip.status === "active"
+                      ? "bg-nova-green-soft text-nova-green border border-nova-green/40"
+                      : "bg-nova-surface text-nova-text-muted",
                   )}
                 >
                   {selectedTrip.status === "active" ? "Active Live Journey" : selectedTrip.dateLabel}
@@ -351,7 +330,7 @@ export default function TripsPage() {
                   </div>
 
                   <span className="text-[12px] font-heading font-semibold text-nova-green bg-nova-green-soft px-2 py-0.5 rounded-full border border-nova-green/30">
-                    Confirmed
+                    {selectedTrip.status === "active" ? "Confirmed" : "Completed"}
                   </span>
                 </div>
               ))}
@@ -363,9 +342,7 @@ export default function TripsPage() {
             <div className="text-[12px] font-heading text-nova-text-muted">
               {selectedTrip.status === "active"
                 ? "NOVA Guardian auto-monitoring enabled"
-                : selectedTrip.status === "upcoming"
-                  ? "Departure reminder set for 09:08"
-                  : "Recorded in passenger history"}
+                : "Recorded in passenger history"}
             </div>
 
             {selectedTrip.status === "active" ? (
@@ -376,15 +353,6 @@ export default function TripsPage() {
                 className="shadow-md shadow-nova-green/20"
               >
                 Continue Live Journey
-              </Button>
-            ) : selectedTrip.status === "upcoming" ? (
-              <Button
-                size="lg"
-                onClick={() => handleViewJourney(selectedTrip)}
-                icon={<ArrowRight className="w-4 h-4" />}
-                className="shadow-md shadow-nova-green/20"
-              >
-                View Journey Details
               </Button>
             ) : (
               <Button

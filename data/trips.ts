@@ -1,6 +1,6 @@
 export interface TripItem {
   id: string;
-  status: "active" | "upcoming" | "past";
+  status: "active" | "past";
   origin: string;
   destination: string;
   destinationDistrict: string;
@@ -27,45 +27,17 @@ export const TRIPS_DATA: TripItem[] = [
     destination: "Colombo Skyport",
     destinationDistrict: "Air Mobility Terminal",
     departureTime: "09:18",
-    arrivalTime: "09:42",
-    durationMinutes: 24,
+    arrivalTime: "09:40",
+    durationMinutes: 22,
     dateLabel: "Today · In Progress",
-    modes: ["Autonomous Pod P17", "HyperRail H4", "AeroLink A12", "Walk"],
+    modes: ["HyperRail H4"],
     currentLeg: {
       vehicle: "HyperRail H4",
-      nextStop: "Central Skyport",
+      nextStop: "Colombo Skyport",
       minutesToNext: 4,
     },
-    accessibilityBadges: ["Low walking", "Step-free route", "Guardian Active"],
-    confidenceScore: 99.4,
-  },
-  {
-    id: "trip-upcoming-01",
-    status: "upcoming",
-    origin: "KDU Mobility Hub",
-    destination: "Colombo Skyport",
-    destinationDistrict: "Gate 04 · Air Mobility Terminal",
-    departureTime: "09:18",
-    arrivalTime: "09:42",
-    durationMinutes: 24,
-    dateLabel: "Tomorrow · 09:18",
-    modes: ["Pod P17", "HyperRail H4", "AeroLink A12", "Walk"],
-    accessibilityBadges: ["Low walking", "Step-free transfers"],
-    confidenceScore: 98.8,
-  },
-  {
-    id: "trip-upcoming-02",
-    status: "upcoming",
-    origin: "Ratmalana District",
-    destination: "Port City Ocean Hub",
-    destinationDistrict: "Waterfront Transit District",
-    departureTime: "14:30",
-    arrivalTime: "15:01",
-    durationMinutes: 31,
-    dateLabel: "Fri 20 Sep · 14:30",
-    modes: ["HyperRail H2", "SkyPod S04", "Walk"],
-    accessibilityBadges: ["Step-free", "Calmest Route"],
-    confidenceScore: 99.1,
+    accessibilityBadges: ["Direct Journey", "Step-free route", "Guardian Active"],
+    confidenceScore: 99.8,
   },
   {
     id: "trip-past-01",
@@ -77,7 +49,7 @@ export const TRIPS_DATA: TripItem[] = [
     arrivalTime: "10:11",
     durationMinutes: 31,
     dateLabel: "Yesterday",
-    modes: ["HyperRail H2", "SkyPod S04"],
+    modes: ["HyperRail H2"],
     accessibilityBadges: ["Completed", "Zero Delays"],
   },
   {
@@ -90,7 +62,7 @@ export const TRIPS_DATA: TripItem[] = [
     arrivalTime: "11:23",
     durationMinutes: 18,
     dateLabel: "2 days ago",
-    modes: ["Autonomous Pod P12", "HyperRail H1"],
+    modes: ["Autonomous Pod P12"],
     accessibilityBadges: ["Completed", "Fastest route taken"],
   },
   {
@@ -103,7 +75,7 @@ export const TRIPS_DATA: TripItem[] = [
     arrivalTime: "18:54",
     durationMinutes: 24,
     dateLabel: "3 days ago",
-    modes: ["AeroLink A08", "HyperRail H4", "Pod P17"],
+    modes: ["AeroLink A08"],
     accessibilityBadges: ["Completed", "Assistance Utilized"],
   },
 ];

@@ -16,6 +16,7 @@ export interface SegmentedControlProps<T extends string> {
   onChange: (val: T) => void;
   className?: string;
   size?: "sm" | "md";
+  layoutId?: string;
 }
 
 export function SegmentedControl<T extends string>({
@@ -24,6 +25,7 @@ export function SegmentedControl<T extends string>({
   onChange,
   className,
   size = "md",
+  layoutId = "segmented-active-pill",
 }: SegmentedControlProps<T>) {
   return (
     <div
@@ -42,8 +44,10 @@ export function SegmentedControl<T extends string>({
             aria-selected={isSelected}
             onClick={() => onChange(option.value)}
             className={cn(
-              "relative px-4 py-1.5 text-[14px] font-heading font-medium rounded-full transition-colors select-none flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-nova-green focus-visible:outline-offset-1",
-              size === "sm" ? "px-3 py-1 text-[13px]" : "px-4 py-2 text-[14px]",
+              "relative text-[14px] font-heading font-medium rounded-full transition-colors select-none flex items-center justify-center gap-1.5 focus-visible:outline-2 focus-visible:outline-nova-green focus-visible:outline-offset-1",
+              size === "sm"
+                ? "min-h-[36px] px-3 py-1 text-[13px]"
+                : "min-h-[44px] px-4 py-2 text-[14px]",
               isSelected
                 ? "text-white"
                 : "text-nova-text-secondary hover:text-nova-text-primary",
@@ -51,7 +55,7 @@ export function SegmentedControl<T extends string>({
           >
             {isSelected && (
               <motion.div
-                layoutId="segmented-active-pill"
+                layoutId={layoutId}
                 transition={{ type: "spring", stiffness: 450, damping: 35 }}
                 className="absolute inset-0 bg-nova-green rounded-full z-0 shadow-xs"
               />

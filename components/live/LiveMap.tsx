@@ -3,14 +3,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Crosshair, Headphones } from "lucide-react";
-import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { VehicleMarker } from "./VehicleMarker";
 import { useJourney } from "@/context/JourneyContext";
 import { cn } from "@/lib/utils";
 
 export function LiveMap() {
-  const { liveMode, setLiveMode, routeVariant, simulationPhase, showToast } =
-    useJourney();
+  const { routeVariant, simulationPhase, showToast } = useJourney();
 
   const [audioActive, setAudioActive] = useState(false);
 
@@ -42,48 +40,32 @@ export function LiveMap() {
 
   return (
     <div className="relative w-full h-[460px] sm:h-[500px] lg:h-[calc(100vh-140px)] lg:min-h-[580px] bg-[#F3EEF7] overflow-hidden select-none border-b lg:border-b-0 lg:border-r border-nova-border/50">
-      {/* Top Floating Controls Row */}
-      <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
-        {/* Map / Instructions Segmented Control */}
-        <div className="pointer-events-auto shadow-dock rounded-full">
-          <SegmentedControl
-            options={[
-              { value: "map", label: "Map" },
-              { value: "instructions", label: "Instructions" },
-            ]}
-            value={liveMode}
-            onChange={setLiveMode}
-            size="md"
-          />
-        </div>
+      {/* Top Right Floating Controls (Recenter + Audio) */}
+      <div className="absolute top-4 right-4 z-20 flex items-center gap-2 pointer-events-none">
+        {/* Recenter Button */}
+        <button
+          onClick={handleRecenter}
+          aria-label="Recenter map"
+          title="Recenter Map"
+          className="pointer-events-auto w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white border border-nova-border/80 shadow-dock hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-transform active:scale-95"
+        >
+          <Crosshair className="w-5 h-5 text-nova-text-secondary" />
+        </button>
 
-        {/* Action Buttons (Recenter + Audio) */}
-        <div className="pointer-events-auto flex items-center gap-2">
-          {/* Recenter Button */}
-          <button
-            onClick={handleRecenter}
-            aria-label="Recenter map"
-            title="Recenter Map"
-            className="w-11 h-11 rounded-full bg-white border border-nova-border/80 shadow-dock hover:bg-nova-surface text-nova-text-primary flex items-center justify-center transition-transform active:scale-95"
-          >
-            <Crosshair className="w-5 h-5 text-nova-text-secondary" />
-          </button>
-
-          {/* Audio Guidance Button */}
-          <button
-            onClick={toggleAudio}
-            aria-label="Toggle audio guidance"
-            title="Toggle Audio Guidance"
-            className={cn(
-              "w-11 h-11 rounded-full border shadow-dock flex items-center justify-center transition-all active:scale-95",
-              audioActive
-                ? "bg-nova-green border-nova-green text-white"
-                : "bg-white border-nova-border/80 text-nova-text-secondary hover:bg-nova-surface hover:text-nova-text-primary",
-            )}
-          >
-            <Headphones className="w-5 h-5" />
-          </button>
-        </div>
+        {/* Audio Guidance Button */}
+        <button
+          onClick={toggleAudio}
+          aria-label="Toggle audio guidance"
+          title="Toggle Audio Guidance"
+          className={cn(
+            "pointer-events-auto w-11 h-11 min-w-[44px] min-h-[44px] rounded-full border shadow-dock flex items-center justify-center transition-all active:scale-95",
+            audioActive
+              ? "bg-nova-green border-nova-green text-white"
+              : "bg-white border-nova-border/80 text-nova-text-secondary hover:bg-nova-surface hover:text-nova-text-primary",
+          )}
+        >
+          <Headphones className="w-5 h-5" />
+        </button>
       </div>
 
       {/* SVG Custom Map Render */}

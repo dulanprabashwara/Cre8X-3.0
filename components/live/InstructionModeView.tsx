@@ -27,7 +27,7 @@ export function InstructionModeView() {
           : BusFront;
 
   return (
-    <div className="w-full bg-[#FAF8FC] p-5 border-b border-nova-border/70 flex flex-col space-y-3.5">
+    <div className="w-full bg-[#FAF8FC] pt-[72px] sm:pt-20 px-4 sm:px-6 pb-6 border-b lg:border-b-0 lg:border-r border-nova-border/50 flex flex-col space-y-3.5 lg:h-[calc(100vh-140px)] lg:min-h-[580px] lg:overflow-y-auto">
       <div className="flex items-center justify-between pb-1">
         <span className="text-[12px] font-heading font-bold uppercase tracking-wider text-nova-text-muted">
           Turn-by-Turn Guidance
