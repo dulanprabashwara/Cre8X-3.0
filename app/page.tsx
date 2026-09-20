@@ -1,20 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Sliders, ShieldCheck } from "lucide-react";
 import { AppHeader } from "@/components/shared/AppHeader";
 import { StatusBadge } from "@/components/shared/StatusBadge";
 import { JourneyPlannerCard } from "@/components/home/JourneyPlannerCard";
 import { PlanningLoadingOverlay } from "@/components/home/PlanningLoadingOverlay";
-import { TripSetupModal } from "@/components/home/TripSetupModal";
 import { Button } from "@/components/ui/Button";
 import { useJourney } from "@/context/JourneyContext";
 
 export default function HomePage() {
   const router = useRouter();
   const { startPlanning, setPreferencesSheetOpen, preferences } = useJourney();
-  const [showTripSetup, setShowTripSetup] = useState(true);
 
   const handleFindJourney = () => {
     startPlanning(() => {
@@ -24,11 +22,6 @@ export default function HomePage() {
 
   return (
     <main className="flex-1 flex flex-col">
-      <TripSetupModal
-        isOpen={showTripSetup}
-        onComplete={() => setShowTripSetup(false)}
-      />
-
       <div className="md:hidden">
         <AppHeader />
       </div>
