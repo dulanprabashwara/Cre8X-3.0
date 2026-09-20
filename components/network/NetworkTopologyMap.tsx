@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Activity,
-  Sliders,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { Activity, Sliders, ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NetworkTopologyMapProps {
@@ -350,7 +345,9 @@ export function NetworkTopologyMap({
                     type="button"
                     key={mode.id}
                     onClick={() =>
-                      onSelectSystem(selectedSystemId === mode.id ? null : mode.id)
+                      onSelectSystem(
+                        selectedSystemId === mode.id ? null : mode.id,
+                      )
                     }
                     className={cn(
                       "min-h-[44px] inline-flex items-center px-3.5 py-1.5 rounded-full text-[12px] font-heading font-semibold transition-colors shrink-0 cursor-pointer",

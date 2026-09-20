@@ -193,7 +193,7 @@ export default function NetworkPage() {
                       <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                         <span
                           className={cn(
-                            "px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-[11.5px] font-heading font-bold inline-flex items-center gap-1.5 whitespace-nowrap",
+                            "px-2.5 py-1 rounded-full text-[12px] font-heading font-bold inline-flex items-center gap-1.5 whitespace-nowrap",
                             sys.statusType === "normal" &&
                               "bg-nova-green-soft text-nova-green border border-nova-green/30",
                             sys.statusType === "warning" &&
@@ -230,29 +230,29 @@ export default function NetworkPage() {
                           {sys.data.description}
                         </p>
 
-                        <div className="grid grid-cols-3 gap-2 pt-1 border-t border-nova-border/40 text-center">
-                          <div className="p-2 rounded-xl bg-nova-surface">
-                            <span className="block text-[11px] font-heading font-bold uppercase text-nova-text-muted">
-                              Active
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 border-t border-nova-border/40 text-center">
+                          <div className="p-2.5 rounded-xl bg-nova-surface">
+                            <span className="block text-[12px] font-heading font-medium text-nova-text-secondary">
+                              Vehicles available
                             </span>
-                            <span className="font-heading font-bold text-[14px] text-nova-text-primary">
+                            <span className="font-heading font-bold text-[15px] text-nova-text-primary mt-0.5 block">
                               {sys.data.activeVehicles}
                             </span>
                           </div>
-                          <div className="p-2 rounded-xl bg-nova-surface">
-                            <span className="block text-[11px] font-heading font-bold uppercase text-nova-text-muted">
-                              Frequency
+                          <div className="p-2.5 rounded-xl bg-nova-surface">
+                            <span className="block text-[12px] font-heading font-medium text-nova-text-secondary">
+                              Service frequency
                             </span>
-                            <span className="font-heading font-bold text-[14px] text-nova-text-primary">
-                              {sys.data.avgFrequencySeconds}s
+                            <span className="font-heading font-bold text-[15px] text-nova-text-primary mt-0.5 block">
+                              Every {sys.data.avgFrequencySeconds} sec
                             </span>
                           </div>
-                          <div className="p-2 rounded-xl bg-nova-surface">
-                            <span className="block text-[11px] font-heading font-bold uppercase text-nova-text-muted">
-                              Punctuality
+                          <div className="p-2.5 rounded-xl bg-nova-surface">
+                            <span className="block text-[12px] font-heading font-medium text-nova-text-secondary">
+                              Running on time
                             </span>
-                            <span className="font-heading font-bold text-[14px] text-nova-text-primary">
-                              {sys.data.punctualityRate}%
+                            <span className="font-heading font-bold text-[15px] text-nova-text-primary mt-0.5 block">
+                              {Math.round(sys.data.punctualityRate)}%
                             </span>
                           </div>
                         </div>

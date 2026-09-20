@@ -123,7 +123,7 @@ export default function ProfilePage() {
               <h2 className="font-heading font-bold text-[18px] sm:text-[20px] text-nova-text-primary tracking-tight whitespace-nowrap">
                 NOVA Traveler
               </h2>
-              <span className="self-start px-2.5 py-0.5 rounded-full bg-nova-green-soft text-nova-green border border-nova-green/40 text-[11px] sm:text-[12px] font-heading font-bold uppercase tracking-wider">
+              <span className="self-start px-2.5 py-0.5 rounded-full bg-nova-green-soft text-nova-green border border-nova-green/40 text-[12px] font-heading font-bold uppercase tracking-wider">
                 Preferences synced
               </span>
             </div>
